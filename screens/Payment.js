@@ -41,6 +41,7 @@ export default class Payscreen extends React.PureComponent{
          checked: 'first',
          loading:false,
          modalVisible:false,
+         Address:{},
         }; 
       }  
     GetCurrentDate =()=>{
@@ -52,14 +53,43 @@ export default class Payscreen extends React.PureComponent{
       var giay = new Date().getSeconds();
         return date + '/' +month+ "/" +year + " " + gio+":"+ phut+":"+giay;
     }
+    GetAddress =() =>{
+      if(fbApp.auth().currentUser)
+      {
+          this.itemRef.ref('ListAddress').child(fbApp.auth().currentUser.uid).once('value').then((snapshot)=>{
+            var item;
+            snapshot.forEach(function(childSnapshot){
+              var Address={
+                ShipName:'',
+                ShipPhone:'',
+                NumberAddress:'',
+                Xa:'',
+                Huyen:'',
+                City:'',
+              }
+              if(childSnapshot.val().Main==true){
+                Address.ShipName= childSnapshot.val().ShipName;
+                Address.ShipPhone= childSnapshot.val().ShipPhone;
+                Address.NumberAddress= childSnapshot.val().NumberAddress;
+                Address.Xa= childSnapshot.val().Xa;
+                Address.Huyen= childSnapshot.val().Huyen;
+                Address.City= childSnapshot.val().City;
+                item=Address;
+              }
+            });
+            this.setState({
+              Address:item,
+              loading:false
+          });
+        });
+      };
+    };
       thanhToan=async()=>{
         if(this.state.checked == "first"){
         var key = this.itemRef.ref().child('Orders/').push().key;
         var phone = this.props.address.ShipPhone;
         var name = this.props.address.ShipName;
         var diachi = this.props.address.NumberAddress+", "+this.props.address.Xa+", "+this.props.address.Huyen+", "+ this.props.address.City;       
-        var _listItem = this.props._listItem;
-
           this.itemRef.ref('Orders/'+key).set({
               Status:1,
               CreatedDate:this.GetCurrentDate(),
@@ -87,7 +117,7 @@ export default class Payscreen extends React.PureComponent{
          this.props.navigation.navigate("App");
         }
         else{
-          this.props.navigation.navigate("ZaloPayScreen",{amount: this.props.amount});
+          this.props.navigation.navigate("ZaloPayScreen",{amount: this.props.amount,listItem : this.props.CartItem, Address: this.props.address });
         }          
         
       }

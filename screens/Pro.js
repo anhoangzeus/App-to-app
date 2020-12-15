@@ -23,7 +23,7 @@
   import "firebase/auth";
   import Swiper from 'react-native-swiper';
  
-
+  console.disableYellowBox= true;
   const { height, width } = Dimensions.get('screen');
   function ReactNativeNumberFormat({ value }) {
     return (

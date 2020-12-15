@@ -5,24 +5,25 @@ import { Button } from 'react-native-elements';
 import CryptoJS from 'crypto-js';
 import NumberFormat from 'react-number-format';
 import { View } from 'react-native';
+import {fbApp} from "../../firebaseconfig";
+import "firebase/auth";
 
 const { height, width } = Dimensions.get('screen');
 const { PayZaloBridge } = NativeModules;
 const payZaloBridgeEmitter = new NativeEventEmitter(PayZaloBridge);
 let apptransid;
 
-const subscription = payZaloBridgeEmitter.addListener(
-    'EventPayZalo',
-    (data) => {
-      console.log("kết quả giao dịch:"+ data);
-      if(data.returnCode == 1){
-        alert('Pay success!');
-      }else{
-        alert('Pay errror! ' + data.returnCode);
-      }
-    }
-);
+function GetCurrentDate(){
+  var date = new Date().getDate();
+  var month = new Date().getMonth() + 1; 
+  var year = new Date().getFullYear();
+  var gio = new Date().getHours();
+  var phut = new Date().getMinutes();
+  var giay = new Date().getSeconds();
+    return date + '/' +month+ "/" +year + " " + gio+":"+ phut+":"+giay;
+}
 
+ 
 function ReactNativeNumberFormat({ value }) {
   return (
     <NumberFormat
@@ -35,30 +36,42 @@ function ReactNativeNumberFormat({ value }) {
 }
 
 export default function App({route,navigation}) {
-  const [money,setMoney] = React.useState('10000')
+ 
+  const subscription = payZaloBridgeEmitter.addListener(
+    'EventPayZalo',
+    (data) => {
+      console.log("kết quả giao dịch:"+ data);
+      if(data.returnCode == 1){
+        alert('Pay success!');
+        thanhToan();
+      }else{
+        alert('Pay errror! ' + data.returnCode);
+      }
+    }
+);
+
   const [token,setToken] = React.useState('')
   const [returncode,setReturnCode] = React.useState('')
+  const address = route.params.Address;
+  console.log("address: "+address.ShipName);
+  console.log("dia chi va gia "+address +" + "+route.params.amount );
+  const diachi = address.NumberAddress+", "+address.Xa+", "+address.Huyen+", "+ address.City;
   function getCurrentDateYYMMDD() {
     var todayDate = new Date().toISOString().slice(2,10);
     return todayDate.split('-').join('');
   }
   async function createOrder() {
     apptransid = getCurrentDateYYMMDD()+ '_'+new Date().getTime()
-    console.log("App transit khoi tao: "+apptransid);
+    
     let appid = 553
     let amount = route.params.amount;
     let appuser = "TiAn"
     let apptime = (new Date).getTime()
     let embeddata = "{}"
     let item = "[id : 12]"
-    
     let description = "mua san pham tren TiAn" + apptransid
     let hmacInput = appid +"|"+ apptransid +"|"+ appuser +"|"+ amount +"|" + apptime +"|"+ embeddata +"|" +item
     let mac = CryptoJS.HmacSHA256(hmacInput, "9phuAOYhan4urywHTh0ndEXiV3pKHr5Q")
-    console.log('====================================');
-    console.log("hmacInput: " + hmacInput);
-    console.log("mac: " + mac)
-    console.log('====================================');
     var order = {
       'appid':appid,
       'appuser': appuser,
@@ -77,7 +90,6 @@ export default function App({route,navigation}) {
       formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
-    console.log(formBody);
     await fetch('https://sandbox.zalopay.com.vn/v001/tpe/createorder', {
       method: 'POST',
       headers: {
@@ -88,50 +100,45 @@ export default function App({route,navigation}) {
     .then(resJson => {
       setToken(resJson.zptranstoken)
       setReturnCode(resJson.returncode)
-      payOrder()
-      
     })
     .catch((error)=>{
       console.log("error ", error)
     })
+    payOrder() 
   }
 
-  async function getStatus(){
-    var payZP = NativeModules.PayZaloBridge;
-    // console.log("kết quả sub: "+ subscription.listener());
-    let appid = 553;
-    let key = "9phuAOYhan4urywHTh0ndEXiV3pKHr5Q"
-    let hmacinput =  appid+"|"+apptransid+"|"+key
-    let mac = CryptoJS.HmacSHA256(hmacinput, "9phuAOYhan4urywHTh0ndEXiV3pKHr5Q")
-    console.log("mac: "+mac);
-    var order = {
-      'appid':appid,
-      'apptransid': apptransid,
-      'mac': mac
-    }
-    let formBody = [];
-    for (let i in order) {
-      var encodedKey = encodeURIComponent(i);
-      var encodedValue = encodeURIComponent(order[i]);
-      formBody.push(encodedKey + "=" + encodedValue);
-    }
-    formBody = formBody.join("&");
-    // console.log(formBody);
-    await fetch('https://sandbox.zalopay.com.vn/v001/tpe/getstatusbyapptransid', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      params: formBody
-    }).then(response => response.json())
-    .then(resJson => {  
-      console.log("giá trị đơn hàng: "+resJson.amount);
-      console.log("trạng thái đơn hàng trả về: "+resJson.returnmessage);
-    })
-    .catch((error)=>{
-      console.log("error ", error)
-    })
+  function getStatus(){
+    navigation.navigate("App");
   }
+  function thanhToan(){ 
+    var key = fbApp.database().ref().child('Orders/').push().key;  
+      fbApp.database().ref('Orders/'+key).set({
+          Status:1,
+          CreatedDate:GetCurrentDate(),
+          ShipAddress:diachi,
+          ShipName:address.ShipName,
+          ShipMoblie:address.ShipPhone,
+          OrderID: key,
+          Payment:"01",
+          Total:"Đã thanh toán",
+          CustomerID:fbApp.auth().currentUser.uid,       
+      });
+      fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
+        snapshot.forEach(function(childSnapshot){
+        var keyDetail = fbApp.database().ref().child('OrderDetails/').push().key;
+        fbApp.database().ref('/OrderDetails/'+keyDetail).set({
+         OrderDetailID:keyDetail,
+         OrderID:key,
+         Price:childSnapshot.val().Price,
+         ProductID: childSnapshot.val().Id,
+         Quantity:childSnapshot.val().Quantity
+        });
+        fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
+      })
+     })
+     navigation.navigate("App"); 
+  }
+  
 
   function payOrder() {
     var payZP = NativeModules.PayZaloBridge;

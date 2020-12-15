@@ -10,7 +10,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import {fbApp} from "../firebaseconfig";
 import "firebase/auth";
 import { SafeAreaView } from 'react-navigation';
-
+console.disableYellowBox= true;
 function ReactNativeNumberFormat({ value }) {
   return (
     <NumberFormat
@@ -71,7 +71,7 @@ const ProductItem = ({image, name, price,PromotionPrice}) => (
 export default class Setting extends React.Component {
   constructor(props) {
     super(props);
-    LogBox.ignoreAllLogs();
+    
     this.itemRef = fbApp.database();
     this.state = { 
       listcate:[],
