@@ -35,7 +35,7 @@ function ReactNativeNumberFormat({ value }) {
     />
   );
 };
-const ProductItem = ({image, name, price,PromotionPrice}) => (
+const ProductItem = ({image, name, price,rating,bough,PromotionPrice}) => (
   <View style={styles.itemContainer}>
     <Image source={{uri:image}} style={styles.itemImage} />
     <Text style={styles.itemName} numberOfLines={2}>
@@ -47,12 +47,13 @@ const ProductItem = ({image, name, price,PromotionPrice}) => (
     }
     </Text>
     <View style={{flexDirection:'row'}}>
-      <Image source={require("../assets/images/star.jpg")} style={styles.reviewimg}/>
-      <Text style={{color:'green',}}>(500)</Text>
+      {RatingUI({rating})}
+      <Text style={{color:'green',}}>({bough})</Text>
+      
     </View>
   </View>
 );
-const NewProductItem = ({image, name, price,PromotionPrice}) => (
+const NewProductItem = ({image, name, price,rating,bough,PromotionPrice}) => (
   <View style={styles.itemContainer1}>
     <Image source={{uri:image}} style={styles.itemImage} />
     <Text style={styles.itemName} numberOfLines={2}>
@@ -64,16 +65,56 @@ const NewProductItem = ({image, name, price,PromotionPrice}) => (
     }
     </Text>
     <View style={{flexDirection:'row'}}>
-      <Image source={require("../assets/images/star.jpg")} style={styles.reviewimg}/>
-      <Text style={{color:'green',}}>(500)</Text>
+      {RatingUI({rating})}
+      <Text style={{color:'green',}}>({bough})</Text>
+      
     </View>
   </View>
 );
+function RatingUI({rating}){
+  switch(rating){
+    case 1: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
+      </View>
+    );
+    case 2: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+      </View>
+    );
+    case 3: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+      </View>
+    );
+    case 4: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+      </View>
+    );
+    case 5: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+      </View>
+    );
+    default: return null;
+  }
+}
 
 export default class Home extends React.PureComponent {
   constructor(props) {
     super(props);
-    console.log("nothing");
     this.itemRef = fbApp.database();
     this.state = { 
      listpro:[],
@@ -148,6 +189,8 @@ export default class Home extends React.PureComponent {
             image : childSnapshot.val().Image,
             metades:childSnapshot.val().MetaDescription,
             id : childSnapshot.val().ProductID,
+            rating: childSnapshot.val().Rating,
+            bough:childSnapshot.val().Bough,
             BrandID : childSnapshot.val().BrandID,
             CategoryID : childSnapshot.val().CategoryID,
             PromotionPrice : childSnapshot.val().PromotionPrice
@@ -171,6 +214,8 @@ export default class Home extends React.PureComponent {
             image : childSnapshot.val().Image,
             metades:childSnapshot.val().MetaDescription,
             id : childSnapshot.val().ProductID,
+            rating: childSnapshot.val().Rating,
+            bough:childSnapshot.val().Bough,
             BrandID : childSnapshot.val().BrandID,
             CategoryID : childSnapshot.val().CategoryID,
             PromotionPrice : childSnapshot.val().PromotionPrice
@@ -194,6 +239,8 @@ export default class Home extends React.PureComponent {
             image : childSnapshot.val().Image,
             metades:childSnapshot.val().MetaDescription,
             id : childSnapshot.val().ProductID,
+            rating: childSnapshot.val().Rating,
+            bough:childSnapshot.val().Bough,
             BrandID : childSnapshot.val().BrandID,
             CategoryID : childSnapshot.val().CategoryID,
             PromotionPrice : childSnapshot.val().PromotionPrice
@@ -217,6 +264,8 @@ export default class Home extends React.PureComponent {
             image : childSnapshot.val().Image,
             metades:childSnapshot.val().MetaDescription,
             id : childSnapshot.val().ProductID,
+            rating: childSnapshot.val().Rating,
+            bough:childSnapshot.val().Bough,
             BrandID : childSnapshot.val().BrandID,
             CategoryID : childSnapshot.val().CategoryID,
             PromotionPrice : childSnapshot.val().PromotionPrice
@@ -240,6 +289,8 @@ export default class Home extends React.PureComponent {
             image : childSnapshot.val().Image,
             metades:childSnapshot.val().MetaDescription,
             id : childSnapshot.val().ProductID,
+            rating: childSnapshot.val().Rating,
+            bough:childSnapshot.val().Bough,
             BrandID : childSnapshot.val().BrandID,
             CategoryID : childSnapshot.val().CategoryID,
             PromotionPrice : childSnapshot.val().PromotionPrice
@@ -261,6 +312,8 @@ export default class Home extends React.PureComponent {
             image : childSnapshot.val().Image,
             metades : childSnapshot.val().MetaDescription,
             id : childSnapshot.val().ProductID,
+            rating: childSnapshot.val().Rating,
+            bough:childSnapshot.val().bough,
             BrandID : childSnapshot.val().BrandID,
             CategoryID : childSnapshot.val().CategoryID,   
             PromotionPrice : childSnapshot.val().PromotionPrice                       
@@ -420,6 +473,8 @@ export default class Home extends React.PureComponent {
                         name={item.title}
                         image={item.image}
                         price={item.price}
+                        rating={item.rating}
+                        bough={item.bough}
                         PromotionPrice ={item.PromotionPrice}
                       />
             </TouchableOpacity>  
@@ -442,6 +497,8 @@ export default class Home extends React.PureComponent {
                         name={item.title}
                         image={item.image}
                         price={item.price}
+                        rating={item.rating}
+                        bough={item.bough}
                         PromotionPrice ={item.PromotionPrice}
                       />
             </TouchableOpacity>  
@@ -464,6 +521,8 @@ export default class Home extends React.PureComponent {
                         name={item.title}
                         image={item.image}
                         price={item.price}
+                        rating={item.rating}
+                        bough={item.bough}
                         PromotionPrice ={item.PromotionPrice}
                       />
             </TouchableOpacity>  
@@ -486,6 +545,8 @@ export default class Home extends React.PureComponent {
                         name={item.title}
                         image={item.image}
                         price={item.price}
+                        rating={item.rating}
+                        bough={item.bough}
                         PromotionPrice ={item.PromotionPrice}
                       />
             </TouchableOpacity>  
@@ -508,6 +569,8 @@ export default class Home extends React.PureComponent {
                         name={item.title}
                         image={item.image}
                         price={item.price}
+                        rating={item.rating}
+                        bough={item.bough}
                         PromotionPrice ={item.PromotionPrice}
                       />
             </TouchableOpacity>  
@@ -526,6 +589,8 @@ export default class Home extends React.PureComponent {
                     name={item.title}
                     image={item.image}
                     price={item.price}
+                    rating={item.rating}
+                    bough={item.bough}
                     PromotionPrice ={item.PromotionPrice}
                   />
         </TouchableOpacity>  
@@ -650,7 +715,6 @@ const styles = StyleSheet.create({
     marginRight:5
   },
   reviewimg:{
-    width:width/4,
     height:height/50,
     marginLeft:width/60
   },

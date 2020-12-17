@@ -93,6 +93,8 @@ export default class Setting extends React.Component {
           metades:'',
           image:'',
           id: '',
+          rating:0,
+          bough:0,
           BrandID:'',
           CategoryID:'',
           PromotionPrice:0
@@ -106,6 +108,8 @@ export default class Setting extends React.Component {
           product.metades=childSnapshot.val().MetaDescription;
           product.image=childSnapshot.val().Image;
           product.id=childSnapshot.val().ProductID;
+          product.rating=childSnapshot.val().Rating;
+          product.bough=childSnapshot.val().bough;
           product.BrandID=childSnapshot.val().BrandID;
           product.CategoryID=childSnapshot.val().CategoryID;
           product.PromotionPrice = childSnapshot.val().PromotionPrice;

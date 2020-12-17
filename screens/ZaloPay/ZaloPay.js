@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, ScrollView, KeyboardAvoidingView, NativeModules,Dimensions, NativeEventEmitter,Image} from 'react-native';
+import { StyleSheet, Text, ScrollView, KeyboardAvoidingView, NativeModules,Dimensions, NativeEventEmitter,Image,TouchableOpacity} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { Button } from 'react-native-elements';
 import CryptoJS from 'crypto-js';
@@ -7,6 +7,7 @@ import NumberFormat from 'react-number-format';
 import { View } from 'react-native';
 import {fbApp} from "../../firebaseconfig";
 import "firebase/auth";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const { height, width } = Dimensions.get('screen');
 const { PayZaloBridge } = NativeModules;
@@ -40,7 +41,7 @@ export default function App({route,navigation}) {
   const subscription = payZaloBridgeEmitter.addListener(
     'EventPayZalo',
     (data) => {
-      console.log("kết quả giao dịch:"+ data);
+     
       if(data.returnCode == 1){
         alert('Pay success!');
         thanhToan();
@@ -53,8 +54,7 @@ export default function App({route,navigation}) {
   const [token,setToken] = React.useState('')
   const [returncode,setReturnCode] = React.useState('')
   const address = route.params.Address;
-  console.log("address: "+address.ShipName);
-  console.log("dia chi va gia "+address +" + "+route.params.amount );
+ 
   const diachi = address.NumberAddress+", "+address.Xa+", "+address.Huyen+", "+ address.City;
   function getCurrentDateYYMMDD() {
     var todayDate = new Date().toISOString().slice(2,10);
@@ -147,8 +147,14 @@ export default function App({route,navigation}) {
 
   return (
     <ScrollView>
+      <View style={styles.headerContainer}>
+          <TouchableOpacity style={{width:width/5}} onPress={() => navigation.goBack()}>
+          <FontAwesome name="angle-left" size={35} color="#fff" style={{marginLeft:width/40}}/>
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Thanh Toán</Text>  
+        </View>
       <KeyboardAvoidingView style={styles.container}>
-      <Image source={require("../../assets/zalopay.png")} style={{width:width/3,height:height/7, resizeMode:'contain', marginTop:height/5}}/>
+      <Image source={require("../../assets/zalopay.png")} style={{width:width/3,height:height/7, resizeMode:'contain', marginTop:height/10}}/>
         <Text style={styles.welcomeHead} >
           Thanh toán qua ZaloPay
         </Text>
@@ -161,29 +167,42 @@ export default function App({route,navigation}) {
           style={{width:width*0.9, height:height/10}}
           onPress={() => {createOrder()}}
         />
-      </KeyboardAvoidingView>
-      <View>
+        <View>
         <Button title="Về lại trang chủ" 
         type="outline"
         style={{width:width*0.9, height:height/10}}
           onPress={() => {getStatus()}}/>
       </View>
+      </KeyboardAvoidingView>
+      
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 6,
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
     backgroundColor:"#fff",
+    height:height*0.9
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 4,
+    backgroundColor: '#a2459a',
+  },
+  headerText:{
+    color:"white",
+    textAlignVertical: 'center',
+    marginLeft:width*0.15,
+    fontSize:20,
   },
   welcomeHead: {
     fontSize: 20,
     textAlign: 'center',
-    marginTop: 50,
+    marginTop: height/20,
     backgroundColor:"#fff",
   },
   welcome: {

@@ -69,9 +69,7 @@ export default class Product extends React.Component {
     }
     var temp =0;
     this.state.listcart.forEach(function(element){
-      console.log("id san pham trong gio hang:"+ element.Id);
       if(element.Id == Id_Item){
-        console.log("đã trùng");
         element.Quantity+=1;
         temp +=1;
         product.image=element.Picture;
@@ -250,7 +248,6 @@ getData =()=>{
   };
 
   render() {
-    console.log(this.state.List_MoreImage);
     const { navigation } = this.props;
     const { modalVisible ,PromotionPrice,Price,List_Productlienquan} = this.state;
     const HEADER_MAX_HEIGHT = height/10;
