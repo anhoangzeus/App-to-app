@@ -9,357 +9,357 @@
 9        android:targetSdkVersion="28" />
 10
 11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-11-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:3:3-75
-11-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:3:20-73
+11-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:3:3-75
+11-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:3:20-73
 12    <uses-permission android:name="android.permission.INTERNET" /> <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
-12-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:2:3-64
-12-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:2:20-62
+12-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:2:3-64
+12-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:2:20-62
 13    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
-13-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:5:3-77
-13-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:5:20-75
+13-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:5:3-77
+13-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:5:20-75
 14    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-14-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:6:3-72
-14-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:6:20-70
+14-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:6:3-72
+14-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:6:20-70
 15    <uses-permission android:name="android.permission.VIBRATE" />
-15-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:7:3-63
-15-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:7:20-61
+15-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:7:3-63
+15-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:7:20-61
 16    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- These require runtime permissions on M -->
-16-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:8:3-77
-16-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:8:20-75
+16-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:8:3-77
+16-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:8:20-75
 17    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-17-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:10:3-78
-17-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:10:20-76
+17-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:10:3-78
+17-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:10:20-76
 18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-18-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:11:3-76
-18-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:11:20-74
+18-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:11:3-76
+18-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:11:20-74
 19    <uses-permission android:name="android.permission.CAMERA" />
-19-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:12:3-62
-19-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:12:20-60
+19-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:12:3-62
+19-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:12:20-60
 20    <uses-permission android:name="android.permission.READ_CONTACTS" />
-20-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:13:3-69
-20-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:13:20-67
+20-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:13:3-69
+20-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:13:20-67
 21    <uses-permission android:name="android.permission.READ_CALENDAR" />
-21-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:14:3-69
-21-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:14:20-67
+21-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:14:3-69
+21-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:14:20-67
 22    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-22-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:15:3-70
-22-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:15:20-68
+22-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:15:3-70
+22-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:15:20-68
 23    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-23-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:16:3-77
-23-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:16:20-75
+23-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:16:3-77
+23-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:16:20-75
 24    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-24-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:17:3-68
-24-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:17:20-66
+24-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:17:3-68
+24-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:17:20-66
 25    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-25-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:18:3-78
-25-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:18:20-76
+25-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:18:3-78
+25-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:18:20-76
 26    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-26-->[:expo-updates] D:\TiAn\App-to-app\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-79
-26-->[:expo-updates] D:\TiAn\App-to-app\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-76
+26-->[:expo-updates] D:\TLMH\Tian\App-to-app\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-79
+26-->[:expo-updates] D:\TLMH\Tian\App-to-app\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-76
 27    <uses-permission android:name="android.permission.WAKE_LOCK" />
-27-->[:react-native-firebase_auth] D:\TiAn\App-to-app\node_modules\@react-native-firebase\auth\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-68
-27-->[:react-native-firebase_auth] D:\TiAn\App-to-app\node_modules\@react-native-firebase\auth\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-65
+27-->[:react-native-firebase_auth] D:\TLMH\Tian\App-to-app\node_modules\@react-native-firebase\auth\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-68
+27-->[:react-native-firebase_auth] D:\TLMH\Tian\App-to-app\node_modules\@react-native-firebase\auth\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-65
 28    <uses-permission android:name="android.permission.STORAGE" />
-28-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-66
-28-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-63
+28-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-66
+28-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-63
 29    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-29-->[:expo-location] D:\TiAn\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-77
-29-->[:expo-location] D:\TiAn\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-74
+29-->[:expo-location] D:\TLMH\Tian\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-77
+29-->[:expo-location] D:\TLMH\Tian\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-74
 30    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-30-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:15:5-98
-30-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:15:22-95
+30-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:15:5-98
+30-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:15:22-95
 31    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
-31-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:16:5-94
-31-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:16:22-91
+31-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:16:5-94
+31-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:16:22-91
 32
 33    <application
-33-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:20:3-52:17
+33-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:20:3-52:17
 34        android:name="com.demoapptoapp.MainApplication"
-34-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:21:5-36
+34-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:21:5-36
 35        android:allowBackup="false"
-35-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:25:5-32
+35-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:25:5-32
 36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-36-->[androidx.core:core:1.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\73435d3d97560fff0f796379f3e1a830\core-1.1.0\AndroidManifest.xml:24:18-86
+36-->[androidx.core:core:1.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\73435d3d97560fff0f796379f3e1a830\core-1.1.0\AndroidManifest.xml:24:18-86
 37        android:debuggable="true"
 38        android:icon="@mipmap/ic_launcher"
-38-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:23:5-39
+38-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:23:5-39
 39        android:label="@string/app_name"
-39-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:22:5-37
+39-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:22:5-37
 40        android:roundIcon="@mipmap/ic_launcher_round"
-40-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:24:5-50
+40-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:24:5-50
 41        android:theme="@style/AppTheme"
-41-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:26:5-36
+41-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:26:5-36
 42        android:usesCleartextTraffic="true" >
-42-->D:\TiAn\App-to-app\android\app\src\debug\AndroidManifest.xml:6:18-53
+42-->D:\TLMH\Tian\App-to-app\android\app\src\debug\AndroidManifest.xml:6:18-53
 43        <meta-data
-43-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:28:5-103
+43-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:28:5-103
 44            android:name="expo.modules.updates.EXPO_UPDATE_URL"
-44-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:28:16-67
+44-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:28:16-67
 45            android:value="YOUR-APP-URL-HERE" />
-45-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:28:68-101
+45-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:28:68-101
 46        <meta-data
-46-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:29:5-112
+46-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:29:5-112
 47            android:name="expo.modules.updates.EXPO_SDK_VERSION"
-47-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:29:16-68
+47-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:29:16-68
 48            android:value="YOUR-APP-SDK-VERSION-HERE" />
-48-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:29:69-110
+48-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:29:69-110
 49
 50        <activity
-50-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:30:5-49:16
+50-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:30:5-49:16
 51            android:name="com.demoapptoapp.MainActivity"
-51-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:31:7-35
+51-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:31:7-35
 52            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-52-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:33:7-77
+52-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:33:7-77
 53            android:label="@string/app_name"
-53-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:32:7-39
+53-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:32:7-39
 54            android:launchMode="singleTask"
-54-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:34:7-38
+54-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:34:7-38
 55            android:theme="@style/Theme.App.SplashScreen"
-55-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:36:7-52
+55-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:36:7-52
 56            android:windowSoftInputMode="adjustResize" >
-56-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:35:7-49
+56-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:35:7-49
 57            <intent-filter>
-57-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:38:7-44:23
+57-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:38:7-44:23
 58                <action android:name="android.intent.action.VIEW" />
-58-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:39:9-61
-58-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:39:17-58
+58-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:39:9-61
+58-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:39:17-58
 59
 60                <category android:name="android.intent.category.DEFAULT" />
-60-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
-60-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
+60-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
+60-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
 61                <category android:name="android.intent.category.BROWSABLE" />
-61-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:41:9-70
-61-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:41:19-67
+61-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:41:9-70
+61-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:41:19-67
 62
 63                <data
-63-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:42:9-43:34
+63-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:42:9-43:34
 64                    android:host="app"
-64-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:43:13-31
+64-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:43:13-31
 65                    android:scheme="demozpdk" />
-65-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:42:15-40
+65-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:42:15-40
 66            </intent-filter>
 67            <intent-filter>
-67-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:45:7-48:23
+67-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:45:7-48:23
 68                <action android:name="android.intent.action.MAIN" />
-68-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:46:9-60
-68-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:46:17-58
+68-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:46:9-60
+68-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:46:17-58
 69
 70                <category android:name="android.intent.category.LAUNCHER" />
-70-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:47:9-68
-70-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:47:19-66
+70-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:47:9-68
+70-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:47:19-66
 71            </intent-filter>
 72        </activity>
 73        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-73-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:51:5-81
-73-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:51:15-79
+73-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:51:5-81
+73-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:51:15-79
 74
 75        <provider
-75-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:9-27:20
+75-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:9-27:20
 76            android:name="expo.modules.filesystem.FileSystemFileProvider"
-76-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-74
+76-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-74
 77            android:authorities="com.demoapptoapp.FileSystemFileProvider"
-77-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-74
+77-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-74
 78            android:exported="false"
-78-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:13-37
+78-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:13-37
 79            android:grantUriPermissions="true" >
-79-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:13-47
+79-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:13-47
 80            <meta-data
-80-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:70
+80-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:70
 81                android:name="android.support.FILE_PROVIDER_PATHS"
-81-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
+81-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
 82                android:resource="@xml/file_system_provider_paths" />
-82-->[:expo-file-system] D:\TiAn\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-67
+82-->[:expo-file-system] D:\TLMH\Tian\App-to-app\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-67
 83        </provider>
 84
 85        <service
-85-->[:expo-location] D:\TiAn\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-18:40
+85-->[:expo-location] D:\TLMH\Tian\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-18:40
 86            android:name="expo.modules.location.services.LocationTaskService"
-86-->[:expo-location] D:\TiAn\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-78
+86-->[:expo-location] D:\TLMH\Tian\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-78
 87            android:exported="false" />
-87-->[:expo-location] D:\TiAn\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+87-->[:expo-location] D:\TLMH\Tian\App-to-app\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
 88
 89        <activity
-89-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:23:9-27:75
+89-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:23:9-27:75
 90            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-90-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:24:13-93
+90-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:24:13-93
 91            android:excludeFromRecents="true"
-91-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:25:13-46
+91-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:25:13-46
 92            android:exported="false"
-92-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:26:13-37
+92-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:26:13-37
 93            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-93-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:27:13-72
+93-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:27:13-72
 94        <!--
 95            Service handling Google Sign-In user revocation. For apps that do not integrate with
 96            Google Sign-In, this service will never be started.
 97        -->
 98        <service
-98-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:33:9-37:51
+98-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:33:9-37:51
 99            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-99-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:34:13-89
+99-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:34:13-89
 100            android:exported="true"
-100-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:35:13-36
+100-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:35:13-36
 101            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-101-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:36:13-107
+101-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:36:13-107
 102            android:visibleToInstantApps="true" />
-102-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:37:13-48
+102-->[com.google.android.gms:play-services-auth:19.0.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\d2ed70a51bb5e00c21e27033fe3396f8\jetified-play-services-auth-19.0.0\AndroidManifest.xml:37:13-48
 103
 104        <activity
-104-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:27:9-44:20
+104-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:27:9-44:20
 105            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-105-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:28:13-80
+105-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:28:13-80
 106            android:excludeFromRecents="true"
-106-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:29:13-46
+106-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:29:13-46
 107            android:exported="true"
-107-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:30:13-36
+107-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:30:13-36
 108            android:launchMode="singleTask"
-108-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:31:13-44
+108-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:31:13-44
 109            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-109-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:32:13-72
+109-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:32:13-72
 110            <intent-filter>
-110-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:33:13-43:29
+110-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:33:13-43:29
 111                <action android:name="android.intent.action.VIEW" />
-111-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:39:9-61
-111-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:39:17-58
+111-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:39:9-61
+111-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:39:17-58
 112
 113                <category android:name="android.intent.category.DEFAULT" />
-113-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
-113-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
+113-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
+113-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
 114                <category android:name="android.intent.category.BROWSABLE" />
-114-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:41:9-70
-114-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:41:19-67
+114-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:41:9-70
+114-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:41:19-67
 115
 116                <data
-116-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:42:9-43:34
+116-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:42:9-43:34
 117                    android:host="firebase.auth"
-117-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:43:13-31
+117-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:43:13-31
 118                    android:path="/"
 119                    android:scheme="genericidp" />
-119-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:42:15-40
+119-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:42:15-40
 120            </intent-filter>
 121        </activity>
 122        <activity
-122-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:45:9-62:20
+122-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:45:9-62:20
 123            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-123-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:46:13-79
+123-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:46:13-79
 124            android:excludeFromRecents="true"
-124-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:47:13-46
+124-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:47:13-46
 125            android:exported="true"
-125-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:48:13-36
+125-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:48:13-36
 126            android:launchMode="singleTask"
-126-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:49:13-44
+126-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:49:13-44
 127            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-127-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:50:13-72
+127-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:50:13-72
 128            <intent-filter>
-128-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:51:13-61:29
+128-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:51:13-61:29
 129                <action android:name="android.intent.action.VIEW" />
-129-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:39:9-61
-129-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:39:17-58
+129-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:39:9-61
+129-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:39:17-58
 130
 131                <category android:name="android.intent.category.DEFAULT" />
-131-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
-131-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
+131-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
+131-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
 132                <category android:name="android.intent.category.BROWSABLE" />
-132-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:41:9-70
-132-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:41:19-67
+132-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:41:9-70
+132-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:41:19-67
 133
 134                <data
-134-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:42:9-43:34
+134-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:42:9-43:34
 135                    android:host="firebase.auth"
-135-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:43:13-31
+135-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:43:13-31
 136                    android:path="/"
 137                    android:scheme="recaptcha" />
-137-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:42:15-40
+137-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:42:15-40
 138            </intent-filter>
 139        </activity>
 140
 141        <service
-141-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:64:9-73:19
+141-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:64:9-73:19
 142            android:name="com.google.firebase.auth.api.fallback.service.FirebaseAuthFallbackService"
-142-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:65:13-101
+142-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:65:13-101
 143            android:enabled="true"
-143-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:66:13-35
+143-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:66:13-35
 144            android:exported="false" >
-144-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:67:13-37
+144-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:67:13-37
 145            <intent-filter>
-145-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:68:13-72:29
+145-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:68:13-72:29
 146                <action android:name="com.google.firebase.auth.api.gms.service.START" />
-146-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:69:17-89
-146-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:69:25-86
+146-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:69:17-89
+146-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:69:25-86
 147
 148                <category android:name="android.intent.category.DEFAULT" />
-148-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
-148-->D:\TiAn\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
+148-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:9-68
+148-->D:\TLMH\Tian\App-to-app\android\app\src\main\AndroidManifest.xml:40:19-65
 149            </intent-filter>
 150        </service>
 151        <service
-151-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:74:9-80:19
+151-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:74:9-80:19
 152            android:name="com.google.firebase.components.ComponentDiscoveryService"
-152-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:75:13-84
+152-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:75:13-84
 153            android:directBootAware="true"
-153-->[com.google.firebase:firebase-common:19.4.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:35:13-43
+153-->[com.google.firebase:firebase-common:19.4.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:35:13-43
 154            android:exported="false" >
-154-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:76:13-37
+154-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:76:13-37
 155            <meta-data
-155-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:77:13-79:85
+155-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:77:13-79:85
 156                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-156-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:78:17-109
+156-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:78:17-109
 157                android:value="com.google.firebase.components.ComponentRegistrar" />
-157-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:79:17-82
+157-->[com.google.firebase:firebase-auth:20.0.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\b2a0ba21db83467a06533eff1c6bcf4c\jetified-firebase-auth-20.0.1\AndroidManifest.xml:79:17-82
 158        </service>
 159
 160        <activity
-160-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+160-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
 161            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-161-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+161-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:24:13-79
 162            android:exported="false"
-162-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+162-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:25:13-37
 163            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-163-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+163-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\20dd9211aac8673dbc6a7dc3f6f41d5c\jetified-play-services-base-17.1.0\AndroidManifest.xml:26:13-72
 164
 165        <provider
-165-->[com.google.firebase:firebase-common:19.4.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:26:9-31:39
+165-->[com.google.firebase:firebase-common:19.4.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:26:9-31:39
 166            android:name="com.google.firebase.provider.FirebaseInitProvider"
-166-->[com.google.firebase:firebase-common:19.4.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:27:13-77
+166-->[com.google.firebase:firebase-common:19.4.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:27:13-77
 167            android:authorities="com.demoapptoapp.firebaseinitprovider"
-167-->[com.google.firebase:firebase-common:19.4.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:28:13-72
+167-->[com.google.firebase:firebase-common:19.4.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:28:13-72
 168            android:directBootAware="true"
-168-->[com.google.firebase:firebase-common:19.4.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:29:13-43
+168-->[com.google.firebase:firebase-common:19.4.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:29:13-43
 169            android:exported="false"
-169-->[com.google.firebase:firebase-common:19.4.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:30:13-37
+169-->[com.google.firebase:firebase-common:19.4.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:30:13-37
 170            android:initOrder="100" />
-170-->[com.google.firebase:firebase-common:19.4.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:31:13-36
+170-->[com.google.firebase:firebase-common:19.4.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\43a46fb3a6e8ce3c76e7f1edc35100a0\jetified-firebase-common-19.4.0\AndroidManifest.xml:31:13-36
 171
 172        <meta-data
-172-->[com.google.android.gms:play-services-basement:17.1.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\218c951fc67babca6b7c8e487afbacaa\jetified-play-services-basement-17.1.1\AndroidManifest.xml:23:9-25:69
+172-->[com.google.android.gms:play-services-basement:17.1.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\218c951fc67babca6b7c8e487afbacaa\jetified-play-services-basement-17.1.1\AndroidManifest.xml:23:9-25:69
 173            android:name="com.google.android.gms.version"
-173-->[com.google.android.gms:play-services-basement:17.1.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\218c951fc67babca6b7c8e487afbacaa\jetified-play-services-basement-17.1.1\AndroidManifest.xml:24:13-58
+173-->[com.google.android.gms:play-services-basement:17.1.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\218c951fc67babca6b7c8e487afbacaa\jetified-play-services-basement-17.1.1\AndroidManifest.xml:24:13-58
 174            android:value="@integer/google_play_services_version" />
-174-->[com.google.android.gms:play-services-basement:17.1.1] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\218c951fc67babca6b7c8e487afbacaa\jetified-play-services-basement-17.1.1\AndroidManifest.xml:25:13-66
+174-->[com.google.android.gms:play-services-basement:17.1.1] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\218c951fc67babca6b7c8e487afbacaa\jetified-play-services-basement-17.1.1\AndroidManifest.xml:25:13-66
 175
 176        <service
-176-->[androidx.room:room-runtime:2.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\6af9853f47fad4c93cfd121e201d857f\room-runtime-2.1.0\AndroidManifest.xml:25:9-27:40
+176-->[androidx.room:room-runtime:2.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\6af9853f47fad4c93cfd121e201d857f\room-runtime-2.1.0\AndroidManifest.xml:25:9-27:40
 177            android:name="androidx.room.MultiInstanceInvalidationService"
-177-->[androidx.room:room-runtime:2.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\6af9853f47fad4c93cfd121e201d857f\room-runtime-2.1.0\AndroidManifest.xml:26:13-74
+177-->[androidx.room:room-runtime:2.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\6af9853f47fad4c93cfd121e201d857f\room-runtime-2.1.0\AndroidManifest.xml:26:13-74
 178            android:exported="false" />
-178-->[androidx.room:room-runtime:2.1.0] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\6af9853f47fad4c93cfd121e201d857f\room-runtime-2.1.0\AndroidManifest.xml:27:13-37
+178-->[androidx.room:room-runtime:2.1.0] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\6af9853f47fad4c93cfd121e201d857f\room-runtime-2.1.0\AndroidManifest.xml:27:13-37
 179        <service
-179-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:19:9-21:40
+179-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:19:9-21:40
 180            android:name="io.nlopez.smartlocation.activity.providers.ActivityGooglePlayServicesProvider$ActivityRecognitionService"
-180-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:20:13-132
+180-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:20:13-132
 181            android:exported="false" />
-181-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:21:13-37
+181-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:21:13-37
 182        <service
-182-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:22:9-24:40
+182-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:22:9-24:40
 183            android:name="io.nlopez.smartlocation.geofencing.providers.GeofencingGooglePlayServicesProvider$GeofencingService"
-183-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:23:13-127
+183-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:23:13-127
 184            android:exported="false" />
-184-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:24:13-37
+184-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:24:13-37
 185        <service
-185-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:25:9-27:40
+185-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:25:9-27:40
 186            android:name="io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider$AndroidGeocodingService"
-186-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:26:13-120
+186-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:26:13-120
 187            android:exported="false" />
-187-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\PC\.gradle\caches\transforms-2\files-2.1\0037e9c9aafbd2848819cdfc7881af57\jetified-library-3.2.11\AndroidManifest.xml:27:13-37
+187-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\Dell\.gradle\caches\transforms-2\files-2.1\09d63f9857393417fd67c1e319b0b9aa\jetified-library-3.2.11\AndroidManifest.xml:27:13-37
 188    </application>
 189
 190</manifest>

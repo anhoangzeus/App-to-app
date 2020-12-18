@@ -41,7 +41,7 @@ export default class Payscreen extends React.PureComponent{
          checked: 'first',
          loading:false,
          modalVisible:false,
-         Address:{},
+
         }; 
       }  
     GetCurrentDate =()=>{
@@ -53,36 +53,15 @@ export default class Payscreen extends React.PureComponent{
       var giay = new Date().getSeconds();
         return date + '/' +month+ "/" +year + " " + gio+":"+ phut+":"+giay;
     }
-    GetAddress =() =>{
-      if(fbApp.auth().currentUser)
-      {
-          this.itemRef.ref('ListAddress').child(fbApp.auth().currentUser.uid).once('value').then((snapshot)=>{
-            var item;
-            snapshot.forEach(function(childSnapshot){
-              var Address={
-                ShipName:'',
-                ShipPhone:'',
-                NumberAddress:'',
-                Xa:'',
-                Huyen:'',
-                City:'',
-              }
-              if(childSnapshot.val().Main==true){
-                Address.ShipName= childSnapshot.val().ShipName;
-                Address.ShipPhone= childSnapshot.val().ShipPhone;
-                Address.NumberAddress= childSnapshot.val().NumberAddress;
-                Address.Xa= childSnapshot.val().Xa;
-                Address.Huyen= childSnapshot.val().Huyen;
-                Address.City= childSnapshot.val().City;
-                item=Address;
-              }
-            });
-            this.setState({
-              Address:item,
-              loading:false
-          });
-        });
-      };
+    setModalVisible = (visible) => {
+      if(fbApp.auth().currentUser){
+        this.setState({ modalVisible: visible },()=> {setTimeout(this.handleClose,10000)});
+      }
+    };
+    handleClose = () => {
+      this.setState({
+        modalVisible: false 
+      });
     };
       thanhToan=async()=>{
         if(this.state.checked == "first"){
@@ -114,6 +93,7 @@ export default class Payscreen extends React.PureComponent{
             fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
           })
          }))
+         this.setModalVisible(true);
          this.props.navigation.navigate("App");
         }
         else{
