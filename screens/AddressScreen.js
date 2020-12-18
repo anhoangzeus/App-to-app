@@ -24,35 +24,26 @@ export default class AddressScreen extends Component {
         }; 
       }
     RenderList = ({NumberAddress,Xa, City, Huyen,ShipName,ShipMoblie,id,Main}) =>(
-        <View style={styles.listItem}>
+        <TouchableOpacity style={styles.listItem} onPress={()=> {this.props.navigation.navigate('DetailAddressScreen', {id: id})}}>
           <View style={{flex:1, margin: 10}}>   
             <Text style={styles.address}>{NumberAddress}, {Xa}, {Huyen}, {City}</Text>
             <Text style={{marginLeft: 10}}>{ShipName} - {ShipMoblie}</Text>
             <View style={{justifyContent:'space-between', flexDirection:'row',marginTop:10}}>
             {Main ? <Text style={{marginLeft: 10, color:'#FFCC00'}}>Địa chỉ mặc định</Text>:<Text/>}
               <View style={{flexDirection:'row'}}>
-                <Feather 
-                  style={{marginRight:5}}
-                  name='edit' 
-                  color="green" 
-                  size={25}
-                  onPress={()=> {this.props.navigation.navigate('DetailAddressScreen', {id: id})}}
-                  />
                   {
                     Main ? null:
-                    <MaterialIcons 
-                      name='delete' 
-                      color="red" 
-                      size={25}
-                      onPress={()=> {this.setModalVisible(true),this.setState({
-                        _idCanXoa: id, 
-                        isMain: Main})}}
-                    />
+                    <TouchableOpacity
+                      style={{width:width/8,height:width/10}}
+                      onPress={()=> {this.setModalVisible(true),this.setState({_idCanXoa: id,isMain: Main})}}
+                    >
+                      <MaterialIcons name='delete' color="red" size={30}/>
+                    </TouchableOpacity>
                   }           
               </View>             
             </View>                   
           </View >
-      </View>
+      </TouchableOpacity>
     );
     componentDidMount(){
       this.ListenForListAddress();
@@ -158,11 +149,7 @@ export default class AddressScreen extends Component {
             <StatusBar backgroundColor='#a2459a' barStyle="light-content"/>
                 <View style={styles.headerContainer}>
                     <TouchableOpacity style={styles.cartContainer} onPress={() =>{this.props.navigation.goBack()}}>
-                        <Ionicons 
-                            name='arrow-back-outline' 
-                            color='white'  
-                            size={25}
-                            />
+                    <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
                     </TouchableOpacity>
                     <Text style={styles.headerText}>Thông tin địa chỉ</Text>   
                 </View>
@@ -195,7 +182,7 @@ export default class AddressScreen extends Component {
                       style={styles.userContainer}>
                         <View>      
                             <View style={{flexDirection:'row'}}>
-                            <Ionicons name='add-circle-outline' color='green' size={28}/>
+                            <MaterialIcons name='map-marker-plus' color='green' size={28}/>
                             <Text style={styles.titletext}>Thêm địa chỉ mới</Text>            
                             </View>                       
                         </View>
@@ -213,7 +200,7 @@ export default class AddressScreen extends Component {
                   >
                     <View style={styles.centeredView}>
                       <View style={{...styles.modalView, padding: width/15,}}>
-                        <Text style={styles.modalText}>Bạn có chắc bỏ xoá địa chỉ này?</Text>
+                        <Text style={styles.modalText}>Bạn có chắc xoá địa chỉ này ?</Text>
                         <View style={{flexDirection:'row'}}>
                         <TouchableOpacity
                           style={{ ...styles.openButton, backgroundColor: "#2196F3", width:width/2.5 }}
@@ -267,8 +254,9 @@ const styles = StyleSheet.create({
       },
       headerText: {
         color: '#fff',
-        fontSize: 20,
-        fontWeight: 'bold',
+        textAlignVertical: 'center',
+        fontSize:20,
+        fontWeight:'bold'
       },
       titletext:{
         color:'green',
@@ -285,7 +273,8 @@ const styles = StyleSheet.create({
       },
       address:{
         marginLeft: 10,
-        fontSize: 25
+        fontSize: 25,
+        color:'#000'
       },
       buttonXem:{
         paddingHorizontal: 10,
@@ -327,7 +316,8 @@ const styles = StyleSheet.create({
       modalText: {
         marginBottom: 15,
         fontSize:20,
-        color:'#2196F3'
+        color:'#2196F3',
+        textAlign:'center'
       },
       textStyle: {
         color: "white",

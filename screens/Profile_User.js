@@ -84,11 +84,11 @@ const ProfileUser =(props)=> {
           </TouchableOpacity>
           <View style={styles.divider} />
           <TouchableOpacity>
-          <ProfileItem icon="trophy-outline" name="Săn thưởng" />
+          <ProfileItem icon="star-outline" name="Săn thưởng" />
           </TouchableOpacity>
           <View style={styles.divider} />
           <TouchableOpacity onPress={()=> {props.navigation.navigate("TopOrder")}}>
-          <ProfileItem icon="form-select" name="Quản lí đơn hàng" />
+          <ProfileItem icon="format-list-bulleted" name="Quản lí đơn hàng" />
           </TouchableOpacity>         
           <View style={styles.divider1} />
           <TouchableOpacity onPress={()=> {props.navigation.navigate("TopOrder",{screen: "OrderXuli"})}}>
@@ -116,7 +116,7 @@ const ProfileUser =(props)=> {
           </TouchableOpacity>
           <View style={styles.divider} />
           <TouchableOpacity onPress={()=> {props.navigation.navigate("AddressScreen")}}>
-          <ProfileItem1 icon="location-outline" name="Số địa chỉ" />
+          <ProfileItem icon="map-marker-outline" name="Số địa chỉ" />
           </TouchableOpacity>  
           <View style={styles.divider1} />
           <TouchableOpacity>
@@ -158,7 +158,7 @@ const ProfileUser =(props)=> {
                   onPress={() => {LogOut()}}
               >
               <LinearGradient
-                    colors={['#a2459a', '#3eafff']}
+                    colors={['#a2459a', '#a2459a','#a2459a','#a2459a','#3eafff']}
                   style={styles.signIn}
               >
                   <Text style={[styles.textSign, {
@@ -166,7 +166,6 @@ const ProfileUser =(props)=> {
                   }]}>Đăng xuất</Text>
               </LinearGradient>
               </TouchableOpacity>
-              <View style={styles.divider} />
               <View style={styles.divider} />
         </View>
         </ScrollView>

@@ -4,6 +4,7 @@ import {StyleSheet, View, Text,Alert,
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {fbApp} from "../firebaseconfig";
 import "firebase/auth";
 import Feather from 'react-native-vector-icons/Feather';
@@ -272,11 +273,7 @@ const saveChangesHandle = () => {
       <StatusBar backgroundColor='#a2459a' barStyle="light-content"/>
       <View style={styles.headerContainer}>
               <TouchableOpacity style={styles.cartContainer} onPress={() =>{navigation.goBack()}}>
-                <Ionicons 
-                  name='arrow-back-outline' 
-                  color='white'  
-                  size={25}
-              />
+              <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
               </TouchableOpacity>
               <Text style={styles.headerText}>Thông tin tài khoản</Text>
           </View>

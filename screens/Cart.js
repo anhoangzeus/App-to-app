@@ -214,7 +214,7 @@ export default class Cart extends Component{
             <Text style={{marginVertical:4,fontSize:19, color:"red"}}><ReactNativeNumberFormat value={item.Price}/></Text>
             <View style={{flexDirection:"row"}}>            
                 <Button style={styles.buttonUpDown} color='#ff3333' onPress={()=>{this._giamSoLuong(item)}}>-</Button>
-              <View style={{marginTop:10}}><Text style={{fontSize:20, marginHorizontal:10}} >{item.Quantity}</Text></View>
+              <View style={{marginTop:10}}><Text style={{fontSize:20, marginHorizontal:10,color:'#000'}}>{item.Quantity}</Text></View>
               <Button style={styles.buttonUpDown} color='#ff3333' onPress={()=>{this._tangSoLuong(item)}}>+</Button>
             </View>
           </View>
@@ -245,8 +245,7 @@ export default class Cart extends Component{
                       }}
                     >
                       <Text style={styles.textStyle}>Xác nhận</Text>
-                    </TouchableOpacity>
-                  
+                    </TouchableOpacity>    
                     </View>                  
                   </View>
                 </View>
@@ -277,10 +276,10 @@ export default class Cart extends Component{
       }
     return(      
      <View style={styles.screenContainer}>
-        <StatusBar barStyle="light-content" backgroundColor="#a2459a"/>
+        <StatusBar barStyle="light-content" backgroundColor="#a2459a" translucent={false}/>
         <View style={styles.headerContainer}>
           <TouchableOpacity style={{width:75}} onPress={() => navigation.navigate('App')}>
-          <FontAwesome name="chevron-left" size={24} color="#fff" style={{marginLeft:width/40}}/>
+          <FontAwesome name="angle-left" size={35} color="#fff" style={{marginLeft:width/40}}/>
           </TouchableOpacity>
         
           <Text style={styles.headerText}>Giỏ hàng</Text>  
@@ -356,8 +355,8 @@ export default class Cart extends Component{
         </ScrollView>
         <View style={{backgroundColor:"#fff",marginBottom:5}}>
           <View flexDirection="row"   justifyContent="space-between">
-              <Text style={{marginLeft:10, fontSize:16}}>Thành tiền: </Text>
-              <Text color="red" style={{fontSize:20,marginHorizontal:10}}><ReactNativeNumberFormat value={this.state.amount} /></Text>
+              <Text style={{marginLeft:10, fontSize:16,color:'#000'}}>Thành tiền: </Text>
+              <Text color="red" style={{fontSize:20,marginHorizontal:10,color:'#000'}}><ReactNativeNumberFormat value={this.state.amount} /></Text>
           </View>
           <TouchableOpacity style={styles.btnSubmit}  onPress={() =>{this._checkGioHang()}} >
             <Text style={{color:"white",alignSelf:'center',fontSize:20}}>Tiến hành đặt hàng</Text></TouchableOpacity>
@@ -375,7 +374,7 @@ const styles = StyleSheet.create({
     
     headerContainer: {
       flexDirection: 'row',
-      paddingTop: 10,
+      paddingTop: 20,
       paddingBottom: 4,
       backgroundColor: '#a2459a',
     },
@@ -449,7 +448,8 @@ const styles = StyleSheet.create({
     },
     addresstitle:{
       fontWeight:'bold',
-      fontSize:17
+      fontSize:17,
+      color:'#000'
     },
     centeredView: {
       justifyContent: "center",

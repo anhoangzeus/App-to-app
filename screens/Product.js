@@ -319,14 +319,14 @@ getData =()=>{
           <View  style={styles.options}>
           <View>
               <View >
-              <Text color="Black"  style={{ paddingBottom: 8 ,fontSize:18,marginLeft:width/40}}>{this.state.Name}</Text>
+              <Text style={{ paddingBottom: 8 ,fontSize:18,marginLeft:width/40,color:'black'}}>{this.state.Name}</Text>
               <View style={{flexDirection:'row'}}>
                 <Image source={require("../assets/images/star.jpg")} style={{width:width/4,height:height/40,marginLeft:width/40}}/>
                 <TouchableOpacity style={{marginLeft:10,}}><Text style={{ color:'green'}}>(Xem 518 đánh giá)</Text></TouchableOpacity>
               </View>
-              <Text  style={{marginVertical: 10,fontSize:25,fontWeight:"bold",marginLeft:width/40}}>{this.state.MetaDescription}</Text>
+              <Text  style={{marginVertical: 10,fontSize:25,fontWeight:"bold",marginLeft:width/40,color:'#000'}}>{this.state.MetaDescription}</Text>
               <View style={{flexDirection:'row', alignItems:'center', marginBottom:10}}>
-                <Text color="Black"  style={{ fontSize:24,marginLeft:width/40, color:'black', fontWeight:'bold' }}><ReactNativeNumberFormat value={Price}/> </Text>
+                <Text style={{ fontSize:24,marginLeft:width/40, color:'black', fontWeight:'bold' }}><ReactNativeNumberFormat value={Price}/> </Text>
                 {Price === PromotionPrice ? 
                   null:
                   <View style={{flexDirection:'row'}}>
@@ -366,7 +366,7 @@ getData =()=>{
         <View style={{height:5}}/>
         {List_Productlienquan.length==0 ? null:
         <View style={{backgroundColor:'#fff',height:height/3.5}}>
-        <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40, fontWeight:'bold'}}>Sản phẩm tương tự</Text>
+        <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40, fontWeight:'bold',color:'#000'}}>Sản phẩm tương tự</Text>
         <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -389,7 +389,7 @@ getData =()=>{
        
           <View style={{height:5}}/>
           <View style={{backgroundColor:'#fff'}}>
-          <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40,fontWeight:'bold'}}>Mô tả sản phẩm</Text>
+          <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40,fontWeight:'bold',color:'#000'}}>Mô tả sản phẩm</Text>
           <Text muted size={12} style={{marginHorizontal:width/40}}>  {this.state.Decription}</Text>         
           <View style={{height:25}}/>
           </View>

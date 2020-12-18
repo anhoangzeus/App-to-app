@@ -13,6 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import DropDownPicker from 'react-native-dropdown-picker';
 import AddressScreen from '../screens/AddressScreen';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default  function Route_AddressDetail({ route, navigation}) {  
     var searchContent = "";    
@@ -276,11 +277,7 @@ const saveChangesHandle = async() => {
       <StatusBar backgroundColor='#a2459a' barStyle="light-content"/>
       <View style={styles.headerContainer}>
               <TouchableOpacity style={styles.cartContainer} onPress={() =>{navigation.goBack()}}>
-                <Ionicons 
-                  name='arrow-back-outline' 
-                  color='white'  
-                  size={25}
-                  />
+              <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
               </TouchableOpacity>
               <Text style={styles.headerText}>Cập nhật địa chỉ</Text>
           </View>
@@ -501,7 +498,7 @@ const saveChangesHandle = async() => {
       </View>
        <View style={styles.divider} />
       <TouchableOpacity style={{backgroundColor:'#FF3333',
-      marginHorizontal:10,marginVertical:10,height:height/20,}} onPress={()=> {saveChangesHandle()}}>
+      marginHorizontal:10,marginVertical:10,height:height/20,borderRadius:15}} onPress={()=> {saveChangesHandle()}}>
           <Text style={{fontSize:20, textAlign:'center', color:'white', marginTop:5}}>Lưu địa chỉ</Text>
       </TouchableOpacity >
       </ScrollView>

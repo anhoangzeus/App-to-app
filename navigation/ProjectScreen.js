@@ -4,6 +4,7 @@ import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { Block, Text, theme } from "galio-framework";
 
@@ -52,10 +53,9 @@ export function TopOrder(props){
     <View style={styles.containner}>
       <View style={styles.headconteiner}>
         <TouchableOpacity style={{width:60, borderRadius:10}} onPress={() =>props.navigation.navigate("App")}>
-        <Ionicons name="arrow-back-outline" color={'white'}  size={30} />
+        <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
         </TouchableOpacity> 
       <Text style={styles.texthead}>ĐƠN HÀNG CỦA TÔI</Text>
-      <Ionicons name="arrow-undo" color={'#a2459a'} size={26} />
       </View>
           <TopStackOrder.Navigator
           tabBarOptions={{
@@ -236,11 +236,10 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: 'bold',
       marginBottom: 10,
-      textAlign: 'center',
+      marginLeft:width/20
     },
     headconteiner:{
       flexDirection: 'row', 
-      justifyContent:'space-between', 
       paddingHorizontal: 5, 
       paddingTop: 15,
       paddingBottom:5

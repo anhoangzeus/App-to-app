@@ -27,21 +27,21 @@ export default class Order_Xuli extends Component{
   RenderList = ({CreatedDate,ShipAddress,ShipName,ShipMoblie,ToTalPrice,id}) =>(
     <TouchableOpacity style={styles.listItem} onPress={()=> {this.props.navigation.navigate('View_OrderDetail', {id: id})}}>
       <View style={{flex:1, margin: 10}}>
-         <Text style={{fontSize: 20, fontWeight:'bold',textAlign:'center'}}>{ShipName}</Text>
+         <Text style={{fontSize: 20, fontWeight:'bold',textAlign:'center',color:'#000'}}>{ShipName}</Text>
          <View style={{height:1,backgroundColor:'silver',marginTop:5}}/>
          <View style={{flexDirection:'row',marginTop:10}} >
             <MaterialIcons name='phone-in-talk' size={20} color="#1e88e5"/>
-            <Text style={{marginLeft: 10}}>{ShipMoblie}</Text>
+            <Text style={{marginLeft: 10,color:'#000'}}>{ShipMoblie}</Text>
          </View>
          <View style={{flexDirection:'row'}} >
             <MaterialIcons name='event-available' size={20} color="#1e88e5"/>
-            <Text style={{marginLeft: 10}}>{CreatedDate}</Text>
+            <Text style={{marginLeft: 10,color:'#000'}}>{CreatedDate}</Text>
          </View>
          <View style={{flexDirection:'row'}} >
             <MaterialIcons name='location-on' size={20} color="#1e88e5"/>
             <Text numberOfLines={1} style={styles.address}>{ShipAddress}</Text>
          </View>
-          <Text style={{fontSize:20, color:"#1e88e5", fontWeight:'bold'}}>Tổng tiền: <ReactNativeNumberFormat value={ToTalPrice} /></Text>
+          <Text style={{fontSize:20, color:"#1e88e5", fontWeight:'bold',color:'#000'}}>Tổng tiền: <ReactNativeNumberFormat value={ToTalPrice} /></Text>
       </View >  
       <Text style={{color:"white", textAlign:'center'}}>Xem</Text>
   </TouchableOpacity>
@@ -149,7 +149,8 @@ const styles = StyleSheet.create({
   },
   address:{
     fontWeight: '400',
-    marginLeft: 10
+    marginLeft: 10,
+    color:'#000'
   },
   buttonXem:{
     paddingHorizontal: 10,

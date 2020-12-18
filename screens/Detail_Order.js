@@ -149,11 +149,7 @@ export class Detail_Order extends Component{
                 <StatusBar backgroundColor='#a2459a' barStyle="light-content"/>
                 <View style={styles.headerContainer}>
                         <TouchableOpacity style={styles.cartContainer} onPress={()=>this.props.navigation.goBack()}>
-                          <Ionicons 
-                            name='arrow-back-outline' 
-                            color='white' 
-                            size={25}
-                          />
+                        <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
                         </TouchableOpacity>
                         <Text style={styles.headerText}>Chi tiết đơn hàng</Text>
                     </View>
@@ -217,8 +213,8 @@ export class Detail_Order extends Component{
                     <View style={{backgroundColor:'#fff',paddingTop:5,paddingBottom:10, paddingHorizontal:10,}}>            
                       <Text style={styles.textorder}>Thông tin thanh toán</Text>
                       <View style={{height: 2, backgroundColor:'#1e88e5',marginTop:2}}/>
-                        <Text style={{margin:10,fontSize:20}}>Phí vận chuyển: 0 đ</Text>
-                        <Text style={{marginHorizontal:10,fontSize:20}}>Tổng tiền: <ReactNativeNumberFormat value={this.state.Total} /></Text>        
+                        <Text style={{margin:10,fontSize:20,color:'#000'}}>Phí vận chuyển: 0 đ</Text>
+                        <Text style={{marginHorizontal:10,fontSize:20,color:'#000'}}>Tổng tiền: <ReactNativeNumberFormat value={this.state.Total} /></Text>        
                   </View>                          
                     {this.state.Status == "Chờ xác nhận" ? 
                   <TouchableOpacity
