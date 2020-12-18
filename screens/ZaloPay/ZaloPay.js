@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Text, ScrollView, KeyboardAvoidingView, NativeModules,Dimensions, NativeEventEmitter,Image,TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, ScrollView, KeyboardAvoidingView, NativeModules,Dimensions, NativeEventEmitter,Image,Modal,TouchableOpacity} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { Button } from 'react-native-elements';
 import CryptoJS from 'crypto-js';
 import NumberFormat from 'react-number-format';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { View } from 'react-native';
 import {fbApp} from "../../firebaseconfig";
 import "firebase/auth";
@@ -41,18 +42,18 @@ export default function App({route,navigation}) {
   const subscription = payZaloBridgeEmitter.addListener(
     'EventPayZalo',
     (data) => {
-     
       if(data.returnCode == 1){
-        alert('Pay success!');
         thanhToan();
-      }else{
-        alert('Pay errror! ' + data.returnCode);
+        data.returnCode = 0;
+      }else if(data.returnCode == 4){ 
+        alert('Số dư trong tài khoản không đủ' );
       }
     }
 );
 
   const [token,setToken] = React.useState('')
   const [returncode,setReturnCode] = React.useState('')
+  const [modalVisible,setmodal] = React.useState(false)
   const address = route.params.Address;
  
   const diachi = address.NumberAddress+", "+address.Xa+", "+address.Huyen+", "+ address.City;
@@ -100,12 +101,13 @@ export default function App({route,navigation}) {
     .then(resJson => {
       setToken(resJson.zptranstoken)
       setReturnCode(resJson.returncode)
-      payOrder() 
+      
+    }).then(()=>{
+      payOrder()
     })
     .catch((error)=>{
       console.log("error ", error)
     })
-    
   }
 
   function getStatus(){
@@ -113,41 +115,39 @@ export default function App({route,navigation}) {
   }
   function thanhToan(){ 
     var key = fbApp.database().ref().child('Orders/').push().key;  
-      fbApp.database().ref('Orders/'+key).set({
-          Status:1,
-          CreatedDate:GetCurrentDate(),
-          ShipAddress:diachi,
-          ShipName:address.ShipName,
-          ShipMoblie:address.ShipPhone,
-          OrderID: key,
-          Payment:"01",
-          Total:"Đã thanh toán",
-          CustomerID:fbApp.auth().currentUser.uid,       
+    fbApp.database().ref('Orders/'+key).set({
+        Status:1,
+        CreatedDate:GetCurrentDate(),
+        ShipAddress:diachi,
+        ShipName:address.ShipName,
+        ShipMoblie:address.ShipPhone,
+        OrderID: key,
+        Payment:"02",
+        Total:route.params.amount,
+        CustomerID:fbApp.auth().currentUser.uid,       
+    });
+    fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
+      snapshot.forEach(function(childSnapshot){
+      var keyDetail = fbApp.database().ref().child('OrderDetails/').push().key;
+      fbApp.database().ref('/OrderDetails/'+keyDetail).set({
+       OrderDetailID:keyDetail,
+       OrderID:key,
+       Price:childSnapshot.val().Price,
+       ProductID: childSnapshot.val().Id,
+       Quantity:childSnapshot.val().Quantity
       });
-      fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
-        snapshot.forEach(function(childSnapshot){
-        var keyDetail = fbApp.database().ref().child('OrderDetails/').push().key;
-        fbApp.database().ref('/OrderDetails/'+keyDetail).set({
-         OrderDetailID:keyDetail,
-         OrderID:key,
-         Price:childSnapshot.val().Price,
-         ProductID: childSnapshot.val().Id,
-         Quantity:childSnapshot.val().Quantity
-        });
-        fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
-      })
-     })
-     navigation.navigate("App"); 
+      fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
+    })
+   })
+   setmodal(true);
   }
-  
-
   function payOrder() {
     var payZP = NativeModules.PayZaloBridge;
     payZP.payOrder(token);
   }
 
   return (
-    <ScrollView>
+    <View>
       <View style={styles.headerContainer}>
           <TouchableOpacity style={{width:width/5}} onPress={() => navigation.goBack()}>
           <FontAwesome name="angle-left" size={35} color="#fff" style={{marginLeft:width/40}}/>
@@ -172,11 +172,32 @@ export default function App({route,navigation}) {
         <Button title="Về lại trang chủ" 
         type="outline"
         style={{width:width*0.9, height:height/10}}
-          onPress={() => {getStatus()}}/>
+          onPress={() => {getStatus()}}
+          />
       </View>
       </KeyboardAvoidingView>
-      
-    </ScrollView>
+      <View style={styles.centeredView}>
+              <Modal
+                  animationType="fade"
+                  transparent={true}
+                  visible={modalVisible}
+                
+                  onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                  }}
+               >
+                  <View style={styles.centeredView}>
+                    <TouchableOpacity onPress={() => {getStatus()}}>
+                    <View style={styles.modalView}>
+                      <MaterialIcons name="done" size={55} color="#00cc00"/>
+                      <Text style={styles.modalText}>Mua thành công!</Text>
+                      <Text style={styles.modalText}>Nhấn để về trang chủ</Text>
+                    </View>
+                    </TouchableOpacity>
+                  </View>
+             </Modal>  
+        </View>  
+    </View>
   );
 }
 
@@ -222,6 +243,27 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 20,
     textAlign: 'center'
+  },
+  centeredView: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex:1
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    justifyContent:'center'
   },
 });
 
