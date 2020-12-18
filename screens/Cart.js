@@ -12,7 +12,7 @@ import {
   FlatList,
   TouchableOpacity,
   Text,
-  Modal
+  Modal,
 } from 'react-native';
 import {  Button} from 'galio-framework';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
