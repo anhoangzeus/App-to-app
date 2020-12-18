@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\zalo pay\\zalopay2\\demo-app-to-app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ta\\values-ta.xml",
+            "outputFile": "D:\\TiAn\\App-to-app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ta\\values-ta.xml",
             "map": [
                 {
                     "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-2\\files-2.1\\20dd9211aac8673dbc6a7dc3f6f41d5c\\jetified-play-services-base-17.1.0\\res\\values-ta\\values.xml",

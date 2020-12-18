@@ -100,11 +100,12 @@ export default function App({route,navigation}) {
     .then(resJson => {
       setToken(resJson.zptranstoken)
       setReturnCode(resJson.returncode)
+      payOrder() 
     })
     .catch((error)=>{
       console.log("error ", error)
     })
-    payOrder() 
+    
   }
 
   function getStatus(){

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\zalo pay\\zalopay2\\demo-app-to-app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
+            "outputFile": "D:\\TiAn\\App-to-app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-2\\files-2.1\\a72fc6914174c60e99bb51c1d98759b9\\material-1.1.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\zalo pay\\zalopay2\\demo-app-to-app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hy\\values-hy.xml",
+            "outputFile": "D:\\TiAn\\App-to-app\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hy\\values-hy.xml",
             "map": [
                 {
                     "source": "C:\\Users\\PC\\.gradle\\caches\\transforms-2\\files-2.1\\73435d3d97560fff0f796379f3e1a830\\core-1.1.0\\res\\values-hy\\values-hy.xml",
