@@ -33,7 +33,6 @@ function ReactNativeNumberFormat({ value }) {
   );
 };
 export default class Payscreen extends React.PureComponent{
-
     constructor(props) {
         super(props);
         this.itemRef = fbApp.database();
@@ -55,7 +54,7 @@ export default class Payscreen extends React.PureComponent{
     }
     setModalVisible = (visible) => {
       if(fbApp.auth().currentUser){
-        this.setState({ modalVisible: visible },()=> {setTimeout(this.handleClose,10000)});
+        this.setState({ modalVisible: visible },()=> {setTimeout(this.handleClose,5000)});
       }
     };
     handleClose = () => {
@@ -84,23 +83,24 @@ export default class Payscreen extends React.PureComponent{
           await(this.itemRef.ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
             snapshot.forEach(function(childSnapshot){
             var keyDetail = fbApp.database().ref().child('OrderDetails/').push().key;
-            fbApp.database().ref('/OrderDetails/'+keyDetail).set({
-             OrderDetailID:keyDetail,
-             OrderID:key,
-             Price:childSnapshot.val().Price,
-             ProductID: childSnapshot.val().Id,
-             Quantity:childSnapshot.val().Quantity
+            fbApp.database().ref('Orders/'+key+'/OrderDetails/'+keyDetail).set({
+              OrderDetailID:keyDetail,
+              Price:childSnapshot.val().Price,
+              ProductID: childSnapshot.val().Id,
+              Quantity:childSnapshot.val().Quantity,
+              CategoryID:childSnapshot.val().CategoryID,
+              BrandID:childSnapshot.val().BrandID,
+              Name:childSnapshot.val().Name,
+              Picture:childSnapshot.val().Picture
             });
             fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
           })
          }))
-         this.setModalVisible(true);
-        
+         this.setModalVisible(true); 
         }
         else{
           this.props.navigation.navigate("ZaloPayScreen",{amount: this.props.amount,listItem : this.props.CartItem, Address: this.props.address });
-        }          
-        
+        }            
       }
     render(){
       const { navigation } = this.props;
@@ -190,13 +190,11 @@ export default class Payscreen extends React.PureComponent{
                >
                   <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                      <View style={{flexDirection:'row'}}>
-                      <Image source={require("../assets/logoAn-03.png")} style={{height:60,width:60,resizeMode:'cover'}}/>
-                      <FontAwesome5 name="kiss-wink-heart" size={40} color="#a2459a"/>
-                      </View>               
+                      <FontAwesome5 name="kiss-wink-heart" size={40} color="#a2459a"/>         
                       <Text style={{...styles.modalText, color:'#a2459a'}}>Đặt hàng thành công!</Text>
-                      <TouchableOpacity style={{width:width/2, height:height/18, borderRadius:13, backgroundColor:'#a2459a',justifyContent:'center',alignItems:'center'}} onPress={()=> {this.handleClose}}>
-                        <Text  style={{...styles.modalText, color:'#fff'}}>Tiếp tục mua sắm</Text>
+                      <TouchableOpacity style={{width:width/2, height:height/18, borderRadius:13, backgroundColor:'#a2459a'}} 
+                      onPress={()=> {this.props.navigation.navigate("App")}}>
+                        <Text  style={{...styles.modalText, color:'#fff',textAlign:'center'}}>Tiếp tục mua sắm</Text>
                       </TouchableOpacity>
                     </View>
                   </View>

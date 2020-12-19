@@ -37,7 +37,6 @@ export default function Route_OrderDetail({ route, navigation}) {
         />
     );    
 };
-
 export class Detail_Order extends Component{
     constructor(props) {
         super(props);
@@ -53,9 +52,9 @@ export class Detail_Order extends Component{
           ListProduct: [],
         };
       }
-      getListOrder =async()=>{
+      getListOrder =()=>{
         fbApp.database().ref('Orders').child(this.props.content)
-        .on('value',snapshot => {
+        .once('value').then((snapshot) => {
           if(snapshot.val().Status=="1"){
             this.setState({Status:"Chờ xác nhận"})
           } else if(snapshot.val().Status=="2"){
@@ -74,53 +73,41 @@ export class Detail_Order extends Component{
           } else if(snapshot.val().Payment=="02"){
             this.setState({Payment:"Thanh toán bằng thẻ tín dụng"})
           } 
+          var item=[];
+          snapshot.child('OrderDetails').forEach((child)=>{
+            var product = {
+              ProductName:'',
+              ProductImage:'https://ibb.co/mbtRJGd',
+              Brand_Product:'',
+              Quantity:'',
+              Price: '',
+              id:'',
+              cate_Name:'',
+            } 
+            product.Price = child.val().Price;
+            product.Quantity = child.val().Quantity;    
+            product.ProductImage =child.val().Picture;
+            product.ProductName = child.val().Name;
+            fbApp.database().ref('Brands').child(child.val().BrandID)
+              .on('value',snapshot_brand =>{
+                product.Brand_Product = snapshot_brand.val().Name;       
+            });
+            fbApp.database().ref('Catogorys').child(child.val().CategoryID)
+              .on('value',snapshot_cate =>{
+                product.cate_Name = snapshot_cate.val().Name;       
+            });            
+            product.id=child.val().OrderDetailID;
+            item.push(product); 
+          })
           this.setState({
             OrderID:snapshot.val().OrderID,
             CreatedDate:snapshot.val().CreatedDate,
             ShipName:snapshot.val().ShipName,
             ShipMoblie:snapshot.val().ShipMoblie,
             ShipAddress:snapshot.val().ShipAddress,
+            Total:snapshot.val().Total,
+            ListProduct:item,
           }) 
-          fbApp.database().ref('OrderDetails').once('value').then((snapshot_detail)=>{
-            var list_Details=[];
-            var ToTalPrice = 0;       
-            snapshot_detail.forEach(function(snapshot_detail){  
-              var product = {
-                ProductName:'',
-                ProductImage:'https://ibb.co/mbtRJGd',
-                Brand_Product:'',
-                Quantity:'',
-                Price: '',
-                id:'',
-                cate_Name:'',
-              } 
-              if(snapshot_detail.val().OrderID == snapshot.val().OrderID){
-                ToTalPrice += parseInt(snapshot_detail.val().Price) * parseInt(snapshot_detail.val().Quantity)  
-                product.Price = snapshot_detail.val().Price;
-                product.Quantity = snapshot_detail.val().Quantity;      
-
-                fbApp.database().ref('Products').child(snapshot_detail.val().ProductID)
-                .on('value',snapshot_product =>{   
-
-                  product.ProductName = snapshot_product.val().Name;
-                  product.ProductImage = snapshot_product.val().Image;
-               
-                  fbApp.database().ref('Brands').child(snapshot_product.val().BrandID)
-                  .on('value',snapshot_brand =>{
-                    product.Brand_Product = snapshot_brand.val().Name;       
-                  })
-                  fbApp.database().ref('Catogorys').child(snapshot_product.val().CategoryID)
-                  .on('value',snapshot_cate =>{
-                    product.cate_Name = snapshot_cate.val().Name;       
-                  })
-                })
-                product.id=snapshot_detail.val().OrderDetailID;
-                list_Details.push(product); 
-              }                        
-            })
-            this.setState({ListProduct: list_Details});
-            this.setState({Total: ToTalPrice});
-          })      
         })   
       }
       huy_Order =()=>{

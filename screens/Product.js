@@ -13,6 +13,7 @@ import {
   FlatList,
   Modal,
   TouchableHighlight,
+  ActivityIndicator,
   Animated
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -54,6 +55,7 @@ export default class Product extends React.Component {
       listcart:[],
       modalVisible:false,
       scrollY: new Animated.Value(0),
+      isloaing:true
     };
     this.timer;
   };
@@ -151,7 +153,7 @@ getItemRespon=()=>{
 getData =()=>{
     var ImageItems=[];
     this.itemRef.ref('/Products/').child(this.state.idsanpham)
-    .on('value',snapshot => {
+    .once('value').then((snapshot) => {
       this.setState({
         Decription:snapshot.val().Description,
         Image:snapshot.val().Image,
@@ -166,13 +168,12 @@ getData =()=>{
     this.itemRef.ref('/Products/').child(this.state.idsanpham).child('MoreImages')
     .once('value').then((snapshot)=>{
       snapshot.forEach((child)=>{
-        ImageItems.push(
-          child.val().Image
-        )
+        ImageItems.push(child.val().Image)
       })
     })
     this.setState({
-      List_MoreImage:ImageItems
+      List_MoreImage:ImageItems,
+      isloaing:false
     })
 };
   GetCartData = ()=>{
@@ -258,6 +259,14 @@ getData =()=>{
       outputRange: [HEADER_MIN_HEIGHT,HEADER_MAX_HEIGHT],
       extrapolate: 'clamp',
     });
+    if (this.state.isloaing) {
+      return (
+        <View style={{ flex: 1, backgroundColor:'#fff', justifyContent:'center'}}>
+          <StatusBar barStyle='light-content' backgroundColor='#a2459a'/>
+          <ActivityIndicator size='large' color="'#a2459a"/>
+        </View>
+      )
+    }  
     return (
       <View  style={{flex:1,backgroundColor:"#ededed"}}>
         <StatusBar barStyle='dark-content'  backgroundColor="transparent" translucent={true}/>
@@ -286,9 +295,9 @@ getData =()=>{
          )}
         >
             <Swiper 
-              loop={true}
-              showsPagination={true}
-              index={0}
+             loop={true}
+             showsPagination={true}
+             index={0}
               width= {width}
               height= {height/2}
             >
@@ -390,7 +399,7 @@ getData =()=>{
           <View style={{height:5}}/>
           <View style={{backgroundColor:'#fff'}}>
           <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40,fontWeight:'bold',color:'#000'}}>Mô tả sản phẩm</Text>
-          <Text muted size={12} style={{marginHorizontal:width/40}}>  {this.state.Decription}</Text>         
+          <Text muted size={12} style={{marginHorizontal:width/40,color:'#000'}}>  {this.state.Decription}</Text>         
           <View style={{height:25}}/>
           </View>
         </ScrollView>

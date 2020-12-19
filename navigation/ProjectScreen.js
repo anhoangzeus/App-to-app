@@ -29,8 +29,8 @@ import Route_OrderDetail from '../screens/Detail_Order';
 import PaymentScreen from '../screens/Payment';
 import Route_AddressDetail from '../screens/DetailAddressScreen';
 import Cart from '../screens/Cart';
-import ZaloPay from '../screens/ZaloPay/ZaloPay'
-
+import ZaloPay from '../screens/ZaloPay/ZaloPay';
+import Rating from '../screens/Rating';
 import CustomDrawerContent from './Menu';
 import { Icon, Header } from '../components';
 import { Images, materialTheme } from "../constants/";
@@ -201,23 +201,13 @@ export default function ProjectStack(props) {
       <Stack.Screen name="TopOrder" component={TopOrder}/>
       <Stack.Screen name="Setting" component={SettingsScreen} />
       <Stack.Screen name="Components" component={ComponentsScreen} />
-      <Stack.Screen name="Product" component={ProductScreen} 
-      options={{
-        headerBackTitleVisible:false,
-        headerTitle:false,
-        headerTransparent:true,
-
-        headerTintColor:'red',
-        
-     headerLeft: () => (
-         <Ionicons name="arrow-back-outline" size={25} backgroundColor="#d02860" />
-     )
-     }}/>
+      <Stack.Screen name="Product" component={ProductScreen}/>
       <Stack.Screen name="Items" component={ItemsScreen}/>
       <Stack.Screen name="ItemsCart" component={ItemsCart}/>
       <Stack.Screen name="Cart" component={Cart}/>
       <Stack.Screen name='View_OrderDetail' component={Route_OrderDetail}/>
       <Stack.Screen name='InfoUser' component={InfoUser}/>
+      <Stack.Screen name="Rating" component={Rating}/>
       <Stack.Screen name='Payment' component={PaymentScreen}/>
       <Stack.Screen name="AddressScreen" component={AddressScreen}/>
       <Stack.Screen name="DetailAddressScreen" component={Route_AddressDetail}/>

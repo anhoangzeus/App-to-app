@@ -83,8 +83,8 @@ const ProfileUser =(props)=> {
           <ProfileItem icon="facebook" name="Kết nối mạng xã hội" />
           </TouchableOpacity>
           <View style={styles.divider} />
-          <TouchableOpacity>
-          <ProfileItem icon="star-outline" name="Săn thưởng" />
+          <TouchableOpacity  onPress={()=> {props.navigation.navigate("Rating")}}>
+          <ProfileItem icon="star-outline" name="Đánh giá sản phẩm" />
           </TouchableOpacity>
           <View style={styles.divider} />
           <TouchableOpacity onPress={()=> {props.navigation.navigate("TopOrder")}}>
@@ -137,10 +137,6 @@ const ProfileUser =(props)=> {
           <View style={styles.divider1} />
           <TouchableOpacity>
           <ProfileItem icon="clock-outline" name="Sản phẩm mua sau" />
-          </TouchableOpacity>
-          <View style={styles.divider} />
-          <TouchableOpacity>
-          <ProfileItem  name="Ưu đãi cho chủ thẻ ngân hàng" />
           </TouchableOpacity>
           <View style={styles.divider1} />
           <TouchableOpacity>

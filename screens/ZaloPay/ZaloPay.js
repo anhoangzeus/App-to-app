@@ -129,12 +129,15 @@ export default function App({route,navigation}) {
     fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
       snapshot.forEach(function(childSnapshot){
       var keyDetail = fbApp.database().ref().child('OrderDetails/').push().key;
-      fbApp.database().ref('/OrderDetails/'+keyDetail).set({
-       OrderDetailID:keyDetail,
-       OrderID:key,
-       Price:childSnapshot.val().Price,
-       ProductID: childSnapshot.val().Id,
-       Quantity:childSnapshot.val().Quantity
+      fbApp.database().ref('Orders/'+key+'/OrderDetails/'+keyDetail).set({
+        OrderDetailID:keyDetail,
+        Price:childSnapshot.val().Price,
+        ProductID: childSnapshot.val().Id,
+        Quantity:childSnapshot.val().Quantity,
+        CategoryID:childSnapshot.val().CategoryID,
+        BrandID:childSnapshot.val().BrandID,
+        Name:childSnapshot.val().Name,
+        Picture:childSnapshot.val().Picture
       });
       fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
     })

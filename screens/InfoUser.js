@@ -288,7 +288,7 @@ const saveChangesHandle = () => {
                     style={data.check_textInputFullName
                     ? styles.titletext
                     : 
-                  styles.errtext}>Họ tên   <Entypo name="new-message" size={25} style={{marginHorizontal:10}}/></Text>
+                  styles.errtext}>Họ tên</Text>
                   { data.check_textInputFullName ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
                     <Text style={styles.errorMsg}>Vui lòng nhập Họ tên</Text>
@@ -320,7 +320,7 @@ const saveChangesHandle = () => {
                     style={data.check_textInputSDT
                     ? styles.titletext
                     : 
-                  styles.errtext}>Số điện thoại <Entypo name="new-message" size={25} style={{marginHorizontal:10}}/></Text>
+                  styles.errtext}>Số điện thoại</Text>
                   { data.check_textInputSDT ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
                     <Text style={styles.errorMsg}>Vui lòng nhập Số điện thoại</Text>
@@ -329,15 +329,14 @@ const saveChangesHandle = () => {
                   </View>       
                   <View style={styles.totalContainer1}>
                   <TextInput 
-                        placeholderTextColor="#666666"
-                        autoCapitalize="none"
-                        onChangeText={(val) => textInputPhone(val)}
-                        style={styles.welcomeText}
-                        >{data.Phone}</TextInput>
-                        <TouchableOpacity style={{width:width/3,height:60}}>
-                        <Text style={{fontSize:15, color:'blue', marginEnd: 10}}>Gửi mã xác nhận</Text>
-                        </TouchableOpacity>
-                     
+                    placeholderTextColor="#666666"
+                    autoCapitalize="none"
+                    onChangeText={(val) => textInputPhone(val)}
+                    style={styles.welcomeText}
+                    >{data.Phone}</TextInput>
+                  <TouchableOpacity style={{width:width/3,height:60}}>
+                    <Text style={{fontSize:15, color:'blue', marginEnd: 10}}>Gửi mã xác nhận</Text>
+                  </TouchableOpacity>          
               </View>
               </View>
           </View>
@@ -355,7 +354,7 @@ const saveChangesHandle = () => {
                     style={data.check_textInputCMND
                     ? styles.titletext
                     : 
-                  styles.errtext}>Căn cước công dân <Entypo name="new-message" size={25} style={{marginHorizontal:10}}/></Text>
+                  styles.errtext}>Căn cước công dân </Text>
                   { data.check_textInputCMND ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
                     <Text style={styles.errorMsg}>Thông tin không được để trống</Text>
