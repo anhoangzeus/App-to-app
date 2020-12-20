@@ -100,9 +100,9 @@ export default function App({route,navigation}) {
     }).then(response => response.json())
     .then(resJson => {
       setToken(resJson.zptranstoken)
-      setReturnCode(resJson.returncode)
-      
+      setReturnCode(resJson.returncode) 
     }).then(()=>{
+      console.log("tien hanh chuyen qua zalo")
       payOrder()
     })
     .catch((error)=>{
