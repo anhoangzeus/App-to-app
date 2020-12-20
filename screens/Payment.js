@@ -33,7 +33,6 @@ function ReactNativeNumberFormat({ value }) {
   );
 };
 export default class Payscreen extends React.PureComponent{
-
     constructor(props) {
         super(props);
         this.itemRef = fbApp.database();
@@ -55,13 +54,14 @@ export default class Payscreen extends React.PureComponent{
     }
     setModalVisible = (visible) => {
       if(fbApp.auth().currentUser){
-        this.setState({ modalVisible: visible },()=> {setTimeout(this.handleClose,10000)});
+        this.setState({ modalVisible: visible },()=> {setTimeout(this.handleClose,5000)});
       }
     };
     handleClose = () => {
       this.setState({
         modalVisible: false 
       });
+      this.props.navigation.navigate("App");
     };
       thanhToan=async()=>{
         if(this.state.checked == "first"){
@@ -83,23 +83,24 @@ export default class Payscreen extends React.PureComponent{
           await(this.itemRef.ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
             snapshot.forEach(function(childSnapshot){
             var keyDetail = fbApp.database().ref().child('OrderDetails/').push().key;
-            fbApp.database().ref('/OrderDetails/'+keyDetail).set({
-             OrderDetailID:keyDetail,
-             OrderID:key,
-             Price:childSnapshot.val().Price,
-             ProductID: childSnapshot.val().Id,
-             Quantity:childSnapshot.val().Quantity
+            fbApp.database().ref('Orders/'+key+'/OrderDetails/'+keyDetail).set({
+              OrderDetailID:keyDetail,
+              Price:childSnapshot.val().Price,
+              ProductID: childSnapshot.val().Id,
+              Quantity:childSnapshot.val().Quantity,
+              CategoryID:childSnapshot.val().CategoryID,
+              BrandID:childSnapshot.val().BrandID,
+              Name:childSnapshot.val().Name,
+              Picture:childSnapshot.val().Picture
             });
             fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
           })
          }))
-         this.setModalVisible(true);
-         this.props.navigation.navigate("App");
+         this.setModalVisible(true); 
         }
         else{
           this.props.navigation.navigate("ZaloPayScreen",{amount: this.props.amount,listItem : this.props.CartItem, Address: this.props.address });
-        }          
-        
+        }            
       }
     render(){
       const { navigation } = this.props;
@@ -113,7 +114,7 @@ export default class Payscreen extends React.PureComponent{
       };
         return(      
      <View style={styles.screenContainer}>
-        <StatusBar barStyle="light-content" backgroundColor="#a2459a"/>
+        <StatusBar barStyle="light-content" backgroundColor="#a2459a" translucent={false}/>
         <View style={styles.headerContainer}>
           <TouchableOpacity style={{width:width/5}} onPress={() => navigation.goBack()}>
           <FontAwesome name="angle-left" size={35} color="#fff" style={{marginLeft:width/40}}/>
@@ -138,39 +139,39 @@ export default class Payscreen extends React.PureComponent{
             </View>                   
       </View>
           <View style={styles.paymentoption}>
-            <Text style={{fontSize:16,marginLeft:10}}>Chọn hình thức thanh toán</Text>
+            <Text style={{fontSize:16,marginLeft:10,color:'#000'}}>Chọn hình thức thanh toán</Text>
             <View style={styles.option}>
             <RadioButton value="first"
                 color="#3399ff"
                 status={this.state.checked === 'first' ? 'checked' : 'unchecked'}
                 onPress={() => {this.setState({ checked: 'first' })}} />
-            <FontAwesome name="money" size={30} />
-            <Text style={{marginLeft:width/40,fontSize:16}}>Thanh toán tiền mặt</Text>
+            <FontAwesome name="money" size={30} color='#000'/>
+            <Text style={{marginLeft:width/40,fontSize:16,color:'#000'}}>Thanh toán tiền mặt</Text>
             </View>
             <View style={styles.option}>
             <RadioButton value="second"
             color="#3399ff"
             status={this.state.checked === 'second' ? 'checked' : 'unchecked'}
             onPress={() => {this.setState({ checked: 'second' })}}/>
-            <FontAwesome name="credit-card" size={30} />
-            <Text style={{marginLeft:width/40,fontSize:16}}>Thanh toán trực tuyến </Text>      
+            <FontAwesome name="credit-card" size={30}  color='#000'/>
+            <Text style={{marginLeft:width/40,fontSize:16,color:'#000'}}>Thanh toán trực tuyến </Text>      
             </View>
           </View>
           <View style={styles.count}>
             <View flexDirection='row' justifyContent="space-between">
-              <Text style={{fontSize:17, marginHorizontal:10}} color="#666666">Tạm tính</Text>
-            <Text style={{fontSize:20,marginHorizontal:10}}><ReactNativeNumberFormat value={this.props.amount} /></Text>
+              <Text style={{fontSize:17, marginHorizontal:10,color:'#000'}} color="#666666">Tạm tính</Text>
+            <Text style={{fontSize:20,marginHorizontal:10,color:'#000'}}><ReactNativeNumberFormat value={this.props.amount} /></Text>
             </View>
             <View flexDirection="row" justifyContent="space-between">
-              <Text style={{fontSize:17,marginLeft:10}} color="#666666">Phí vận chuyển</Text>
-              <Text style={{fontSize:20,marginHorizontal:10}}><ReactNativeNumberFormat value={50000} /></Text>
+              <Text style={{fontSize:17,marginLeft:10,color:'#000'}} color="#666666">Phí vận chuyển</Text>
+              <Text style={{fontSize:20,marginHorizontal:10,color:'#000'}}><ReactNativeNumberFormat value={50000} /></Text>
             </View>
           </View>
         </ScrollView>
         <View style={{backgroundColor:"#fff",marginBottom:5,height:height/7.5}}>
         <View style={{flexDirection:"row" ,justifyContent:"space-between" ,marginTop:10}}>
-              <Text style={{marginLeft:10, fontSize:20}}>Thành tiền: </Text>
-              <Text color="red" style={{fontSize:20,marginHorizontal:10}}><ReactNativeNumberFormat value={this.props.amount + 50000} /></Text>
+              <Text style={{marginLeft:10, fontSize:20,color:'#000'}}>Thành tiền: </Text>
+              <Text color="red" style={{fontSize:20,marginHorizontal:10,color:'#000'}}><ReactNativeNumberFormat value={this.props.amount + 50000} /></Text>
           </View>
           <TouchableOpacity style={styles.btnSubmit}   onPress={()=> {this.thanhToan()}}>
                 <Text style={{color:"white", fontSize:20, alignSelf:'center'}}>Xác Nhận</Text>
@@ -189,13 +190,11 @@ export default class Payscreen extends React.PureComponent{
                >
                   <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                      <View style={{flexDirection:'row'}}>
-                      <Image source={require("../assets/logoAn-03.png")} style={{height:60,width:60,resizeMode:'contain'}}/>
-                      <FontAwesome5 name="kiss-wink-heart" size={40} color="#a2459a"/>
-                      </View>               
+                      <FontAwesome5 name="kiss-wink-heart" size={40} color="#a2459a"/>         
                       <Text style={{...styles.modalText, color:'#a2459a'}}>Đặt hàng thành công!</Text>
-                      <TouchableOpacity style={{width:width/2, height:height/18, borderRadius:13, backgroundColor:'#a2459a',justifyContent:'center',alignItems:'center'}} onPress={()=> {this.handleClose}}>
-                        <Text  style={{...styles.modalText, color:'#fff'}}>Tiếp tục mua sắm</Text>
+                      <TouchableOpacity style={{width:width/2, height:height/18, borderRadius:13, backgroundColor:'#a2459a'}} 
+                      onPress={()=> {this.props.navigation.navigate("App")}}>
+                        <Text  style={{...styles.modalText, color:'#fff',textAlign:'center'}}>Tiếp tục mua sắm</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -212,7 +211,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
       flexDirection: 'row',
-      paddingTop: 10,
+      paddingTop: 20,
       paddingBottom: 4,
       backgroundColor: '#a2459a',
     },
@@ -264,7 +263,8 @@ const styles = StyleSheet.create({
     },
     addresstitle:{
       fontWeight:'bold',
-      fontSize:17
+      fontSize:17,
+      color:'#000'
     },  
     paymentoption:{
       backgroundColor:'#fff',

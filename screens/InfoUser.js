@@ -4,6 +4,7 @@ import {StyleSheet, View, Text,Alert,
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {fbApp} from "../firebaseconfig";
 import "firebase/auth";
 import Feather from 'react-native-vector-icons/Feather';
@@ -272,11 +273,7 @@ const saveChangesHandle = () => {
       <StatusBar backgroundColor='#a2459a' barStyle="light-content"/>
       <View style={styles.headerContainer}>
               <TouchableOpacity style={styles.cartContainer} onPress={() =>{navigation.goBack()}}>
-                <Ionicons 
-                  name='arrow-back-outline' 
-                  color='white'  
-                  size={25}
-              />
+              <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
               </TouchableOpacity>
               <Text style={styles.headerText}>Thông tin tài khoản</Text>
           </View>
@@ -291,7 +288,7 @@ const saveChangesHandle = () => {
                     style={data.check_textInputFullName
                     ? styles.titletext
                     : 
-                  styles.errtext}>Họ tên   <Entypo name="new-message" size={25} style={{marginHorizontal:10}}/></Text>
+                  styles.errtext}>Họ tên</Text>
                   { data.check_textInputFullName ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
                     <Text style={styles.errorMsg}>Vui lòng nhập Họ tên</Text>
@@ -323,7 +320,7 @@ const saveChangesHandle = () => {
                     style={data.check_textInputSDT
                     ? styles.titletext
                     : 
-                  styles.errtext}>Số điện thoại <Entypo name="new-message" size={25} style={{marginHorizontal:10}}/></Text>
+                  styles.errtext}>Số điện thoại</Text>
                   { data.check_textInputSDT ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
                     <Text style={styles.errorMsg}>Vui lòng nhập Số điện thoại</Text>
@@ -332,15 +329,14 @@ const saveChangesHandle = () => {
                   </View>       
                   <View style={styles.totalContainer1}>
                   <TextInput 
-                        placeholderTextColor="#666666"
-                        autoCapitalize="none"
-                        onChangeText={(val) => textInputPhone(val)}
-                        style={styles.welcomeText}
-                        >{data.Phone}</TextInput>
-                        <TouchableOpacity style={{width:width/3,height:60}}>
-                        <Text style={{fontSize:15, color:'blue', marginEnd: 10}}>Gửi mã xác nhận</Text>
-                        </TouchableOpacity>
-                     
+                    placeholderTextColor="#666666"
+                    autoCapitalize="none"
+                    onChangeText={(val) => textInputPhone(val)}
+                    style={styles.welcomeText}
+                    >{data.Phone}</TextInput>
+                  <TouchableOpacity style={{width:width/3,height:60}}>
+                    <Text style={{fontSize:15, color:'blue', marginEnd: 10}}>Gửi mã xác nhận</Text>
+                  </TouchableOpacity>          
               </View>
               </View>
           </View>
@@ -358,7 +354,7 @@ const saveChangesHandle = () => {
                     style={data.check_textInputCMND
                     ? styles.titletext
                     : 
-                  styles.errtext}>Căn cước công dân <Entypo name="new-message" size={25} style={{marginHorizontal:10}}/></Text>
+                  styles.errtext}>Căn cước công dân </Text>
                   { data.check_textInputCMND ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
                     <Text style={styles.errorMsg}>Thông tin không được để trống</Text>

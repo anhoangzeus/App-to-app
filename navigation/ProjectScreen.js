@@ -4,6 +4,7 @@ import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { Block, Text, theme } from "galio-framework";
 
@@ -28,8 +29,8 @@ import Route_OrderDetail from '../screens/Detail_Order';
 import PaymentScreen from '../screens/Payment';
 import Route_AddressDetail from '../screens/DetailAddressScreen';
 import Cart from '../screens/Cart';
-import ZaloPay from '../screens/ZaloPay/ZaloPay'
-
+import ZaloPay from '../screens/ZaloPay/ZaloPay';
+import Rating from '../screens/Rating';
 import CustomDrawerContent from './Menu';
 import { Icon, Header } from '../components';
 import { Images, materialTheme } from "../constants/";
@@ -52,10 +53,9 @@ export function TopOrder(props){
     <View style={styles.containner}>
       <View style={styles.headconteiner}>
         <TouchableOpacity style={{width:60, borderRadius:10}} onPress={() =>props.navigation.navigate("App")}>
-        <Ionicons name="arrow-back-outline" color={'white'}  size={30} />
+        <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
         </TouchableOpacity> 
       <Text style={styles.texthead}>ĐƠN HÀNG CỦA TÔI</Text>
-      <Ionicons name="arrow-undo" color={'#a2459a'} size={26} />
       </View>
           <TopStackOrder.Navigator
           tabBarOptions={{
@@ -201,23 +201,13 @@ export default function ProjectStack(props) {
       <Stack.Screen name="TopOrder" component={TopOrder}/>
       <Stack.Screen name="Setting" component={SettingsScreen} />
       <Stack.Screen name="Components" component={ComponentsScreen} />
-      <Stack.Screen name="Product" component={ProductScreen} 
-      options={{
-        headerBackTitleVisible:false,
-        headerTitle:false,
-        headerTransparent:true,
-
-        headerTintColor:'red',
-        
-     headerLeft: () => (
-         <Ionicons name="arrow-back-outline" size={25} backgroundColor="#d02860" />
-     )
-     }}/>
+      <Stack.Screen name="Product" component={ProductScreen}/>
       <Stack.Screen name="Items" component={ItemsScreen}/>
       <Stack.Screen name="ItemsCart" component={ItemsCart}/>
       <Stack.Screen name="Cart" component={Cart}/>
       <Stack.Screen name='View_OrderDetail' component={Route_OrderDetail}/>
       <Stack.Screen name='InfoUser' component={InfoUser}/>
+      <Stack.Screen name="Rating" component={Rating}/>
       <Stack.Screen name='Payment' component={PaymentScreen}/>
       <Stack.Screen name="AddressScreen" component={AddressScreen}/>
       <Stack.Screen name="DetailAddressScreen" component={Route_AddressDetail}/>
@@ -236,11 +226,10 @@ const styles = StyleSheet.create({
       fontSize: 20,
       fontWeight: 'bold',
       marginBottom: 10,
-      textAlign: 'center',
+      marginLeft:width/20
     },
     headconteiner:{
       flexDirection: 'row', 
-      justifyContent:'space-between', 
       paddingHorizontal: 5, 
       paddingTop: 15,
       paddingBottom:5

@@ -215,7 +215,7 @@
   };
     GetAllCate =() =>{
       var items= [];
-      this.itemRef.ref('/Catogorys').once('value').then((snapshot) => {
+      this.itemRef.ref('/Catogorys').orderByChild('Displayed').once('value').then((snapshot) => {
         snapshot.forEach(function (childSnapshot){
           items.push({
             name:childSnapshot.val().Name,
