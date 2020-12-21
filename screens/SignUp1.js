@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
     },
   button: {
       alignItems: 'center',
-      marginTop: 50
+      marginTop: width/20
   },
   signIn: {
       width: '100%',

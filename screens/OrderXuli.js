@@ -1,8 +1,9 @@
 import React,{Component, useEffect, useState} from 'react';
-import { View, Text, Button, StyleSheet,FlatList, TouchableOpacity, ActivityIndicator,Image} from 'react-native';
+import { View, Text, Button, StyleSheet,FlatList, TouchableOpacity, ActivityIndicator,Image,RefreshControl} from 'react-native';
 import { fbApp } from '../firebaseconfig';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import NumberFormat from 'react-number-format';
+import { ScrollView } from 'react-native-gesture-handler';
 function ReactNativeNumberFormat({ value }) {
   return (
     <NumberFormat
@@ -21,7 +22,8 @@ export default class Order_Xuli extends Component{
     this.state = { 
      listOrder:[],
      status:false,
-     loading:true
+     loading:true,
+     refreshing: false,
     }; 
   }
   RenderList = ({CreatedDate,ShipAddress,ShipName,ShipMoblie,ToTalPrice,id}) =>(
@@ -49,6 +51,10 @@ export default class Order_Xuli extends Component{
   componentDidMount(){
     this.ListenForOrder();
   }
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.ListenForOrder();
+  };
   ListenForOrder = () =>{    
     fbApp.database().ref('Orders').once('value').then((snapshot) => {
       var items=[];
@@ -75,7 +81,8 @@ export default class Order_Xuli extends Component{
     });
     this.setState({
       listOrder:items,
-      loading:false
+      loading:false,
+      refreshing:false
     })
     if(items[0].id==''){
       this.setState({status:false})
@@ -86,10 +93,12 @@ export default class Order_Xuli extends Component{
 }
 renderNull = () =>{
   return(
-    <View style={{flex:1, justifyContent:'center', alignItems:"center", backgroundColor:'white'}}>
-    <Image source={noOder} style={{width:50, height:50, }}/>
-    <Text style={{fontSize:20, color:"#1ba8ff"}}>Chưa có đơn hàng</Text>
-  </View>
+    <TouchableOpacity style={{flex:1, justifyContent:'center', alignItems:"center", backgroundColor:'white'}}
+    onPress={()=>{this.ListenForOrder()}}
+    >
+   <Image source={noOder} style={{width:50, height:50, }}/>
+<Text style={{fontSize:20, color:"#1ba8ff"}}>Chưa có đơn hàng</Text>
+</TouchableOpacity>
   )
 }
 render(){
@@ -106,6 +115,12 @@ render(){
    : (
     <View>
     <FlatList
+        refreshControl={
+          <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+          />
+        }
         pagingEnabled={false}
         data={this.state.listOrder}
         initialNumToRender={10}

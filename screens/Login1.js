@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
@@ -133,6 +134,8 @@ const Login1 = ({navigation}) => {
             }
         });                              
     }
+    const loginFacebook=()=>{
+    }
     
     return (
         <View style={styles.container}>
@@ -244,6 +247,23 @@ const Login1 = ({navigation}) => {
               </LinearGradient>
               </TouchableOpacity>
           </View>         
+          <View style={{marginTop:10,flexDirection:'row'}}>
+              <TouchableOpacity
+                  style={{...styles.signIn1,backgroundColor:'#3b5998',flexDirection:'row'}}
+                  onPress={() => {loginFacebook()}}
+              >
+                  <Ionicons name="logo-facebook" size={30} color="#fff"/>
+                  <Text style={[styles.textSign, {color:'#fff',marginLeft:5}]}>Facebook</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                  style={{...styles.signIn1,backgroundColor:'#fff',marginLeft:height/100,flexDirection:'row',
+                borderColor:'#000', borderWidth:2}}
+                  onPress={() => {}}
+              >
+                <Image source={require('../assets/google.jpg')} style={{height:width/10,width:width/10,resizeMode:'contain'}}/>
+                  <Text style={[styles.textSign, {color:'#000',marginLeft:5}]}>Google</Text>
+              </TouchableOpacity>
+          </View>         
       </Animatable.View>
       <Modal
                   animationType="fade"
@@ -322,10 +342,17 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'center',
-        marginTop: 50
+        marginTop: width/15
     },
     signIn: {
         width: '100%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10
+    },
+    signIn1:{
+        width: '49%',
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',

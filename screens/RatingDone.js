@@ -1,10 +1,9 @@
 import React, { Component} from 'react';
-import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,TextInput} from 'react-native';
+import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,RefreshControl} from 'react-native';
 import { fbApp } from '../firebaseconfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import NumberFormat from 'react-number-format';
-import RNPoll, { IChoice } from "react-native-poll";
 
 const { width,height } = Dimensions.get('screen');
 function ReactNativeNumberFormat({ value }) {
@@ -40,6 +39,8 @@ export default class RatingDone extends Component{
         this.state = { 
             ListProduct:[],
             modalVisible:false,
+            refreshing: false,
+            RatingInfor:{},
         }; 
     }
     setModalVisible = (visible) => {
@@ -53,50 +54,64 @@ export default class RatingDone extends Component{
     componentDidMount(){
         this.getListOrder();   
     }
+    _onRefresh = () => {
+      this.setState({refreshing: true});
+      this.getListOrder();   
+    };
+    getInfor=(ProductID,OrderDetailID)=>{
+      this.itemRef.ref("/Products/"+ProductID+"/Rating/"+OrderDetailID).once('value').then((snapshot)=>{
+        this.setState({
+          RatingInfor:{
+            Comment:snapshot.val().Comment,
+            Date:snapshot.val().Date,
+            Point:snapshot.val().Point,
+          }
+        })
+      })
+    }
     getListOrder=()=>{
         this.itemRef.ref('Orders').once('value').then((snapshot) => {
             var items=[];
             snapshot.forEach((childSnapshot)=>{       
             if(childSnapshot.val().CustomerID == fbApp.auth().currentUser.uid 
             && childSnapshot.val().Status == "4"){
-                childSnapshot.child('OrderDetails').forEach((child)=>{
-                  if(child.val().Status== true){
-                    items.push({
-                        id:child.val().OrderDetailID,
-                        ProductId:child.val().ProductID,
-                        Name:child.val().Name,
-                        Picture:child.val().Picture,
-                        Price:child.val().Price,
-                        CategoryID:child.val().CategoryID,
-                        BrandID:child.val().BrandID,
-                        OrderID:childSnapshot.val().OrderID,
-                        Payment:childSnapshot.val().Payment,
-                        CreatedDate:childSnapshot.val().CreatedDate,
-                    });     
-                  }       
-                });         
+              childSnapshot.child('OrderDetails').forEach((child)=>{
+                if(child.val().Status== true){
+                  items.push({
+                      id:child.val().OrderDetailID,
+                      ProductId:child.val().ProductID,
+                      Name:child.val().Name,
+                      Picture:child.val().Picture,
+                      Price:child.val().Price,
+                      CategoryID:child.val().CategoryID,
+                      BrandID:child.val().BrandID,
+                      OrderID:childSnapshot.val().OrderID,
+                      Payment:childSnapshot.val().Payment,
+                      CreatedDate:childSnapshot.val().CreatedDate,
+                  });     
+                }       
+              });           
             }               
         });
-       this.setState({ListProduct:items})
+       this.setState({ListProduct:items,refreshing:false})
     });
-}
+  }
     render(){
-        const {modalVisible} = this.state;
-        const choices: Array<IChoice> = [
-          { id: 1, choice: "1 Sao", votes: 12 },
-          { id: 2, choice: "2 Sao", votes: 1 },
-          { id: 3, choice: "3 Sao", votes: 3 },
-          { id: 4, choice: "4 Sao", votes: 5 },
-          { id: 5, choice: "5 Sao", votes: 9 },
-        ];
+        const {modalVisible,RatingInfor} = this.state;
         return(
             <View style={styles.screenContainer}>
                 <FlatList
+                    refreshControl={
+                      <RefreshControl
+                          refreshing={this.state.refreshing}
+                          onRefresh={this._onRefresh}
+                      />
+                    }
                     numberOfLines={2}
                     showsVerticalScrollIndicator={false}
                     data={this.state.ListProduct}
                     renderItem={({item})=>
-                    <TouchableOpacity onPress={() => {this.setModalVisible(true)}}>
+                    <TouchableOpacity onPress={() => {this.setModalVisible(true),this.getInfor(item.ProductId,item.id)}}>
                         <ProductItem item={item}/>
                     </TouchableOpacity>  
                     }
@@ -113,21 +128,15 @@ export default class RatingDone extends Component{
                     <View style={styles.modalView}>
                       <View style={{justifyContent:'space-between', flexDirection:'row'}}>
                        <FontAwesome name="times-circle" size={25} color="#fff"/>
-                        <Text style={styles.modalText}>Đánh giá sản phẩm</Text>
+                        <Text style={styles.modalText}>Đánh giá của bạn</Text>                  
                         <TouchableOpacity style={{width:width/6}} onPress={()=>{this.handleClose()}}>
                         <FontAwesome name="times-circle" size={30} color="red"/>
                         </TouchableOpacity>
-                      </View>                 
-                      <RNPoll
-                        totalVotes={30}
-                        choices={choices}
-                        choiceTextStyle={{color:'gold',fontWeight:'bold', fontSize:18}}
-                        fillBackgroundColor="#a2459a"
-                        borderColor="#a2459a"
-                        onChoicePress={(selectedChoice: IChoice) =>
-                          console.log("SelectedChoice: ", selectedChoice)
-                        }
-                      />
+                      </View>    
+                      <Text style={styles.modalText}>{RatingInfor.Point}<FontAwesome name="star" size={30} color="gold"/>   </Text>        
+                    
+                      <Text style={{color:"#000", fontSize:18}}>Ngày đánh giá {RatingInfor.Date}</Text>        
+                      <Text style={{color:"#000", marginTop:10}}>{RatingInfor.Comment==""? "Chưa có bình luận...": RatingInfor.Comment}</Text>    
                     </View>
                   </View>
              </Modal>  
@@ -150,8 +159,8 @@ const styles = StyleSheet.create({
       itemName: {
         fontSize: 14,
         color: 'black',
-        marginHorizontal:10,
-        marginRight:width/5
+        marginLeft:10,
+        marginRight:width/4,
       },
       itemPrice: {
         fontSize: 16,

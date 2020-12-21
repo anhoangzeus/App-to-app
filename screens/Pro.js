@@ -129,7 +129,7 @@
             marginVertical:5,
             justifyContent:"center"}
             }>
-            <ImageBackground style={{width:width/7,height:height/13,
+            <ImageBackground style={{width:width/7,height:height/16.1,
             marginVertical:5,
             justifyContent:"center"}
             }

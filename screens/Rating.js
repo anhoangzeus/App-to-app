@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,TextInput} from 'react-native';
+import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,TextInput,RefreshControl} from 'react-native';
 import { fbApp } from '../firebaseconfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -40,17 +40,35 @@ export default class Rating extends Component{
         this.state = { 
             ListProduct:[],
             modalVisible:false,
+            idvoted:"",
+            orderid:"",
+            orderdetailid:"",
+            iscomment:false,
+            opencmt:false,
+            textCmt:"",
+            refreshing: false,
             points1:0,
             points2:0,
             points3:0,
             points4:0,
             points5:0,
-        }; 
+        };
+       
+    }
+    GetCurrentDate =()=>{
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1; 
+      var year = new Date().getFullYear();
+      var gio = new Date().getHours();
+      var phut = new Date().getMinutes();
+      var giay = new Date().getSeconds();
+        return date + '/' +month+ "/" +year + " " + gio+":"+ phut+":"+giay;
     }
     setModalVisible = (visible) => {
           this.setState({ modalVisible: visible });
       };
       handleClose = () => {
+        this.getListOrder(); 
         this.setState({
           modalVisible: false 
         });
@@ -58,8 +76,12 @@ export default class Rating extends Component{
     componentDidMount(){
         this.getListOrder();   
     }
-    getRatingPoint=({ProductID})=>{
-        this.itemRef.ref("Products"+ProductID+"Rating").once('value').then((snapshot)=>{
+    _onRefresh = () => {
+      this.setState({refreshing: true});
+      this.getListOrder();   
+    };
+    getRatingPoint=(ProductID,OrderId,OrderDetailsId)=>{
+        this.itemRef.ref("Products/"+ProductID).child("Rating").once('value').then((snapshot)=>{
           var points1=0;
           var points2=0;
           var points3=0;
@@ -77,14 +99,54 @@ export default class Rating extends Component{
             else  if(child.val().Point=="5")
               points5++;
           });
-          this.setState({
-            points1:points1,
-            points2:points2,
-            points3:points3,
-            points4:points4,
-            points5:points5
+          this.setState({points1:points1,points2:points2,points3:points3,points4:points4,
+            points5:points5,idvoted:ProductID,orderid:OrderId,orderdetailid:OrderDetailsId,
           })
         });
+    }
+    votedProduct=(point)=>{
+        const {idvoted,orderid,orderdetailid}= this.state;
+        var date = this.GetCurrentDate();
+        var uid = fbApp.auth().currentUser.uid;
+        this.itemRef.ref("Products/"+idvoted).child("/Rating/"+orderdetailid).set({
+          Date:date,
+          Point:point,
+          UserId:uid,
+          Comment:"",
+        });
+        this.itemRef.ref("Orders/"+orderid+"/OrderDetails/"+orderdetailid).update({
+          Status:true
+        });
+        this.setPoint(point);
+        this.openComment();
+    }
+    setPoint=(point)=>{
+      if(point==1)
+        this.setState({points1:this.state.points1+1});
+      else if(point==2)
+        this.setState({points2:this.state.points2+1});
+      else if(point==3)
+        this.setState({points3:this.state.points3+1});
+      else if(point==4)
+        this.setState({points4:this.state.points4+1});
+      else if(point==5)
+        this.setState({points5:this.state.points5+1});
+    }
+    openComment=()=>{
+      this.setState({opencmt:true});
+    }
+    openComment1=()=>{
+      this.setState({iscomment:true,opencmt:false})
+    }
+    sendComment=()=>{
+        const {idvoted,textCmt,orderdetailid}= this.state;
+        this.itemRef.ref("Products/"+idvoted).child("/Rating/"+orderdetailid).update({
+          Comment:textCmt,
+        });
+        this.handleClose();
+    }
+    handleChange=(val)=>{
+      this.setState({textCmt:val});
     }
     getListOrder=()=>{
         this.itemRef.ref('Orders').once('value').then((snapshot) => {
@@ -93,7 +155,7 @@ export default class Rating extends Component{
             if(childSnapshot.val().CustomerID == fbApp.auth().currentUser.uid 
             && childSnapshot.val().Status == "4"){
                 childSnapshot.child('OrderDetails').forEach((child)=>{
-                  if(child.val().Status== false){
+                  if(child.val().Status == false){
                     items.push({
                         id:child.val().OrderDetailID,
                         ProductId:child.val().ProductID,
@@ -110,13 +172,13 @@ export default class Rating extends Component{
                 });         
             }               
         });
-       this.setState({ListProduct:items})
+       this.setState({ListProduct:items,refreshing:false})
     });
 }
     render(){
-        const {modalVisible,points1,points2,points3,points4,points5} = this.state;
-        const total = points1+points2+points3+points4+points5;
-        const choices: Array<IChoice> = [
+        const {iscomment,opencmt,modalVisible,points1,points2,points3,points4,points5} = this.state;
+        var total =points1+points2+points3+points4+points5;
+        var choices: Array<IChoice> = [
           { id: 1, choice: "1 Sao", votes: points1 },
           { id: 2, choice: "2 Sao", votes: points2 },
           { id: 3, choice: "3 Sao", votes: points3 },
@@ -126,11 +188,19 @@ export default class Rating extends Component{
         return(
             <View style={styles.screenContainer}>
                 <FlatList
+                    refreshControl={
+                      <RefreshControl
+                          refreshing={this.state.refreshing}
+                          onRefresh={this._onRefresh}
+                      />
+                    }
                     numberOfLines={2}
                     showsVerticalScrollIndicator={false}
                     data={this.state.ListProduct}
                     renderItem={({item})=>
-                    <TouchableOpacity onPress={() => {this.setModalVisible(true)}}>
+                    <TouchableOpacity 
+                    onPress={() => {this.setModalVisible(true),
+                        this.getRatingPoint(item.ProductId,item.OrderID,item.id)}}>
                         <ProductItem item={item}/>
                     </TouchableOpacity>  
                     }
@@ -147,11 +217,12 @@ export default class Rating extends Component{
                     <View style={styles.modalView}>
                       <View style={{justifyContent:'space-between', flexDirection:'row'}}>
                        <FontAwesome name="times-circle" size={25} color="#fff"/>
-                        <Text style={styles.modalText}>Đánh giá sản phẩm</Text>
-                        <TouchableOpacity style={{width:width/6}} onPress={()=>{this.handleClose()}}>
+                        <Text style={styles.modalText}>{iscomment?"Để lại bình luận của bạn":"Đánh giá sản phẩm"}</Text>
+                        <TouchableOpacity style={{width:width/10,marginLeft:20}} onPress={()=>{this.handleClose()}}>
                         <FontAwesome name="times-circle" size={30} color="red"/>
                         </TouchableOpacity>
-                      </View>                 
+                      </View>  
+                      {iscomment ? null:
                       <RNPoll
                         totalVotes={total}
                         choices={choices}
@@ -159,9 +230,32 @@ export default class Rating extends Component{
                         fillBackgroundColor="#a2459a"
                         borderColor="#a2459a"
                         onChoicePress={(selectedChoice: IChoice) =>
-                          console.log("SelectedChoice: ", selectedChoice)
-                        }
-                      />
+                          this.votedProduct(selectedChoice.id)}
+                      /> }       
+                      {iscomment ?
+                      <View>
+                        <TextInput
+                          multiline={true}
+                          placeholder="..."
+                          placeholderTextColor="#a2459a"
+                          autoCapitalize="none"
+                          onChangeText={(val) => this.handleChange(val)}
+                          style={{
+                            borderColor:"#a2459a",
+                            borderWidth:1,
+                            height:height/2,
+                            fontSize:18,
+                            borderRadius:25,
+                          }}
+                          />
+                          <TouchableOpacity style={styles.btncomment} onPress={()=>{this.sendComment()}}>
+                          <Text style={{color:'#fff', fontSize:20,textAlign:'center',fontWeight:'bold'}}>Gửi bình luận</Text>
+                      </TouchableOpacity>
+                        </View>:null}
+                      {opencmt?   <TouchableOpacity style={styles.btncomment} onPress={()=>this.openComment1()}>
+                          <Text style={{color:'#fff', fontSize:20,textAlign:'center',fontWeight:'bold'}}>Bình Luận</Text>
+                      </TouchableOpacity>:null }                                             
+                      
                     </View>
                   </View>
              </Modal>  
@@ -174,6 +268,15 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor:'#fff'
       },
+      btncomment:{
+        height:height/15,
+        width:width/1.5,
+        borderRadius:25,
+        backgroundColor:"#a2459a",
+        justifyContent:'center',
+        marginTop:5,
+        alignSelf:'center'
+      },
       itemImage: {
         width: width/5,
         height: height/8,
@@ -185,7 +288,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: 'black',
         marginHorizontal:10,
-        marginRight:width/5
+        marginRight:width/5,
       },
       itemPrice: {
         fontSize: 16,
@@ -203,7 +306,6 @@ const styles = StyleSheet.create({
         borderRadius:15,
       },
       centeredView: {
-        justifyContent: "center",
         flex:1,
       },
       modalView: {
@@ -220,11 +322,6 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         height:height/1.5
-      },
-      textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
       },
       modalText: {
         alignSelf: "center",

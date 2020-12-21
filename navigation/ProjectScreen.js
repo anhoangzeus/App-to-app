@@ -101,7 +101,11 @@ export function TopTabScreen (props){
                     </TouchableOpacity>
                     <Text style={styles.headerText}>Đánh giá sản phẩm</Text>   
                 </View>
-      <TopTab.Navigator>
+      <TopTab.Navigator
+       tabBarOptions={{
+        activeTintColor: '#a2459a',
+      }}       
+      >
         <TopTab.Screen name="Rating" component={Rating} options={{
           title:'Chưa đánh giá',
           }} 
@@ -119,9 +123,6 @@ export function AppStack(props) {
     <Tab.Navigator
       style={{ flex: 1 }}
       initialRouteName="Home"
-      tabBarOptions={{
-        activeTintColor: '#a2459a',
-      }}      
     >
       <Tab.Screen
         name="Trang chủ"
@@ -132,7 +133,7 @@ export function AppStack(props) {
               size={24}
               name="home"
               family="ionicons"
-              color={focused ? "a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
               family="antdesign"
               color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
             />
@@ -148,8 +149,6 @@ export function AppStack(props) {
             <Icon
               size={24}
               name="appstore1"
-              family="ionicons"
-              color={focused ? "a2459a" : materialTheme.COLORS.MUTED}
               family="antdesign"
               color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
              
@@ -166,15 +165,15 @@ export function AppStack(props) {
               size={24}
               name="search"
               family="font-awesome"
-              color={focused ? "a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
               color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
               style={{ marginRight: -3 }}
             />
           )
         }}
       />
-
-      <Tab.Screen
+     
+     <Tab.Screen
         name="Thông báo"
         component={NotificationScreen}
         options={{
@@ -183,7 +182,7 @@ export function AppStack(props) {
               size={24}
               name="bells"
               family="antdesign"
-              color={focused ? "a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
               color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
               style={{ marginRight: -3 }}
             />
@@ -199,14 +198,13 @@ export function AppStack(props) {
               size={24}
               name="user"
               family="antdesign"
-              color={focused ? "a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
               color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
             />
           )
         }}
       />
-
-      
+  
       
     </Tab.Navigator>
   );
