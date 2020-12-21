@@ -19,11 +19,18 @@ function ReactNativeNumberFormat({ value }) {
 };
 const ProductItem = ({item}) => (
     <View style={styles.itemContainer1}>
+       <Text style={{color:"#000",marginHorizontal:10,textAlign:'center',fontSize:15,fontWeight:'bold'}}>Mã đơn hàng:{item.OrderID}</Text>
+      <View style={{flexDirection:'row'}}>
       <Image source={{uri:item.Picture}} style={styles.itemImage} />
-      <View style={{justifyContent:'center'}}>
-        <Text style={styles.itemName} numberOfLines={2}>{item.Name}</Text>
-        <Text style={styles.itemPrice}><ReactNativeNumberFormat value={item.Price}/></Text>
+        <View style={{marginLeft:20}}>
+          <Text style={{color:"#000",marginHorizontal:10}}>{item.CreatedDate}</Text>
+          <Text style={{color:"#000",marginHorizontal:10}}>{item.Payment=="01" ? "Thanh toán khi nhận hàng": "Thanh toán trực tuyến"}</Text>
+          <Text style={styles.itemName} numberOfLines={2}>{item.Name}</Text>
+          <Text style={styles.itemPrice}><ReactNativeNumberFormat value={item.Price}/></Text>
+        </View>
+        
       </View>
+
     </View>
   );
 export default class Rating extends Component{
@@ -33,6 +40,11 @@ export default class Rating extends Component{
         this.state = { 
             ListProduct:[],
             modalVisible:false,
+            points1:0,
+            points2:0,
+            points3:0,
+            points4:0,
+            points5:0,
         }; 
     }
     setModalVisible = (visible) => {
@@ -46,12 +58,42 @@ export default class Rating extends Component{
     componentDidMount(){
         this.getListOrder();   
     }
+    getRatingPoint=({ProductID})=>{
+        this.itemRef.ref("Products"+ProductID+"Rating").once('value').then((snapshot)=>{
+          var points1=0;
+          var points2=0;
+          var points3=0;
+          var points4=0;
+          var points5=0;
+          snapshot.forEach((child)=>{
+            if(child.val().Point=="1")
+              points1++;
+            else  if(child.val().Point=="2")
+              points2++;
+            else  if(child.val().Point=="3")
+              points3++;
+            else  if(child.val().Point=="4")
+              points4++;
+            else  if(child.val().Point=="5")
+              points5++;
+          });
+          this.setState({
+            points1:points1,
+            points2:points2,
+            points3:points3,
+            points4:points4,
+            points5:points5
+          })
+        });
+    }
     getListOrder=()=>{
         this.itemRef.ref('Orders').once('value').then((snapshot) => {
             var items=[];
             snapshot.forEach((childSnapshot)=>{       
-            if(childSnapshot.val().CustomerID == fbApp.auth().currentUser.uid && childSnapshot.val().Status == "4"){
+            if(childSnapshot.val().CustomerID == fbApp.auth().currentUser.uid 
+            && childSnapshot.val().Status == "4"){
                 childSnapshot.child('OrderDetails').forEach((child)=>{
+                  if(child.val().Status== false){
                     items.push({
                         id:child.val().OrderDetailID,
                         ProductId:child.val().ProductID,
@@ -59,8 +101,12 @@ export default class Rating extends Component{
                         Picture:child.val().Picture,
                         Price:child.val().Price,
                         CategoryID:child.val().CategoryID,
-                        BrandID:child.val().BrandID
-                    });            
+                        BrandID:child.val().BrandID,
+                        OrderID:childSnapshot.val().OrderID,
+                        Payment:childSnapshot.val().Payment,
+                        CreatedDate:childSnapshot.val().CreatedDate,
+                    });     
+                  }       
                 });         
             }               
         });
@@ -68,13 +114,14 @@ export default class Rating extends Component{
     });
 }
     render(){
-        const {modalVisible} = this.state;
+        const {modalVisible,points1,points2,points3,points4,points5} = this.state;
+        const total = points1+points2+points3+points4+points5;
         const choices: Array<IChoice> = [
-          { id: 1, choice: "1 Sao", votes: 12 },
-          { id: 2, choice: "2 Sao", votes: 1 },
-          { id: 3, choice: "3 Sao", votes: 3 },
-          { id: 4, choice: "4 Sao", votes: 5 },
-          { id: 5, choice: "5 Sao", votes: 9 },
+          { id: 1, choice: "1 Sao", votes: points1 },
+          { id: 2, choice: "2 Sao", votes: points2 },
+          { id: 3, choice: "3 Sao", votes: points3 },
+          { id: 4, choice: "4 Sao", votes: points4 },
+          { id: 5, choice: "5 Sao", votes: points5 },
         ];
         return(
             <View style={styles.screenContainer}>
@@ -106,7 +153,7 @@ export default class Rating extends Component{
                         </TouchableOpacity>
                       </View>                 
                       <RNPoll
-                        totalVotes={30}
+                        totalVotes={total}
                         choices={choices}
                         choiceTextStyle={{color:'gold',fontWeight:'bold', fontSize:18}}
                         fillBackgroundColor="#a2459a"
@@ -124,21 +171,21 @@ export default class Rating extends Component{
 };
 const styles = StyleSheet.create({
     screenContainer: {
-      flex: 1,
-    },
-    screenContainer: {
         flex: 1,
+        backgroundColor:'#fff'
       },
       itemImage: {
         width: width/5,
         height: height/8,
         resizeMode:'contain',
-        alignSelf:'center'
+        alignSelf:'center',
+        marginLeft:5
       },
       itemName: {
         fontSize: 14,
         color: 'black',
         marginHorizontal:10,
+        marginRight:width/5
       },
       itemPrice: {
         fontSize: 16,
@@ -148,13 +195,12 @@ const styles = StyleSheet.create({
       },
       itemContainer1:{
         width: width-20,
-        height:height/8,
+        height:height/6,
         borderColor:'silver',
         borderWidth:1,
         marginHorizontal:10,
         marginVertical:2,
-        borderRadius:5,
-        flexDirection:'row'
+        borderRadius:15,
       },
       centeredView: {
         justifyContent: "center",
@@ -173,7 +219,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        height:height/1.8
+        height:height/1.5
       },
       textStyle: {
         color: "white",

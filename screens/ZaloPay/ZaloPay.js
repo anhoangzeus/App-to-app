@@ -124,7 +124,8 @@ export default function App({route,navigation}) {
         OrderID: key,
         Payment:"02",
         Total:route.params.amount,
-        CustomerID:fbApp.auth().currentUser.uid,       
+        CustomerID:fbApp.auth().currentUser.uid,    
+        Rating:false     
     });
     fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
       snapshot.forEach(function(childSnapshot){
@@ -137,7 +138,8 @@ export default function App({route,navigation}) {
         CategoryID:childSnapshot.val().CategoryID,
         BrandID:childSnapshot.val().BrandID,
         Name:childSnapshot.val().Name,
-        Picture:childSnapshot.val().Picture
+        Picture:childSnapshot.val().Picture,
+        Status:false,
       });
       fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
     })

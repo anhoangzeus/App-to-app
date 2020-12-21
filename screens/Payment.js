@@ -78,7 +78,8 @@ export default class Payscreen extends React.PureComponent{
               OrderID: key,
               Payment:"01",
               Total:this.props.amount + 50000,
-              CustomerID:fbApp.auth().currentUser.uid,       
+              CustomerID:fbApp.auth().currentUser.uid,    
+             
           });
           await(this.itemRef.ref("Cart/"+fbApp.auth().currentUser.uid).once("value").then((snapshot)=>{                
             snapshot.forEach(function(childSnapshot){
@@ -91,7 +92,8 @@ export default class Payscreen extends React.PureComponent{
               CategoryID:childSnapshot.val().CategoryID,
               BrandID:childSnapshot.val().BrandID,
               Name:childSnapshot.val().Name,
-              Picture:childSnapshot.val().Picture
+              Picture:childSnapshot.val().Picture,  
+              Status:false,
             });
             fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
           })

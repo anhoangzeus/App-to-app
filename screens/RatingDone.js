@@ -19,11 +19,18 @@ function ReactNativeNumberFormat({ value }) {
 };
 const ProductItem = ({item}) => (
     <View style={styles.itemContainer1}>
+       <Text style={{color:"#000",marginHorizontal:10,textAlign:'center',fontSize:15}}>Mã đơn hàng:{item.OrderID}</Text>
+      <View style={{flexDirection:'row'}}>
       <Image source={{uri:item.Picture}} style={styles.itemImage} />
-      <View style={{justifyContent:'center'}}>
-        <Text style={styles.itemName} numberOfLines={2}>{item.Name}</Text>
-        <Text style={styles.itemPrice}><ReactNativeNumberFormat value={item.Price}/></Text>
+        <View style={{marginLeft:20}}>
+          <Text style={{color:"#000",marginHorizontal:10}}>{item.CreatedDate}</Text>
+          <Text style={{color:"#000",marginHorizontal:10}}>{item.Payment=="01" ? "Thanh toán khi nhận hàng": "Thanh toán trực tuyến"}</Text>
+          <Text style={styles.itemName} numberOfLines={2}>{item.Name}</Text>
+          <Text style={styles.itemPrice}><ReactNativeNumberFormat value={item.Price}/></Text>
+        </View>
+        
       </View>
+
     </View>
   );
 export default class RatingDone extends Component{
@@ -50,15 +57,23 @@ export default class RatingDone extends Component{
         this.itemRef.ref('Orders').once('value').then((snapshot) => {
             var items=[];
             snapshot.forEach((childSnapshot)=>{       
-            if(childSnapshot.val().CustomerID == fbApp.auth().currentUser.uid && childSnapshot.val().Status == "4"){
+            if(childSnapshot.val().CustomerID == fbApp.auth().currentUser.uid 
+            && childSnapshot.val().Status == "4"){
                 childSnapshot.child('OrderDetails').forEach((child)=>{
+                  if(child.val().Status== true){
                     items.push({
                         id:child.val().OrderDetailID,
                         ProductId:child.val().ProductID,
                         Name:child.val().Name,
                         Picture:child.val().Picture,
-                        Price:child.val().Price
-                    });            
+                        Price:child.val().Price,
+                        CategoryID:child.val().CategoryID,
+                        BrandID:child.val().BrandID,
+                        OrderID:childSnapshot.val().OrderID,
+                        Payment:childSnapshot.val().Payment,
+                        CreatedDate:childSnapshot.val().CreatedDate,
+                    });     
+                  }       
                 });         
             }               
         });
@@ -122,21 +137,21 @@ export default class RatingDone extends Component{
 };
 const styles = StyleSheet.create({
     screenContainer: {
-      flex: 1,
-    },
-    screenContainer: {
         flex: 1,
+        backgroundColor:'#fff'
       },
       itemImage: {
         width: width/5,
         height: height/8,
         resizeMode:'contain',
-        alignSelf:'center'
+        alignSelf:'center',
+        marginLeft:5
       },
       itemName: {
         fontSize: 14,
         color: 'black',
         marginHorizontal:10,
+        marginRight:width/5
       },
       itemPrice: {
         fontSize: 16,
@@ -146,13 +161,12 @@ const styles = StyleSheet.create({
       },
       itemContainer1:{
         width: width-20,
-        height:height/8,
+        height:height/6,
         borderColor:'silver',
         borderWidth:1,
         marginHorizontal:10,
         marginVertical:2,
-        borderRadius:5,
-        flexDirection:'row'
+        borderRadius:15,
       },
       centeredView: {
         justifyContent: "center",
@@ -171,7 +185,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        height:height/1.8
+        height:height/1.5
       },
       textStyle: {
         color: "white",
