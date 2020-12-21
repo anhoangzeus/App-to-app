@@ -83,7 +83,7 @@ const ProfileUser =(props)=> {
           <ProfileItem icon="facebook" name="Kết nối mạng xã hội" />
           </TouchableOpacity>
           <View style={styles.divider} />
-          <TouchableOpacity  onPress={()=> {props.navigation.navigate("Rating")}}>
+          <TouchableOpacity  onPress={()=> {props.navigation.navigate("TopTabScreen")}}>
           <ProfileItem icon="star-outline" name="Đánh giá sản phẩm" />
           </TouchableOpacity>
           <View style={styles.divider} />

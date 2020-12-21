@@ -126,17 +126,17 @@
       return(
         <TouchableOpacity  onPress={()=> this.setState({CatogoryID: id})} >
           <View style={{width:width/7,height:height/15,marginHorizontal:10,
-          marginVertical:5,
-          justifyContent:"center"}
-          }>
-          <ImageBackground style={{width:width/6,height:height/13.6,
-          marginVertical:5,
-          justifyContent:"center"}
-          }
-            source={require('../assets/bg.png')}>
-          <Icons name={icon} color="#fff" size={width/12} 
-            style={styles.cateIcon}/>
-          </ImageBackground>
+            marginVertical:5,
+            justifyContent:"center"}
+            }>
+            <ImageBackground style={{width:width/7,height:height/13,
+            marginVertical:5,
+            justifyContent:"center"}
+            }
+              source={require('../assets/bg.png')}>
+            <Icons name={icon} color="#fff" size={width/12} 
+              style={styles.cateIcon}/>
+            </ImageBackground>
           </View>
 
           <Text style={{textAlign:'center', fontWeight:'bold',color:colorText }}>{name}</Text>
@@ -312,7 +312,7 @@
       return(
         <View style={{position:"absolute", borderRadius:25,backgroundColor:"red",alignItems:"center",marginLeft:width/30,width:width/20}}>
          <Text style={{alignSelf:'center', fontSize:10,margin:1,fontWeight:'bold',color:'white'}} numberOfLines={1}>{this.state.numcart}</Text>
-    </View>
+       </View>
       )
     }
   };
@@ -493,7 +493,7 @@
     itemContainer: {
       alignItems:'center',
       width: width/2,
-      height:height/3.6,
+      height:height/3.2,
       margin: -0.2,
       borderColor:'#a2459a',
       borderWidth: 1,     

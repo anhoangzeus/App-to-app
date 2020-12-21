@@ -4,6 +4,7 @@ import { fbApp } from '../firebaseconfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import NumberFormat from 'react-number-format';
+import RNPoll, { IChoice } from "react-native-poll";
 
 const { width,height } = Dimensions.get('screen');
 function ReactNativeNumberFormat({ value }) {
@@ -56,7 +57,9 @@ export default class Rating extends Component{
                         ProductId:child.val().ProductID,
                         Name:child.val().Name,
                         Picture:child.val().Picture,
-                        Price:child.val().Price
+                        Price:child.val().Price,
+                        CategoryID:child.val().CategoryID,
+                        BrandID:child.val().BrandID
                     });            
                 });         
             }               
@@ -66,15 +69,15 @@ export default class Rating extends Component{
 }
     render(){
         const {modalVisible} = this.state;
+        const choices: Array<IChoice> = [
+          { id: 1, choice: "1 Sao", votes: 12 },
+          { id: 2, choice: "2 Sao", votes: 1 },
+          { id: 3, choice: "3 Sao", votes: 3 },
+          { id: 4, choice: "4 Sao", votes: 5 },
+          { id: 5, choice: "5 Sao", votes: 9 },
+        ];
         return(
             <View style={styles.screenContainer}>
-            <StatusBar backgroundColor='#a2459a' barStyle="light-content"/>
-                <View style={styles.headerContainer}>
-                    <TouchableOpacity style={styles.cartContainer} onPress={() =>{this.props.navigation.goBack()}}>
-                    <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
-                    </TouchableOpacity>
-                    <Text style={styles.headerText}>Đánh giá sản phẩm</Text>   
-                </View>
                 <FlatList
                     numberOfLines={2}
                     showsVerticalScrollIndicator={false}
@@ -95,7 +98,23 @@ export default class Rating extends Component{
                >
                   <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                      <Text style={styles.modalText}>Đánh giá sản phẩm</Text>
+                      <View style={{justifyContent:'space-between', flexDirection:'row'}}>
+                       <FontAwesome name="times-circle" size={25} color="#fff"/>
+                        <Text style={styles.modalText}>Đánh giá sản phẩm</Text>
+                        <TouchableOpacity style={{width:width/6}} onPress={()=>{this.handleClose()}}>
+                        <FontAwesome name="times-circle" size={30} color="red"/>
+                        </TouchableOpacity>
+                      </View>                 
+                      <RNPoll
+                        totalVotes={30}
+                        choices={choices}
+                        choiceTextStyle={{color:'gold',fontWeight:'bold', fontSize:18}}
+                        fillBackgroundColor="#a2459a"
+                        borderColor="#a2459a"
+                        onChoicePress={(selectedChoice: IChoice) =>
+                          console.log("SelectedChoice: ", selectedChoice)
+                        }
+                      />
                     </View>
                   </View>
              </Modal>  
@@ -107,46 +126,12 @@ const styles = StyleSheet.create({
     screenContainer: {
       flex: 1,
     },
-    bodyContainer: {
-      flex: 1,
-      backgroundColor: '#ededed',
-    },
-    userContainer: {
-      backgroundColor: '#fff',
-      flexDirection: 'row',
-      paddingHorizontal: 10,
-      paddingVertical: 10,
-      margin:10
-    },
     screenContainer: {
         flex: 1,
       },
-      headerContainer: {
-        flexDirection: 'row',
-        paddingTop: 15,
-        backgroundColor: '#a2459a',
-        paddingBottom: 12,
-
-      },
-      cartContainer: {
-        paddingHorizontal: 20,
-        width:72,
-        borderRadius:15
-      },
-      headerText: {
-        color: '#fff',
-        textAlignVertical: 'center',
-        fontSize:20,
-        fontWeight:'bold'
-      },
-      titletext:{
-        color:'green',
-        fontSize:20,
-        marginLeft: 20,
-      },
       itemImage: {
-        width: width/3,
-        height: height/4,
+        width: width/5,
+        height: height/8,
         resizeMode:'contain',
         alignSelf:'center'
       },
@@ -163,7 +148,7 @@ const styles = StyleSheet.create({
       },
       itemContainer1:{
         width: width-20,
-        height:height/5,
+        height:height/8,
         borderColor:'silver',
         borderWidth:1,
         marginHorizontal:10,
@@ -174,7 +159,6 @@ const styles = StyleSheet.create({
       centeredView: {
         justifyContent: "center",
         flex:1,
-        width:width
       },
       modalView: {
         margin: 20,
@@ -189,13 +173,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        height:height/3
-      },
-      openButton: {
-        backgroundColor: "#F194FF",
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
+        height:height/1.8
       },
       textStyle: {
         color: "white",
@@ -203,8 +181,9 @@ const styles = StyleSheet.create({
         textAlign: "center"
       },
       modalText: {
-        textAlign: "center",
+        alignSelf: "center",
         fontSize:20,
-        color:'#a2459a'
+        color:'#a2459a',
+        fontWeight:'bold'
       },
 })
