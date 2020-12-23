@@ -54,7 +54,7 @@ export default class Payscreen extends React.PureComponent{
     }
     setModalVisible = (visible) => {
       if(fbApp.auth().currentUser){
-        this.setState({ modalVisible: visible },()=> {setTimeout(this.handleClose,5000)});
+        this.setState({ modalVisible: visible },()=> {setTimeout(this.handleClose,10000)});
       }
     };
     handleClose = () => {
@@ -93,6 +93,8 @@ export default class Payscreen extends React.PureComponent{
               BrandID:childSnapshot.val().BrandID,
               Name:childSnapshot.val().Name,
               Picture:childSnapshot.val().Picture,  
+              BrandName:childSnapshot.val().BrandName,
+              CategoryName:childSnapshot.val().CategoryName,
               Status:false,
             });
             fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})
@@ -180,7 +182,6 @@ export default class Payscreen extends React.PureComponent{
             </TouchableOpacity>
         </View>
       <View style={styles.bodyContainer}></View>
-      <View style={styles.centeredView}>
               <Modal
                   animationType="fade"
                   transparent={true}
@@ -192,16 +193,15 @@ export default class Payscreen extends React.PureComponent{
                >
                   <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                      <FontAwesome5 name="kiss-wink-heart" size={40} color="#a2459a"/>         
+                      <FontAwesome5 name="kiss-wink-heart" size={70} color="#a2459a"/>         
                       <Text style={{...styles.modalText, color:'#a2459a'}}>Đặt hàng thành công!</Text>
-                      <TouchableOpacity style={{width:width/2, height:height/18, borderRadius:13, backgroundColor:'#a2459a'}} 
+                      <TouchableOpacity style={{width:width/1.5, height:height/15, borderRadius:13, backgroundColor:'#a2459a',justifyContent:'center'}} 
                       onPress={()=> {this.props.navigation.navigate("App")}}>
                         <Text  style={{...styles.modalText, color:'#fff',textAlign:'center'}}>Tiếp tục mua sắm</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
-             </Modal>  
-        </View>    
+             </Modal>   
     </View>
     );
   };
@@ -283,7 +283,8 @@ const styles = StyleSheet.create({
     centeredView: {
       justifyContent: "center",
       alignItems: "center",
-      flex:1
+      flex:1,
+      alignSelf:'center'
     },
     modalView: {
       margin: 20,
@@ -299,7 +300,10 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
       elevation: 5,
-      justifyContent:'center'
+      justifyContent:'center',
+      height:height/3,
+      width:width/1.2
+      
     },
     openButton: {
       backgroundColor: "#F194FF",

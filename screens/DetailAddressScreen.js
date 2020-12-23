@@ -460,28 +460,6 @@ const saveChangesHandle = async() => {
               <View style={{height: 2, backgroundColor:'red'}} />
             }
           </View>
-          {/* <DropDownPicker
-            items={[
-              {label: 'USA',value:'usa',  selected: true,disabled: true},
-              {label: 'UK',value:'uk'},
-            ]}
-            searchable={true}
-            searchablePlaceholder="Tìm Tỉnh thành"
-            searchablePlaceholderTextColor="gray"
-            seachableStyle={{}}
-            searchableError={() => <Text>Không tìm thấy</Text>}
-            containerStyle={{}}
-            style={{backgroundColor: '#fafafa'}}
-            itemStyle={{
-                justifyContent: 'flex-start',
-            }}
-            
-            dropDownStyle={{}}
-            // onChangeItem={item => this.setState({
-            //     country: item.value
-            // })}
-          
-          /> */}
           <View style={styles.divider} />
           <View style={styles.userContainer}>
               <View style={styles.totalContainer1}>

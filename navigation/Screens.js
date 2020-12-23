@@ -51,7 +51,10 @@ export function AppStack(props) {
   return (
     <Tab.Navigator
       style={{ flex: 1 }}
-      initialRouteName="Home"
+      initialRouteName="Trang chủ"
+      tabBarOptions={{
+        activeTintColor: '#a2459a',
+      }}  
     >
       <Tab.Screen
         name="Trang chủ"

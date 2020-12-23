@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,RefreshControl} from 'react-native';
+import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,RefreshControl,Alert} from 'react-native';
 import { fbApp } from '../firebaseconfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

@@ -88,14 +88,8 @@ export class Detail_Order extends Component{
             product.Quantity = child.val().Quantity;    
             product.ProductImage =child.val().Picture;
             product.ProductName = child.val().Name;
-            fbApp.database().ref('Brands').child(child.val().BrandID)
-              .on('value',snapshot_brand =>{
-                product.Brand_Product = snapshot_brand.val().Name;       
-            });
-            fbApp.database().ref('Catogorys').child(child.val().CategoryID)
-              .on('value',snapshot_cate =>{
-                product.cate_Name = snapshot_cate.val().Name;       
-            });            
+            product.Brand_Product= child.val().BrandName;
+            product.cate_Name=child.val().CategoryName;    
             product.id=child.val().OrderDetailID;
             item.push(product); 
           })

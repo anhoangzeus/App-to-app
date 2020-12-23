@@ -139,6 +139,8 @@ export default function App({route,navigation}) {
         BrandID:childSnapshot.val().BrandID,
         Name:childSnapshot.val().Name,
         Picture:childSnapshot.val().Picture,
+        BrandName:childSnapshot.val().BrandName,
+        CategoryName:childSnapshot.val().CategoryName,
         Status:false,
       });
       fbApp.database().ref("Cart/"+fbApp.auth().currentUser.uid).child(childSnapshot.key).set({})

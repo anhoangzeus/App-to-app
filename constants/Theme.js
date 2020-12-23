@@ -7,7 +7,7 @@ export default {
     ERROR: '#F44336',
     SUCCESS: '#4CAF50',
     WARNING: '#FF9800',
-    MUTED: '#a2459a',
+    MUTED: '#800080',
     INPUT: '#DCDCDC',
     ACTIVE: '#9C26B0',
     BUTTON_COLOR: '#9C26B0',

@@ -100,7 +100,7 @@ const ProfileUser =(props)=> {
           </TouchableOpacity>
           <View style={styles.divider1} />
           <TouchableOpacity onPress={()=> {props.navigation.navigate("TopOrder",{screen: "Order_DangVanChuyen"})}}>
-          <ProfileItem  name="Đơn hàng đang chờ vận chuyển" />
+          <ProfileItem  name="Đơn hàng đang vận chuyển" />
           </TouchableOpacity>
           <View style={styles.divider1} />
           <TouchableOpacity onPress={()=> {props.navigation.navigate("TopOrder",{screen: "Order_DaGiao"})}}>

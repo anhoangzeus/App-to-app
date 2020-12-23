@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,TextInput,RefreshControl} from 'react-native';
+import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,Image,Modal,TextInput,RefreshControl,ActivityIndicator} from 'react-native';
 import { fbApp } from '../firebaseconfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -52,6 +52,8 @@ export default class Rating extends Component{
             points3:0,
             points4:0,
             points5:0,
+            loading:true,
+            modalVisibleSuccess:false,
         };
        
     }
@@ -71,6 +73,14 @@ export default class Rating extends Component{
         this.getListOrder(); 
         this.setState({
           modalVisible: false 
+        });
+      };
+      setModalVisibleSuccess = (visible) => {
+          this.setState({ modalVisibleSuccess: visible },()=> {setTimeout(this.handleCloseSuccess,1500)});
+      };
+      handleCloseSuccess = () => {
+        this.setState({
+          modalVisibleSuccess: false 
         });
       };
     componentDidMount(){
@@ -144,6 +154,7 @@ export default class Rating extends Component{
           Comment:textCmt,
         });
         this.handleClose();
+        this.setModalVisibleSuccess(true);
     }
     handleChange=(val)=>{
       this.setState({textCmt:val});
@@ -172,11 +183,11 @@ export default class Rating extends Component{
                 });         
             }               
         });
-       this.setState({ListProduct:items,refreshing:false})
+       this.setState({ListProduct:items,refreshing:false,loading:false})
     });
 }
     render(){
-        const {iscomment,opencmt,modalVisible,points1,points2,points3,points4,points5} = this.state;
+        const {iscomment,opencmt,modalVisible,points1,points2,points3,points4,points5,ListProduct,modalVisibleSuccess} = this.state;
         var total =points1+points2+points3+points4+points5;
         var choices: Array<IChoice> = [
           { id: 1, choice: "1 Sao", votes: points1 },
@@ -185,6 +196,23 @@ export default class Rating extends Component{
           { id: 4, choice: "4 Sao", votes: points4 },
           { id: 5, choice: "5 Sao", votes: points5 },
         ];
+        if (this.state.loading) {
+          return (
+            <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+              <ActivityIndicator size="large" color="dodgerblue" />
+            </View>
+          );
+        }
+        if(ListProduct[0]==null){
+          return( 
+          <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+              <Text style={{color:'#000', marginHorizontal:20,textAlign:'center',fontSize:15}}>Bạn nhớ quay lại đánh giá sản phẩm khi hoàn thành đơn hàng nhé</Text>
+              <TouchableOpacity style={styles.btnBuyNow} onPress={()=>this.props.navigation.navigate("App")}>
+                <Text style={{textAlign:'center',color:'#fff',fontSize:20,fontWeight:'bold'}}>Mua Sắm Ngay</Text>
+              </TouchableOpacity>
+          </View>
+          )
+        }
         return(
             <View style={styles.screenContainer}>
                 <FlatList
@@ -259,6 +287,21 @@ export default class Rating extends Component{
                     </View>
                   </View>
              </Modal>  
+             <Modal
+                  animationType="fade"
+                  transparent={true}
+                  visible={modalVisibleSuccess}
+                  onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                  }}
+               >
+                  <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                      <FontAwesome5 name="cart-plus" size={40} color="#a2459a"/>
+                      <Text style={styles.modalText}>Đánh giá thành công!</Text>
+                    </View>
+                  </View>
+             </Modal>  
             </View>
         );
     }
@@ -307,6 +350,7 @@ const styles = StyleSheet.create({
       },
       centeredView: {
         flex:1,
+        justifyContent:'center'
       },
       modalView: {
         margin: 20,
@@ -329,4 +373,12 @@ const styles = StyleSheet.create({
         color:'#a2459a',
         fontWeight:'bold'
       },
+      btnBuyNow:{
+        height:height/14,
+        width:width/1.5,
+        backgroundColor:"#a2459a",
+        borderRadius:25,
+        justifyContent:'center',
+        marginTop:10
+      }
 })

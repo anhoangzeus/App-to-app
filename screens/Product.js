@@ -55,10 +55,20 @@ export default class Product extends React.Component {
       listcart:[],
       modalVisible:false,
       scrollY: new Animated.Value(0),
-      isloaing:true
+      isloaing:true,
+      BrandName:"",
+      CategoryName:"",
     };
     this.timer;
   };
+  getNameBrandCate = ()=>{
+    this.itemRef.ref("/Catogorys/"+this.props.CategoryID).once('value').then((snapshot)=>{
+      this.setState({CategoryName:snapshot.val().Name});
+    });
+    this.itemRef.ref("/Brands/"+this.props.BrandID).once('value').then((snapshot)=>{
+      this.setState({BrandName:snapshot.val().Name});
+    });
+  }
   addCart =()=>{
     const Id_Item = this.state.idsanpham;
     var key;
@@ -88,6 +98,8 @@ export default class Product extends React.Component {
         Id :this.props.content,
         CategoryID :this.props.CategoryID,
         BrandID : this.props.BrandID,
+        CategoryName :this.state.CategoryName,
+        BrandName : this.state.BrandName,
         Name:this.state.Name,
         Picture:this.state.Image,
         Price: this.state.Price,
@@ -99,6 +111,8 @@ export default class Product extends React.Component {
         Id:product.ProductID,
         CategoryID :this.props.CategoryID,
         BrandID : this.props.BrandID,
+        CategoryName :this.state.CategoryName,
+        BrandName : this.state.BrandName,
         Name:product.Name,
         Picture:product.image,
         Price:product.Price,
@@ -234,6 +248,7 @@ getData =()=>{
   };
   componentDidMount(){
     this.getData();
+    this.getNameBrandCate();
     this.getItemRespon();
     this.GetCartData();
     this.timer = setInterval(() => {
@@ -425,7 +440,7 @@ getData =()=>{
         <View style={styles.devide} />
         <View style={{backgroundColor:"#fff",flexDirection:"row",height:height/16, justifyContent:'center'}}>
           <TouchableOpacity style={styles.btnmua} onPress={this.addCart}>
-            <Text style={{color:'#fff', fontSize:20,  fontWeight:'bold'}}>Chọn mua</Text>
+            <Text style={{color:'#fff', fontSize:20,}}>Thêm vào giỏ hàng</Text>
           </TouchableOpacity>
         </View>
       </View> 
@@ -526,7 +541,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    justifyContent:'center'
+    justifyContent:'center',
+    height:height/4,
+    width:width/1.5
   },
   openButton: {
     backgroundColor: "#F194FF",
@@ -542,8 +559,7 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontSize:20,
+    fontSize:22,
     color:'#a2459a'
   },
-
 });

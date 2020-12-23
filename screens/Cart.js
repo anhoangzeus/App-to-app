@@ -205,7 +205,7 @@ export default class Cart extends Component{
         </View>
         <View style={{flexDirection:"row"}}>
         <FontAwesome name="gift" color="green" size={24} style={styles.itemGift} ></FontAwesome>
-        <Text style={{marginLeft:5, color:"green", fontSize:18}}>nhận một phần quà may mắn</Text>
+        <Text style={{marginLeft:5, color:"green", fontSize:18}}>Nhận một phần quà may mắn</Text>
         </View>
         <View style={styles.itemInfo}>
           <Image style={styles.itemImage} source={{uri:item.Picture }}></Image>
@@ -435,12 +435,12 @@ const styles = StyleSheet.create({
     },
     btnSubmit:{
       width:width*0.9,
-      height:height/18,
       marginLeft:width*0.05,
-      backgroundColor:'#a2459a',
+      height:height/15,
       borderRadius:10,
+      justifyContent:'center',
       marginVertical:10,
-      justifyContent:'center'
+      backgroundColor:'#a2459a'
     },
     address:{
       marginTop:5,
