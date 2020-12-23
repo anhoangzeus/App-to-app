@@ -47,13 +47,14 @@
           }
       </Text>
       <View style={{flexDirection:'row'}}>
-      {RatingUI({rating})}
-      <Text style={{color:'green',}}>({bough})</Text>
+      {RatingUI(rating)}
+      {bough!=0 ? <Text style={{color:'green',}}>({bough})</Text>: null}   
       </View>
     </View>
   );
-  function RatingUI({rating}){
-    switch(rating){
+  function RatingUI(rating){
+    var point = parseInt(rating);
+    switch(point){
       case 1: return(
         <View style={{flexDirection:"row"}}>
           <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
@@ -237,64 +238,88 @@
       snapshot.forEach(function (childSnapshot){
         if(brandid == ""){
           if(cateid == ""){
+            var point=0;
+            var count=0;
+            childSnapshot.child("Rating").forEach((child)=>{
+              point+=child.val().Point;
+              count++;
+            })       
             items.push({
-              title:childSnapshot.val().Name,
-              price:childSnapshot.val().Price,
-              metades:childSnapshot.val().MetaDescription,
-              image:childSnapshot.val().Image,
-              id: childSnapshot.val().ProductID,
-              rating: childSnapshot.val().Rating,
-              bough:childSnapshot.val().Bough,
-              BrandID:childSnapshot.val().BrandID,
-              CategoryID:childSnapshot.val().CategoryID,
-              PromotionPrice : childSnapshot.val().PromotionPrice
-            })    
+                title : childSnapshot.val().Name,
+                price : childSnapshot.val().Price,
+                image : childSnapshot.val().Image,
+                metades : childSnapshot.val().MetaDescription,
+                id : childSnapshot.val().ProductID,
+                rating: point/count,
+                bough:count,
+                BrandID : childSnapshot.val().BrandID,
+                CategoryID : childSnapshot.val().CategoryID,   
+                PromotionPrice : childSnapshot.val().PromotionPrice                       
+            });
           }else{
               if(childSnapshot.val().CategoryID == cateid){
+                var point=0;
+                var count=0;
+                childSnapshot.child("Rating").forEach((child)=>{
+                  point+=child.val().Point;
+                  count++;
+                })       
                 items.push({
-                  title:childSnapshot.val().Name,
-                  price:childSnapshot.val().Price,
-                  metades:childSnapshot.val().MetaDescription,
-                  image:childSnapshot.val().Image,
-                  id: childSnapshot.val().ProductID,
-                  rating: childSnapshot.val().Rating,
-                  bough:childSnapshot.val().Bough,
-                  BrandID:childSnapshot.val().BrandID,
-                  CategoryID:childSnapshot.val().CategoryID,
-                  PromotionPrice : childSnapshot.val().PromotionPrice
-                })                
+                    title : childSnapshot.val().Name,
+                    price : childSnapshot.val().Price,
+                    image : childSnapshot.val().Image,
+                    metades : childSnapshot.val().MetaDescription,
+                    id : childSnapshot.val().ProductID,
+                    rating: point/count,
+                    bough:count,
+                    BrandID : childSnapshot.val().BrandID,
+                    CategoryID : childSnapshot.val().CategoryID,   
+                    PromotionPrice : childSnapshot.val().PromotionPrice                       
+                });          
               }  
             }                    
           }else{
             if(cateid == ""){
               if(childSnapshot.val().BrandID == brandid){
+                var point=0;
+                var count=0;
+                childSnapshot.child("Rating").forEach((child)=>{
+                  point+=child.val().Point;
+                  count++;
+                })       
                 items.push({
-                  title:childSnapshot.val().Name,
-                  price:childSnapshot.val().Price,
-                  metades:childSnapshot.val().MetaDescription,
-                  image:childSnapshot.val().Image,
-                  id: childSnapshot.val().ProductID,
-                  rating: childSnapshot.val().Rating,
-                  bough:childSnapshot.val().Bough,
-                  BrandID:childSnapshot.val().BrandID,
-                  CategoryID:childSnapshot.val().CategoryID,
-                  PromotionPrice : childSnapshot.val().PromotionPrice
-                })                
+                    title : childSnapshot.val().Name,
+                    price : childSnapshot.val().Price,
+                    image : childSnapshot.val().Image,
+                    metades : childSnapshot.val().MetaDescription,
+                    id : childSnapshot.val().ProductID,
+                    rating: point/count,
+                    bough:count,
+                    BrandID : childSnapshot.val().BrandID,
+                    CategoryID : childSnapshot.val().CategoryID,   
+                    PromotionPrice : childSnapshot.val().PromotionPrice                       
+                });                   
               }  
             }else{
               if(childSnapshot.val().BrandID == brandid && childSnapshot.val().CategoryID == cateid ){
+                var point=0;
+                var count=0;
+                childSnapshot.child("Rating").forEach((child)=>{
+                  point+=child.val().Point;
+                  count++;
+                })       
                 items.push({
-                  title:childSnapshot.val().Name,
-                  price:childSnapshot.val().Price,
-                  metades:childSnapshot.val().MetaDescription,
-                  image:childSnapshot.val().Image,
-                  id: childSnapshot.val().ProductID,
-                  rating: childSnapshot.val().Rating,
-                  bough:childSnapshot.val().Bough,
-                  BrandID:childSnapshot.val().BrandID,
-                  CategoryID:childSnapshot.val().CategoryID,
-                  PromotionPrice : childSnapshot.val().PromotionPrice
-                })                
+                    title : childSnapshot.val().Name,
+                    price : childSnapshot.val().Price,
+                    image : childSnapshot.val().Image,
+                    metades : childSnapshot.val().MetaDescription,
+                    id : childSnapshot.val().ProductID,
+                    rating: point/count,
+                    bough:count,
+                    BrandID : childSnapshot.val().BrandID,
+                    CategoryID : childSnapshot.val().CategoryID,   
+                    PromotionPrice : childSnapshot.val().PromotionPrice                       
+                });                 
               }  
             }                
           }
@@ -346,6 +371,7 @@
     </View>
       <View style={styles.bodyContainer}> 
     <ScrollView
+        showsVerticalScrollIndicator={false}
        refreshControl={
         <RefreshControl
             refreshing={this.state.refreshing}
@@ -493,7 +519,7 @@
     itemContainer: {
       alignItems:'center',
       width: width/2,
-      height:height/3.2,
+      height:height/3.8,
       margin: -0.2,
       borderColor:'#a2459a',
       borderWidth: 1,     

@@ -3,8 +3,10 @@ import {StyleSheet, View, Text, StatusBar,TouchableOpacity,Dimensions,FlatList,I
 import { fbApp } from '../firebaseconfig';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import NumberFormat from 'react-number-format';
 import RNPoll, { IChoice } from "react-native-poll";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const { width,height } = Dimensions.get('screen');
 function ReactNativeNumberFormat({ value }) {
@@ -205,12 +207,13 @@ export default class Rating extends Component{
         }
         if(ListProduct[0]==null){
           return( 
-          <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-              <Text style={{color:'#000', marginHorizontal:20,textAlign:'center',fontSize:15}}>Bạn nhớ quay lại đánh giá sản phẩm khi hoàn thành đơn hàng nhé</Text>
+          <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', flex: 1}}
+            onPress={()=>this.getListOrder()}>
+            <Text style={{color:'#000', marginHorizontal:20,textAlign:'center',fontSize:15}}>Bạn nhớ quay lại đánh giá sản phẩm khi hoàn thành đơn hàng nhé</Text>
               <TouchableOpacity style={styles.btnBuyNow} onPress={()=>this.props.navigation.navigate("App")}>
                 <Text style={{textAlign:'center',color:'#fff',fontSize:20,fontWeight:'bold'}}>Mua Sắm Ngay</Text>
               </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
           )
         }
         return(

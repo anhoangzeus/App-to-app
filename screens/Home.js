@@ -47,8 +47,8 @@ const ProductItem = ({image, name, price,rating,bough,PromotionPrice}) => (
     }
     </Text>
     <View style={{flexDirection:'row'}}>
-      {RatingUI({rating})}
-      <Text style={{color:'green',}}>({bough})</Text>
+      {RatingUI(rating)}
+      {bough!=0 ? <Text style={{color:'green',}}>({bough})</Text>: null}   
       
     </View>
   </View>
@@ -65,14 +65,14 @@ const NewProductItem = ({image, name, price,rating,bough,PromotionPrice}) => (
     }
     </Text>
     <View style={{flexDirection:'row'}}>
-      {RatingUI({rating})}
-      <Text style={{color:'green',}}>({bough})</Text>
-      
+      {RatingUI(rating)}
+      {bough!=0 ? <Text style={{color:'green',}}>({bough})</Text>: null}      
     </View>
   </View>
 );
-function RatingUI({rating}){
-  switch(rating){
+const RatingUI=(rating)=>{
+  var point = parseInt(rating);
+  switch(point){
     case 1: return(
       <View style={{flexDirection:"row"}}>
         <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
@@ -183,17 +183,23 @@ export default class Home extends React.PureComponent {
       snapshot.forEach(function (childSnapshot){   
         if(childSnapshot.val().CategoryID=="AIzaSyDSWIekvpvwQbRiGh4WF88H91tqFzL6OWI")
         {
-          itemsphone.push({ 
-            title : childSnapshot.val().Name,
-            price : childSnapshot.val().Price,       
-            image : childSnapshot.val().Image,
-            metades:childSnapshot.val().MetaDescription,
-            id : childSnapshot.val().ProductID,
-            rating: childSnapshot.val().Rating,
-            bough:childSnapshot.val().Bough,
-            BrandID : childSnapshot.val().BrandID,
-            CategoryID : childSnapshot.val().CategoryID,
-            PromotionPrice : childSnapshot.val().PromotionPrice
+          var point=0;
+          var count=0;
+          childSnapshot.child("Rating").forEach((child)=>{
+            point+=child.val().Point;
+            count++;
+          })       
+          itemsphone.push({
+              title : childSnapshot.val().Name,
+              price : childSnapshot.val().Price,
+              image : childSnapshot.val().Image,
+              metades : childSnapshot.val().MetaDescription,
+              id : childSnapshot.val().ProductID,
+              rating: point/count,
+              bough:count,
+              BrandID : childSnapshot.val().BrandID,
+              CategoryID : childSnapshot.val().CategoryID,   
+              PromotionPrice : childSnapshot.val().PromotionPrice                       
           });
         };                   
       });
@@ -208,17 +214,23 @@ export default class Home extends React.PureComponent {
       snapshot.forEach(function (childSnapshot){   
         if(childSnapshot.val().CategoryID=="-MJaC7kTLJOYZjt9G4zs")
         {
-          itemslap.push({ 
-            title : childSnapshot.val().Name,
-            price : childSnapshot.val().Price,
-            image : childSnapshot.val().Image,
-            metades:childSnapshot.val().MetaDescription,
-            id : childSnapshot.val().ProductID,
-            rating: childSnapshot.val().Rating,
-            bough:childSnapshot.val().Bough,
-            BrandID : childSnapshot.val().BrandID,
-            CategoryID : childSnapshot.val().CategoryID,
-            PromotionPrice : childSnapshot.val().PromotionPrice
+          var point=0;
+          var count=0;
+          childSnapshot.child("Rating").forEach((child)=>{
+            point+=child.val().Point;
+            count++;
+          })       
+          itemslap.push({
+              title : childSnapshot.val().Name,
+              price : childSnapshot.val().Price,
+              image : childSnapshot.val().Image,
+              metades : childSnapshot.val().MetaDescription,
+              id : childSnapshot.val().ProductID,
+              rating: point/count,
+              bough:count,
+              BrandID : childSnapshot.val().BrandID,
+              CategoryID : childSnapshot.val().CategoryID,   
+              PromotionPrice : childSnapshot.val().PromotionPrice                       
           });
         };                   
       });
@@ -233,17 +245,23 @@ export default class Home extends React.PureComponent {
       snapshot.forEach(function (childSnapshot){   
         if(childSnapshot.val().CategoryID=="-MJaB1_P1gTPbxmjMXSW")
         {
-          itemstab.push({ 
-            title : childSnapshot.val().Name,
-            price : childSnapshot.val().Price,
-            image : childSnapshot.val().Image,
-            metades:childSnapshot.val().MetaDescription,
-            id : childSnapshot.val().ProductID,
-            rating: childSnapshot.val().Rating,
-            bough:childSnapshot.val().Bough,
-            BrandID : childSnapshot.val().BrandID,
-            CategoryID : childSnapshot.val().CategoryID,
-            PromotionPrice : childSnapshot.val().PromotionPrice
+          var point=0;
+          var count=0;
+          childSnapshot.child("Rating").forEach((child)=>{
+            point+=child.val().Point;
+            count++;
+          })       
+          itemstab.push({
+              title : childSnapshot.val().Name,
+              price : childSnapshot.val().Price,
+              image : childSnapshot.val().Image,
+              metades : childSnapshot.val().MetaDescription,
+              id : childSnapshot.val().ProductID,
+              rating: point/count,
+              bough:count,
+              BrandID : childSnapshot.val().BrandID,
+              CategoryID : childSnapshot.val().CategoryID,   
+              PromotionPrice : childSnapshot.val().PromotionPrice                       
           });
         };                   
       });
@@ -258,17 +276,23 @@ export default class Home extends React.PureComponent {
       snapshot.forEach(function (childSnapshot){   
         if(childSnapshot.val().CategoryID=="-MJaCJRVtI_o9Hv5XY-N")
         {
-          itemsdongho.push({ 
-            title : childSnapshot.val().Name,
-            price : childSnapshot.val().Price,
-            image : childSnapshot.val().Image,
-            metades:childSnapshot.val().MetaDescription,
-            id : childSnapshot.val().ProductID,
-            rating: childSnapshot.val().Rating,
-            bough:childSnapshot.val().Bough,
-            BrandID : childSnapshot.val().BrandID,
-            CategoryID : childSnapshot.val().CategoryID,
-            PromotionPrice : childSnapshot.val().PromotionPrice
+          var point=0;
+          var count=0;
+          childSnapshot.child("Rating").forEach((child)=>{
+            point+=child.val().Point;
+            count++;
+          })       
+          itemsdongho.push({
+              title : childSnapshot.val().Name,
+              price : childSnapshot.val().Price,
+              image : childSnapshot.val().Image,
+              metades : childSnapshot.val().MetaDescription,
+              id : childSnapshot.val().ProductID,
+              rating: point/count,
+              bough:count,
+              BrandID : childSnapshot.val().BrandID,
+              CategoryID : childSnapshot.val().CategoryID,   
+              PromotionPrice : childSnapshot.val().PromotionPrice                       
           });
         };                   
       });
@@ -283,17 +307,23 @@ export default class Home extends React.PureComponent {
       snapshot.forEach(function (childSnapshot){   
         if(childSnapshot.val().CategoryID=="-MJaCDw6CYGQenBvOtGO")
         {
-          itemsphukien.push({ 
-            title : childSnapshot.val().Name,
-            price : childSnapshot.val().Price,
-            image : childSnapshot.val().Image,
-            metades:childSnapshot.val().MetaDescription,
-            id : childSnapshot.val().ProductID,
-            rating: childSnapshot.val().Rating,
-            bough:childSnapshot.val().Bough,
-            BrandID : childSnapshot.val().BrandID,
-            CategoryID : childSnapshot.val().CategoryID,
-            PromotionPrice : childSnapshot.val().PromotionPrice
+          var point=0;
+          var count=0;
+          childSnapshot.child("Rating").forEach((child)=>{
+            point+=child.val().Point;
+            count++;
+          })       
+          itemsphukien.push({
+              title : childSnapshot.val().Name,
+              price : childSnapshot.val().Price,
+              image : childSnapshot.val().Image,
+              metades : childSnapshot.val().MetaDescription,
+              id : childSnapshot.val().ProductID,
+              rating: point/count,
+              bough:count,
+              BrandID : childSnapshot.val().BrandID,
+              CategoryID : childSnapshot.val().CategoryID,   
+              PromotionPrice : childSnapshot.val().PromotionPrice                       
           });
         };                   
       });
@@ -305,15 +335,21 @@ export default class Home extends React.PureComponent {
   ListenForItems = () => {
     this.itemRef.ref('/Products').once('value').then((snapshot) => {
       var items=[];
-      snapshot.forEach(function (childSnapshot){     
+      snapshot.forEach(function (childSnapshot){   
+        var point=0;
+        var count=0;
+        childSnapshot.child("Rating").forEach((child)=>{
+          point+=child.val().Point;
+          count++;
+        })       
           items.push({
             title : childSnapshot.val().Name,
             price : childSnapshot.val().Price,
             image : childSnapshot.val().Image,
             metades : childSnapshot.val().MetaDescription,
             id : childSnapshot.val().ProductID,
-            rating: childSnapshot.val().Rating,
-            bough:childSnapshot.val().bough,
+            rating: point/count,
+            bough:count,
             BrandID : childSnapshot.val().BrandID,
             CategoryID : childSnapshot.val().CategoryID,   
             PromotionPrice : childSnapshot.val().PromotionPrice                       

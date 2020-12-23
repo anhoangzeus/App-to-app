@@ -144,14 +144,23 @@ const textInputFullName = (val) => {
   }
 }
 const textInputCMND = (val) => {
+  if( val.trim().length == 8 || val.trim().length == 12 ) {
     setData({
       ...data,
       CMND: val,
+      check_textInputCMND: true,
   });
+  } else {
+    setData({
+      ...data,
+      CMND: val,
+      check_textInputCMND: false,
+    });
+  }
 }
 const textInputPhone = (val) => {
 
-  if( val.trim().length > 0 ) {
+  if( val.trim().length == 10 ) {
       setData({
           ...data,
           Phone: val,
@@ -278,7 +287,8 @@ const saveChangesHandle = () => {
               <Text style={styles.headerText}>Thông tin tài khoản</Text>
           </View>
           <View style={styles.divider} />
-          <ScrollView>
+          <ScrollView
+          >
           <View style={styles.bodyContainer}>
           <View style={styles.userContainer}>
               <View style={styles.textContainer}>
@@ -323,12 +333,13 @@ const saveChangesHandle = () => {
                   styles.errtext}>Số điện thoại</Text>
                   { data.check_textInputSDT ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
-                    <Text style={styles.errorMsg}>Vui lòng nhập Số điện thoại</Text>
+                    <Text style={styles.errorMsg}>Số điện thoại sai định dạng</Text>
                     </Animatable.View>
                   }
                   </View>       
                   <View style={styles.totalContainer1}>
                   <TextInput 
+                    keyboardType='numeric'
                     placeholderTextColor="#666666"
                     autoCapitalize="none"
                     onChangeText={(val) => textInputPhone(val)}
@@ -357,11 +368,12 @@ const saveChangesHandle = () => {
                   styles.errtext}>Căn cước công dân </Text>
                   { data.check_textInputCMND ? null : 
                     <Animatable.View animation="fadeInLeft" duration={500}>
-                    <Text style={styles.errorMsg}>Thông tin không được để trống</Text>
+                    <Text style={styles.errorMsg}>CMND sai định dạng</Text>
                     </Animatable.View>
                   }
                   </View>       
                   <TextInput 
+                        keyboardType='numeric'
                         placeholderTextColor="#666666"
                         autoCapitalize="none"
                         onChangeText={(val) => textInputCMND(val)}

@@ -9,6 +9,7 @@ MERGED from [:unimodules-react-native-adapter] D:\TLMH\Tian\App-to-app\node_modu
 MERGED from [:expo-updates] D:\TLMH\Tian\App-to-app\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-13:12
 MERGED from [:react-native-community_async-storage] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-community_masked-view] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-community_picker] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-firebase_auth] D:\TLMH\Tian\App-to-app\node_modules\@react-native-firebase\auth\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:react-native-firebase_app] D:\TLMH\Tian\App-to-app\node_modules\@react-native-firebase\app\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] D:\TLMH\Tian\App-to-app\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
@@ -354,6 +355,8 @@ MERGED from [:react-native-community_async-storage] D:\TLMH\Tian\App-to-app\node
 MERGED from [:react-native-community_async-storage] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_masked-view] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-community_masked-view] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-community_picker] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-community_picker] D:\TLMH\Tian\App-to-app\node_modules\@react-native-community\picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-firebase_auth] D:\TLMH\Tian\App-to-app\node_modules\@react-native-firebase\auth\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase_auth] D:\TLMH\Tian\App-to-app\node_modules\@react-native-firebase\auth\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-firebase_app] D:\TLMH\Tian\App-to-app\node_modules\@react-native-firebase\app\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41

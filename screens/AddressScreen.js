@@ -34,10 +34,10 @@ export default class AddressScreen extends Component {
                   {
                     Main ? null:
                     <TouchableOpacity
-                      style={{width:width/8,height:width/10}}
+                      style={{height:width/10,width:width/3.3}}
                       onPress={()=> {this.setModalVisible(true),this.setState({_idCanXoa: id,isMain: Main})}}
                     >
-                      <MaterialIcons name='delete' color="red" size={30}/>
+                      <Text style={{color:"red",fontSize:20}}>Xoá địa chỉ</Text>
                     </TouchableOpacity>
                   }           
               </View>             
@@ -203,16 +203,16 @@ export default class AddressScreen extends Component {
                         <Text style={styles.modalText}>Bạn có chắc xoá địa chỉ này ?</Text>
                         <View style={{flexDirection:'row'}}>
                         <TouchableOpacity
-                          style={{ ...styles.openButton, backgroundColor: "#2196F3", width:width/2.5 }}
-                          onPress={() => {this.handleClose()}}
-                        >
-                          <Text style={styles.textStyle}>Giữ lại</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={{ ...styles.openButton, backgroundColor: "#2196F3",width:width/2.5,marginLeft:5}}
+                          style={{ ...styles.openButton, backgroundColor: "#2196F3",width:width/2.5}}
                           onPress={() => {this._deleteAddress()}}
                         >
                           <Text style={styles.textStyle}>Xác nhận</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={{ ...styles.openButton, backgroundColor: "#2196F3", width:width/2.5 ,marginLeft:5}}
+                          onPress={() => {this.handleClose()}}
+                        >
+                          <Text style={styles.textStyle}>Giữ lại</Text>
                         </TouchableOpacity>
                         </View>                  
                       </View>
