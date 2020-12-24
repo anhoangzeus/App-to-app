@@ -76,12 +76,19 @@ const RatingUI=(rating)=>{
     case 1: return(
       <View style={{flexDirection:"row"}}>
         <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
       </View>
     );
     case 2: return(
       <View style={{flexDirection:"row"}}>
         <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
         <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
       </View>
     );
     case 3: return(
@@ -89,6 +96,8 @@ const RatingUI=(rating)=>{
         <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg}/>
         <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
         <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
       </View>
     );
     case 4: return(
@@ -97,6 +106,7 @@ const RatingUI=(rating)=>{
         <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
         <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
         <FontAwesome name="star" size={17} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={17} color={null} style={{marginLeft:5}}/>
       </View>
     );
     case 5: return(

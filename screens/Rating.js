@@ -6,7 +6,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import NumberFormat from 'react-number-format';
 import RNPoll, { IChoice } from "react-native-poll";
-import { ScrollView } from 'react-native-gesture-handler';
 
 const { width,height } = Dimensions.get('screen');
 function ReactNativeNumberFormat({ value }) {
@@ -78,7 +77,7 @@ export default class Rating extends Component{
         });
       };
       setModalVisibleSuccess = (visible) => {
-          this.setState({ modalVisibleSuccess: visible },()=> {setTimeout(this.handleCloseSuccess,1500)});
+          this.setState({ modalVisibleSuccess: visible },()=> {setTimeout(this.handleCloseSuccess,3000)});
       };
       handleCloseSuccess = () => {
         this.setState({
@@ -116,15 +115,23 @@ export default class Rating extends Component{
           })
         });
     }
-    votedProduct=(point)=>{
+    votedProduct=async(point)=>{
         const {idvoted,orderid,orderdetailid}= this.state;
         var date = this.GetCurrentDate();
         var uid = fbApp.auth().currentUser.uid;
+        var username="";
+        var Avatar="";
+         await(this.itemRef.ref("Users").child(uid).once('value').then((snapshot)=>{
+            username= snapshot.val().FullName;
+            Avatar=snapshot.val().Avatar;
+        }));
         this.itemRef.ref("Products/"+idvoted).child("/Rating/"+orderdetailid).set({
           Date:date,
           Point:point,
           UserId:uid,
           Comment:"",
+          UserName:username,
+          Avatar:Avatar,
         });
         this.itemRef.ref("Orders/"+orderid+"/OrderDetails/"+orderdetailid).update({
           Status:true
@@ -300,7 +307,6 @@ export default class Rating extends Component{
                >
                   <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                      <FontAwesome5 name="cart-plus" size={40} color="#a2459a"/>
                       <Text style={styles.modalText}>Đánh giá thành công!</Text>
                     </View>
                   </View>

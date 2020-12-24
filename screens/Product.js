@@ -32,9 +32,60 @@ function ReactNativeNumberFormat({ value }) {
       value={value}
       displayType={'text'}
       thousandSeparator={true}
-      renderText={formattedValue => <Text>{formattedValue} đ</Text>} 
+      renderText={formattedValue => <Text style={{color:"#000"}}>{formattedValue} đ</Text>} 
     />
   );
+}
+function RatingUI({rating,size}){
+  var point = parseInt(rating);
+  switch(point){
+    case 1: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={size} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+      </View>
+    );
+    case 2: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={size} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+      </View>
+    );
+    case 3: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={size} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+      </View>
+    );
+    case 4: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={size} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color={null} style={{marginLeft:5}}/>
+      </View>
+    );
+    case 5: return(
+      <View style={{flexDirection:"row"}}>
+        <FontAwesome name="star" size={size} color="#ffd700" style={styles.reviewimg}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+        <FontAwesome name="star" size={size} color="#ffd700" style={{marginLeft:5}}/>
+      </View>
+    );
+    default: return null;
+  }
 }
 export default class Product extends React.Component {
   constructor(props) {
@@ -51,6 +102,7 @@ export default class Product extends React.Component {
       MetaDescription:"",
       List_Productlienquan:[],
       List_MoreImage:[],
+      List_Comment:[],
       idsanpham:this.props.content,
       listcart:[],
       modalVisible:false,
@@ -58,6 +110,13 @@ export default class Product extends React.Component {
       isloaing:true,
       BrandName:"",
       CategoryName:"",
+      rating:0,
+      bough:0,
+      sao1:0,
+      sao2:0,
+      sao3:0,
+      sao4:0,
+      sao5:0,
     };
     this.timer;
   };
@@ -168,6 +227,36 @@ getData =()=>{
     var ImageItems=[];
     this.itemRef.ref('/Products/').child(this.state.idsanpham)
     .once('value').then((snapshot) => {
+      var point=0;
+      var count=0;
+      var sao1=0;
+      var sao2=0;
+      var sao3=0;
+      var sao4=0;
+      var sao5=0;
+      var items=[];
+       snapshot.child("Rating").forEach((child)=>{
+    
+          if(child.val().Point=="1")
+            sao1++;
+          else if(child.val().Point=="2")
+            sao2++;
+          else if(child.val().Point=="3")
+            sao3++;
+          else if(child.val().Point=="4")
+            sao4++;
+          else if(child.val().Point=="5")
+            sao5++;
+          point+=child.val().Point;
+          count++;    
+          items.push({
+            Avatar:child.val().Avatar,
+            Comment:child.val().Comment,
+            Date:child.val().Date,
+            Point:child.val().Point,
+            UserName:child.val().UserName,
+          });
+      })   
       this.setState({
         Decription:snapshot.val().Description,
         Image:snapshot.val().Image,
@@ -176,6 +265,14 @@ getData =()=>{
         Waranty:snapshot.val().Warranty,
         MetaDescription:snapshot.val().MetaDescription,
         PromotionPrice:snapshot.val().PromotionPrice,
+        rating:point/count,
+        List_Comment:items,
+        bough:count,
+        sao1:sao1,
+        sao2:sao2,
+        sao3:sao3,
+        sao4:sao4,
+        sao5:sao5,
       });
       ImageItems.push(snapshot.val().Image);
     });
@@ -220,10 +317,24 @@ getData =()=>{
   ProductItem = ({image, Name, Price}) => (
     <View style={styles.itemContainer}>
       <Image source={{uri: image}} style={styles.itemImage1}/>
-      <Text style={styles.itemName} numberOfLines={2}>{Name}</Text>
+      <Text style={{color:"#000"}} numberOfLines={2}>{Name}</Text>
       <ReactNativeNumberFormat value={Price} />
     </View>
   );
+  CommentItem = ({item}) =>(
+    <View style={{backgroundColor:'#fff'}}>
+      <View style={{flexDirection:'row',margin:10,justifyContent:'space-between'}}>
+      <RatingUI rating={item.Point} size={20}/>
+      <Text style={{color:'#000'}}>{item.Date}</Text>
+      </View>
+      <View style={{marginLeft:10}}>
+        <Text style={{color:'#000'}}>{item.UserName}</Text>
+        <Image source={{uri: item.Avatar}} style={{width:50,height:50,borderRadius:25,marginVertical:5}}/>  
+        <Text muted style={{color:'#000'}}>{item.Comment}</Text>
+      </View>
+      <View style={{backgroundColor:'#DDDDDD', height:1,marginHorizontal:20,marginTop:20}}></View>
+    </View>
+  )
   renderNofiCart = () =>{
     if(this.state.numcart == 0){
       return null;
@@ -265,7 +376,7 @@ getData =()=>{
 
   render() {
     const { navigation } = this.props;
-    const { modalVisible ,PromotionPrice,Price,List_Productlienquan} = this.state;
+    const { modalVisible ,PromotionPrice,Price,List_Productlienquan,rating,bough,sao1,sao2,sao3,sao4,sao5,List_Comment} = this.state;
     const HEADER_MAX_HEIGHT = height/10;
     const HEADER_MIN_HEIGHT = height/30;
     const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT + HEADER_MIN_HEIGHT;
@@ -277,7 +388,6 @@ getData =()=>{
     if (this.state.isloaing) {
       return (
         <View style={{ flex: 1, backgroundColor:'#fff', justifyContent:'center'}}>
-          <StatusBar barStyle='light-content' backgroundColor='#a2459a'/>
           <ActivityIndicator size='large' color="'#a2459a"/>
         </View>
       )
@@ -344,10 +454,18 @@ getData =()=>{
           <View>
               <View >
               <Text style={{ paddingBottom: 8 ,fontSize:18,marginLeft:width/40,color:'black'}}>{this.state.Name}</Text>
-              <View style={{flexDirection:'row'}}>
-                <Image source={require("../assets/images/star.jpg")} style={{width:width/4,height:height/40,marginLeft:width/40}}/>
-                <TouchableOpacity style={{marginLeft:10,}}><Text style={{ color:'green'}}>(Xem 518 đánh giá)</Text></TouchableOpacity>
-              </View>
+              
+                {bough!=0 ?
+                  <View style={{flexDirection:'row',marginLeft:10}}>
+                    <RatingUI rating={rating} size={17} /> 
+                    <TouchableOpacity style={{marginLeft:10}}>
+                      <Text style={{ color:'green'}}>(Xem {bough} đánh giá)
+                      </Text>
+                    </TouchableOpacity>
+                  </View> 
+                : 
+                <Text style={{ color:'green',marginLeft:10}}>Chưa có đánh giá</Text>}
+                
               <Text  style={{marginVertical: 10,fontSize:25,fontWeight:"bold",marginLeft:width/40,color:'#000'}}>{this.state.MetaDescription}</Text>
               <View style={{flexDirection:'row', alignItems:'center', marginBottom:10}}>
                 <Text style={{ fontSize:24,marginLeft:width/40, color:'black', fontWeight:'bold' }}><ReactNativeNumberFormat value={Price}/> </Text>
@@ -390,19 +508,18 @@ getData =()=>{
         <View style={{height:5}}/>
         {List_Productlienquan.length==0 ? null:
         <View style={{backgroundColor:'#fff',height:height/3.5}}>
-        <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40, fontWeight:'bold',color:'#000'}}>Sản phẩm tương tự</Text>
+        <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40, fontWeight:'bold',color:'#000'}}>Sản Phẩm Tương Tự</Text>
         <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{marginHorizontal:10}}
             data={List_Productlienquan}
-                renderItem={({item})=>
+            renderItem={({item})=>
                 <TouchableOpacity  onPress={() => this.setState({idsanpham:item.proid})}>
                     <this.ProductItem           
                     image={item.image}
                     Name={item.Name}
                     Price={item.Price}
-                    
                 />
                 </TouchableOpacity>                    
             }
@@ -410,15 +527,65 @@ getData =()=>{
         />        
       </View>   
         }
-       
           <View style={{height:5}}/>
           <View style={{backgroundColor:'#fff'}}>
-          <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40,fontWeight:'bold',color:'#000'}}>Mô tả sản phẩm</Text>
-          <Text muted size={12} style={{marginHorizontal:width/40,color:'#000'}}>  {this.state.Decription}</Text>         
+            <Text bold size={12} style={{marginVertical: 10,marginLeft:width/40,fontWeight:'bold',color:'#000'}}>Mô Tả Sản Phẩm</Text>
+            <Text muted size={12} style={{marginHorizontal:width/40,color:'#000',textAlign:'justify'}}>  {this.state.Decription}</Text>         
           <View style={{height:25}}/>
           </View>
+          <View style={{height:5}}/>
+          {bough != 0 ?
+              <View style={{backgroundColor:'#fff',height:height/3.2}}>
+              <View style={{flexDirection:'row',marginVertical: 10,justifyContent:'space-between'}}>
+              <Text bold size={12} style={{marginLeft:width/40,fontWeight:'bold',color:'#000'}}>Khách Hàng Nhận Xét </Text>
+                <TouchableOpacity><Text style={{color:'#a2459a', marginRight:width/40}}>XEM TẤT CẢ</Text></TouchableOpacity>
+              </View>
+  
+              <View style={{flexDirection:'row'}}>
+                  <View style={{flexDirection:'column', marginHorizontal:width/6,marginVertical:height/30}}>
+                    <Text style={{fontSize:50,color:"#000"}}>{rating.toFixed(1)}</Text>
+                    <RatingUI rating={rating} size={10} /> 
+                    <Text style={{fontSize:15,color:"green",marginTop:5}}>{bough} nhận xét</Text>
+                  </View>
+                  <View style={{width:1, backgroundColor:'#DDDDDD'}}></View>
+                  <View style={{ marginLeft:5}}>
+                  
+                    <View style={styles.star}>
+                        <RatingUI rating={5} size={17} /> 
+                        <Text style={{marginLeft:width/12,color:'#a2459a',fontWeight:'bold'}}>{sao5}</Text> 
+                    </View>
+                    <View style={styles.star}>
+                        <RatingUI rating={4} size={17} /> 
+                        <Text style={{marginLeft:width/12,color:'#a2459a',fontWeight:'bold'}}>{sao4}</Text> 
+                    </View>
+                    <View style={styles.star}>
+                        <RatingUI rating={3} size={17} /> 
+                        <Text style={{marginLeft:width/12,color:'#a2459a',fontWeight:'bold'}}>{sao3}</Text> 
+                    </View>
+                    <View style={styles.star}>
+                        <RatingUI rating={2} size={17} /> 
+                        <Text style={{marginLeft:width/12,color:'#a2459a',fontWeight:'bold'}}>{sao2}</Text> 
+                    </View>
+                    <View style={styles.star}>
+                        <RatingUI rating={1} size={17} /> 
+                        <Text style={{marginLeft:width/12,color:'#a2459a',fontWeight:'bold'}}>{sao1}</Text> 
+                    </View>
+                  </View>
+              </View>        
+            </View>
+        : null
+        }     
+        <View style={{height:5}}/>
+        <FlatList
+          data={List_Comment}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item})=>
+          <this.CommentItem
+                item={item}
+              />               
+      }
+        />
         </ScrollView>
-   
         <View style={styles.centeredView}>
               <Modal
                   animationType="fade"
@@ -562,4 +729,8 @@ const styles = StyleSheet.create({
     fontSize:22,
     color:'#a2459a'
   },
+  star:{
+    height:height/20,
+    flexDirection:'row',
+  }
 });

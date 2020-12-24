@@ -5,9 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 import { Block, Text, theme } from "galio-framework";
-
 import ComponentsScreen from '../screens/Components';
 import HomeScreen from '../screens/Home';
 import ItemsScreen from '../screens/Items';
@@ -136,9 +134,9 @@ export function AppStack(props) {
               size={24}
               name="home"
               family="ionicons"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : null}
               family="antdesign"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : null}
             />
           )
         }}
@@ -153,7 +151,7 @@ export function AppStack(props) {
               size={24}
               name="appstore1"
               family="antdesign"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : null}
              
             />
           )
@@ -168,8 +166,8 @@ export function AppStack(props) {
               size={24}
               name="search"
               family="font-awesome"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : null}
+              color={focused ? "#a2459a" : null}
               style={{ marginRight: -3 }}
             />
           )
@@ -185,8 +183,8 @@ export function AppStack(props) {
               size={24}
               name="bells"
               family="antdesign"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : null}
+              color={focused ? "#a2459a" : null}
               style={{ marginRight: -3 }}
             />
           )
@@ -201,8 +199,8 @@ export function AppStack(props) {
               size={24}
               name="user"
               family="antdesign"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : null}
+              color={focused ? "#a2459a" : null}
             />
           )
         }}

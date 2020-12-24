@@ -66,9 +66,9 @@ export function AppStack(props) {
               size={24}
               name="home"
               family="ionicons"
-              color={focused ? "blue" : materialTheme.COLORS.MUTED}
+              color={focused ? "blue" : null}
               family="antdesign"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" : null}
             />
           )
         }}
@@ -83,7 +83,7 @@ export function AppStack(props) {
               size={24}
               name="appstore1"
               family="antdesign"
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "#a2459a" :null}
              
             />
           )
@@ -98,8 +98,8 @@ export function AppStack(props) {
               size={24}
               name="search"
               family="font-awesome"
-              color={focused ? "blue" : materialTheme.COLORS.MUTED}
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "blue" : null}
+              color={focused ? "#a2459a" : null}
               style={{ marginRight: -3 }}
             />
           )
@@ -115,8 +115,8 @@ export function AppStack(props) {
               size={24}
               name="bells"
               family="antdesign"
-              color={focused ? "blue" : materialTheme.COLORS.MUTED}
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "blue" :null}
+              color={focused ? "#a2459a" : null}
               style={{ marginRight: -3 }}
             />
           )
@@ -131,8 +131,8 @@ export function AppStack(props) {
               size={24}
               name="user"
               family="antdesign"
-              color={focused ? "blue" : materialTheme.COLORS.MUTED}
-              color={focused ? "#a2459a" : materialTheme.COLORS.MUTED}
+              color={focused ? "blue" : null}
+              color={focused ? "#a2459a" : null}
             />
           )
         }}
