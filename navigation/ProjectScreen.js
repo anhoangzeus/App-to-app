@@ -1,5 +1,5 @@
 import React from 'react';
-import { Easing, Animated, Dimensions, View , StyleSheet, Image, StatusBar,TouchableOpacity} from 'react-native';
+import { Animated, Dimensions, View, StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
 import { createStackNavigator, HeaderBackButton } from "@react-navigation/stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -45,76 +45,76 @@ const TopTab = createMaterialTopTabNavigator();
 const TopStackOrder = createMaterialTopTabNavigator();
 const StackProfile = createStackNavigator();
 
-export function TopOrder(props){
-  return(
+export function TopOrder(props) {
+  return (
     <View style={styles.containner}>
       <View style={styles.headconteiner}>
-        <TouchableOpacity style={{width:60, borderRadius:10}} onPress={() =>props.navigation.navigate("App")}>
-        <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
-        </TouchableOpacity> 
-      <Text style={styles.texthead}>ĐƠN HÀNG CỦA TÔI</Text>
+        <TouchableOpacity style={{ width: 60, borderRadius: 10 }} onPress={() => props.navigation.navigate("App")}>
+          <FontAwesome name="angle-left" size={30} color="#fff" style={{ marginLeft: width / 40 }} />
+        </TouchableOpacity>
+        <Text style={styles.texthead}>ĐƠN HÀNG CỦA TÔI</Text>
       </View>
-          <TopStackOrder.Navigator
-          tabBarOptions={{
+      <TopStackOrder.Navigator
+        tabBarOptions={{
           activeTintColor: '#a2459a',
           scrollEnabled: true,
-        }}      
+        }}
       >
-      <Tab.Screen name="OrderXuli" component={OrderXuli}
-       options={{
-        title :"Chờ xác nhận",
-      }}/>
-           <Tab.Screen name="Order_LayHangScreen" component={Order_LayHangScreen}
-       options={{
-        title :"Chờ lấy hàng",
-      }}/>
-      <Tab.Screen name="Order_DangVanChuyen" component={Order_DangVanChuyen}
-       options={{
-        title :"Đang vận chuyển",
-      }}/>
-      <Tab.Screen name="Order_DaGiao" component={Order_DaGiao}
-       options={{
-        title :"Đã giao",
-      }}/>
-      <Tab.Screen name="Order_DaHuy" component={Order_DaHuy}
-       options={{
-        title :"Đã huỷ",
-      }}/>
-     <Tab.Screen name="Order_Payment" component={Order_Payment}
-       options={{
-        title :"Trả hàng",
-      }}/>
+        <Tab.Screen name="OrderXuli" component={OrderXuli}
+          options={{
+            title: "Chờ xác nhận",
+          }} />
+        <Tab.Screen name="Order_LayHangScreen" component={Order_LayHangScreen}
+          options={{
+            title: "Chờ lấy hàng",
+          }} />
+        <Tab.Screen name="Order_DangVanChuyen" component={Order_DangVanChuyen}
+          options={{
+            title: "Đang vận chuyển",
+          }} />
+        <Tab.Screen name="Order_DaGiao" component={Order_DaGiao}
+          options={{
+            title: "Đã giao",
+          }} />
+        <Tab.Screen name="Order_DaHuy" component={Order_DaHuy}
+          options={{
+            title: "Đã huỷ",
+          }} />
+        <Tab.Screen name="Order_Payment" component={Order_Payment}
+          options={{
+            title: "Trả hàng",
+          }} />
       </TopStackOrder.Navigator>
-      </View>
+    </View>
   );
 }
 
-export function TopTabScreen (props){
-  return(
+export function TopTabScreen(props) {
+  return (
     <View style={styles.screenContainer}>
-            <StatusBar backgroundColor='#a2459a' barStyle="light-content"/>
-                <View style={styles.headerContainer}>
-                    <TouchableOpacity style={styles.cartContainer} onPress={() =>{props.navigation.navigate("App")}}>
-                    <FontAwesome name="angle-left" size={30} color="#fff" style={{marginLeft:width/40}}/>
-                    </TouchableOpacity>
-                    <Text style={styles.headerText}>Đánh giá sản phẩm</Text>   
-                </View>
+      <StatusBar backgroundColor='#a2459a' barStyle="light-content" />
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.cartContainer} onPress={() => { props.navigation.navigate("App") }}>
+          <FontAwesome name="angle-left" size={30} color="#fff" style={{ marginLeft: width / 40 }} />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Đánh giá sản phẩm</Text>
+      </View>
       <TopTab.Navigator
-       tabBarOptions={{
-        activeTintColor: '#a2459a',
-      }}       
+        tabBarOptions={{
+          activeTintColor: '#a2459a',
+        }}
       >
         <TopTab.Screen name="Rating" component={Rating} options={{
-          title:'Chưa đánh giá',
-          }} 
-      />
-          <TopTab.Screen name="RatingDone" component={RatingDone} options={{
-          title :"Đã đánh giá",
+          title: 'Chưa đánh giá',
+        }}
+        />
+        <TopTab.Screen name="RatingDone" component={RatingDone} options={{
+          title: "Đã đánh giá",
         }} />
-        </TopTab.Navigator>
+      </TopTab.Navigator>
     </View>
 
-    )
+  )
 }
 export function AppStack(props) {
   return (
@@ -123,7 +123,7 @@ export function AppStack(props) {
       initialRouteName="Trang chủ"
       tabBarOptions={{
         activeTintColor: '#a2459a',
-      }}   
+      }}
     >
       <Tab.Screen
         name="Trang chủ"
@@ -152,7 +152,7 @@ export function AppStack(props) {
               name="appstore1"
               family="antdesign"
               color={focused ? "#a2459a" : null}
-             
+
             />
           )
         }}
@@ -173,8 +173,8 @@ export function AppStack(props) {
           )
         }}
       />
-     
-     <Tab.Screen
+
+      <Tab.Screen
         name="Thông báo"
         component={NotificationScreen}
         options={{
@@ -205,8 +205,8 @@ export function AppStack(props) {
           )
         }}
       />
-  
-      
+
+
     </Tab.Navigator>
   );
 }
@@ -217,66 +217,66 @@ export default function ProjectStack(props) {
       <Stack.Screen name="App" component={AppStack} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Pro" component={ProScreen} />
-      <Stack.Screen name="Profile_User" component={Profile_User}/>
-      <Stack.Screen name="TopOrder" component={TopOrder}/>
+      <Stack.Screen name="Profile_User" component={Profile_User} />
+      <Stack.Screen name="TopOrder" component={TopOrder} />
       <Stack.Screen name="Setting" component={SettingsScreen} />
       <Stack.Screen name="Components" component={ComponentsScreen} />
-      <Stack.Screen name="Product" component={ProductScreen}/>
-      <Stack.Screen name="Items" component={ItemsScreen}/>
-      <Stack.Screen name="ItemsCart" component={ItemsCart}/>
-      <Stack.Screen name="Cart" component={Cart}/>
-      <Stack.Screen name='View_OrderDetail' component={Route_OrderDetail}/>
-      <Stack.Screen name='InfoUser' component={InfoUser}/>
-      <Stack.Screen name="TopTabScreen" component={TopTabScreen}/>
-      <Stack.Screen name='Payment' component={PaymentScreen}/>
-      <Stack.Screen name="AddressScreen" component={AddressScreen}/>
-      <Stack.Screen name="DetailAddressScreen" component={Route_AddressDetail}/>
-      <Stack.Screen name="NotificationScreen" component={NotificationScreen}/>
-      <Stack.Screen name="ZaloPayScreen" component={ZaloPay}/>
+      <Stack.Screen name="Product" component={ProductScreen} />
+      <Stack.Screen name="Items" component={ItemsScreen} />
+      <Stack.Screen name="ItemsCart" component={ItemsCart} />
+      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name='View_OrderDetail' component={Route_OrderDetail} />
+      <Stack.Screen name='InfoUser' component={InfoUser} />
+      <Stack.Screen name="TopTabScreen" component={TopTabScreen} />
+      <Stack.Screen name='Payment' component={PaymentScreen} />
+      <Stack.Screen name="AddressScreen" component={AddressScreen} />
+      <Stack.Screen name="DetailAddressScreen" component={Route_AddressDetail} />
+      <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
+      <Stack.Screen name="ZaloPayScreen" component={ZaloPay} />
     </Stack.Navigator>
   );
 }
 const styles = StyleSheet.create({
-    containner: {
-      flex: 1,
-      backgroundColor:"#a2459a",
-    },
-    texthead:{
-      color:"white",
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginBottom: 10,
-      marginLeft:width/20
-    },
-    headconteiner:{
-      flexDirection: 'row', 
-      paddingHorizontal: 5, 
-      paddingTop: 15,
-      paddingBottom:5
-    },
-    screenContainer: {
-      flex: 1,
-    },
-    screenContainer: {
-        flex: 1,
-      },
-      headerContainer: {
-        flexDirection: 'row',
-        paddingTop: 15,
-        backgroundColor: '#a2459a',
-        paddingBottom: 12,
+  containner: {
+    flex: 1,
+    backgroundColor: "#a2459a",
+  },
+  texthead: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginLeft: width / 20
+  },
+  headconteiner: {
+    flexDirection: 'row',
+    paddingHorizontal: 5,
+    paddingTop: 15,
+    paddingBottom: 5
+  },
+  screenContainer: {
+    flex: 1,
+  },
+  screenContainer: {
+    flex: 1,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    paddingTop: 15,
+    backgroundColor: '#a2459a',
+    paddingBottom: 12,
 
-      },
-      cartContainer: {
-        paddingHorizontal: 20,
-        width:72,
-        borderRadius:15
-      },
-      headerText: {
-        color: '#fff',
-        textAlignVertical: 'center',
-        fontSize:20,
-        fontWeight:'bold'
-      },
+  },
+  cartContainer: {
+    paddingHorizontal: 20,
+    width: 72,
+    borderRadius: 15
+  },
+  headerText: {
+    color: '#fff',
+    textAlignVertical: 'center',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
 
-  });
+});

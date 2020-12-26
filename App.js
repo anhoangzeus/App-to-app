@@ -1,5 +1,5 @@
-import React ,  { useEffect }from 'react';
-import { ImageBackground, StyleSheet, View,Dimensions, StatusBar,Image} from 'react-native';
+import React, { useEffect } from 'react';
+import { ImageBackground, StyleSheet, View, Dimensions, StatusBar, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Screens from './navigation/Screens';
 import ProjectScreen from './navigation/ProjectScreen';
@@ -8,7 +8,7 @@ import 'firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { fbApp } from './firebaseconfig';
-const { width,height } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 const App = () => {
   const initialLoginState = {
@@ -16,39 +16,39 @@ const App = () => {
     userToken: null
   };
 
-  const [isLoading , setisLoading]= React.useState(true);
-  const [userToken, setUserToken]= React.useState(null);
+  const [isLoading, setisLoading] = React.useState(true);
+  const [userToken, setUserToken] = React.useState(null);
 
-  useEffect(() =>{
-    setTimeout(async()=>{
+  useEffect(() => {
+    setTimeout(async () => {
       let userToken;
-      userToken= null;
-      try{
+      userToken = null;
+      try {
         userToken = await AsyncStorage.getItem('userToken');
-      } catch(e){
+      } catch (e) {
         console.log(e);
       }
-      dispatch({ type: 'LOGIN', token: userToken})
-    },2500)
+      dispatch({ type: 'LOGIN', token: userToken })
+    }, 2500)
   }, [])
 
- 
+
 
   const loginReducer = (prevState, action) => {
-    switch( action.type ) {
+    switch (action.type) {
       case 'RETRIEVE_TOKEN':
-        return{
-          ...prevState,
-          isLoading: false,
-          userToken:action.token,
-        };
-      case 'LOGIN': 
         return {
           ...prevState,
-          isLoading:false,
+          isLoading: false,
+          userToken: action.token,
+        };
+      case 'LOGIN':
+        return {
+          ...prevState,
+          isLoading: false,
           userToken: action.token
         };
-      case 'LOGOUT': 
+      case 'LOGOUT':
         return {
           ...prevState,
           userToken: null,
@@ -57,7 +57,7 @@ const App = () => {
       case 'REGISTER':
         return {
           ...prevState,
-          isLoading:false,
+          isLoading: false,
           userToken: action.token
         };
     }
@@ -66,58 +66,58 @@ const App = () => {
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState);
 
   const authContext = React.useMemo(() => ({
-    signIn:async() => {
+    signIn: async () => {
       let userToken;
       userToken = 'abc';
-      try{
-        await AsyncStorage.setItem('userToken',userToken)
-      } catch(e){
-          console.log(e);
+      try {
+        await AsyncStorage.setItem('userToken', userToken)
+      } catch (e) {
+        console.log(e);
       }
 
-      dispatch({ type: 'LOGIN', token: userToken});
+      dispatch({ type: 'LOGIN', token: userToken });
     },
-    signOut: async() => {
+    signOut: async () => {
       try {
-         await AsyncStorage.removeItem('userToken');
-      } catch(e) {
+        await AsyncStorage.removeItem('userToken');
+      } catch (e) {
         console.log(e);
       }
       setUserToken(null);
       setisLoading(false);
       dispatch({ type: 'LOGOUT' });
     },
-    signUp:async()=>{
+    signUp: async () => {
       let userToken;
       userToken = 'abc';
-      try{
-        await AsyncStorage.setItem('userToken',userToken)
-      } catch(e){
-          console.log(e);
+      try {
+        await AsyncStorage.setItem('userToken', userToken)
+      } catch (e) {
+        console.log(e);
       }
 
-      dispatch({ type: 'REGISTER', token: userToken})
+      dispatch({ type: 'REGISTER', token: userToken })
     }
   }), []);
-  if(loginState.isLoading){
-    return(
-      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-          <StatusBar barStyle='light-content' backgroundColor ='white'/>
-          <Image source={require("./assets/whitelogo.png")} style={{width:width,height:height, resizeMode:'contain'}}/>
+  if (loginState.isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <StatusBar barStyle='light-content' backgroundColor='white' />
+        <Image source={require("./assets/whitelogo.png")} style={{ width: width, height: height, resizeMode: 'contain' }} />
       </View>
     );
   }
   return (
     <AuthContext.Provider value={authContext}>
-    <NavigationContainer>
-          {loginState.userToken == null ? (
-             <Screens/> 
-          )
+      <NavigationContainer>
+        {loginState.userToken == null ? (
+          <Screens />
+        )
           :
           <ProjectScreen />
-          }
-    </NavigationContainer>
+        }
+      </NavigationContainer>
     </AuthContext.Provider>
-  );        
+  );
 }
 export default App;

@@ -366,6 +366,9 @@ getData =()=>{
       this.getnumcart();
     }, 1500);
   };
+  componentWillUnmount() {
+    clearInterval(this.timer); 
+  }
 
   componentDidUpdate(prevProps, prevState){
     if(this.state.idsanpham != prevState.idsanpham){
@@ -579,10 +582,13 @@ getData =()=>{
         <FlatList
           data={List_Comment}
           showsVerticalScrollIndicator={false}
+          initialNumToRender={3}
+          pagingEnabled={true}
+          // initialScrollIndex={3}
           renderItem={({item})=>
           <this.CommentItem
                 item={item}
-              />               
+          />               
       }
         />
         </ScrollView>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, Image, StyleSheet,ScrollView, StatusBar, Dimensions, TextInput,View,LogBox } from 'react-native';
+import { ImageBackground, Image, StyleSheet, ScrollView, StatusBar, Dimensions, TextInput, View, LogBox } from 'react-native';
 import { Block, Button, Text, theme } from 'galio-framework';
 import NumberFormat from 'react-number-format';
 
@@ -7,29 +7,29 @@ const { height, width } = Dimensions.get('screen');
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
-import {fbApp} from "../firebaseconfig";
+import { fbApp } from "../firebaseconfig";
 import "firebase/auth";
 import { SafeAreaView } from 'react-navigation';
-console.disableYellowBox= true;
+console.disableYellowBox = true;
 function ReactNativeNumberFormat({ value }) {
   return (
     <NumberFormat
       value={value}
       displayType={'text'}
       thousandSeparator={true}
-      renderText={formattedValue => <Text>{formattedValue} đ</Text>} 
+      renderText={formattedValue => <Text>{formattedValue} đ</Text>}
     />
   );
 };
 
-export function bodau(str){
-  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
-  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
-  str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
-  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
-  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
-  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
-  str = str.replace(/đ/g,"d");
+export function bodau(str) {
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+  str = str.replace(/đ/g, "d");
   str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
   str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
   str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
@@ -43,121 +43,121 @@ export function bodau(str){
   str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
   // Remove extra spaces
   // Bỏ các khoảng trắng liền nhau
-  str = str.replace(/ + /g," ");
+  str = str.replace(/ + /g, " ");
   str = str.trim();
   // Remove punctuations
   // Bỏ dấu câu, kí tự đặc biệt
-  str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
+  str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
   return str;
 }
 
-const ProductItem = ({image, name, price,PromotionPrice}) => (
+const ProductItem = ({ image, name, price, PromotionPrice }) => (
   <View style={styles.itemContainer1}>
-  <Image source={{uri:image}} style={styles.itemImage} />
-  <Text style={styles.itemName} numberOfLines={2}>
-    {name}
-  </Text>
-  <Text style={styles.itemPrice}><ReactNativeNumberFormat value={price}/> 
-      {price === PromotionPrice? null:
-          <Text style={{color:"red"}}>  -{((PromotionPrice-price)/PromotionPrice*100).toFixed(0)}%</Text>
-          }
-  </Text>
-  <View style={{flexDirection:'row'}}>
-    <Image source={require("../assets/images/star.jpg")} style={styles.reviewimg}/>
-    <Text style={{color:'green',}}>(500)</Text>
+    <Image source={{ uri: image }} style={styles.itemImage} />
+    <Text style={styles.itemName} numberOfLines={2}>
+      {name}
+    </Text>
+    <Text style={styles.itemPrice}><ReactNativeNumberFormat value={price} />
+      {price === PromotionPrice ? null :
+        <Text style={{ color: "red" }}>  -{((PromotionPrice - price) / PromotionPrice * 100).toFixed(0)}%</Text>
+      }
+    </Text>
+    <View style={{ flexDirection: 'row' }}>
+      <Image source={require("../assets/images/star.jpg")} style={styles.reviewimg} />
+      <Text style={{ color: 'green', }}>(500)</Text>
+    </View>
   </View>
-</View>
 );
 export default class Setting extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
-    
+
     this.itemRef = fbApp.database();
-    this.state = { 
-      listcate:[],
-      searchText:"",
-      numcart:0,
-    }; 
+    this.state = {
+      listcate: [],
+      searchText: "",
+      numcart: 0,
+    };
     this.timer;
   }
- 
-  searchDictionary=()=>{
+
+  searchDictionary = () => {
     var st = this.state.searchText.toLowerCase();
     bodau(st);
     this.itemRef.ref('/Products').once('value').then((snapshot) => {
-      var items=[];
-      snapshot.forEach( function(childSnapshot){       
-        var product={
-          title:'',
-          price:'',
-          metades:'',
-          image:'',
+      var items = [];
+      snapshot.forEach(function (childSnapshot) {
+        var product = {
+          title: '',
+          price: '',
+          metades: '',
+          image: '',
           id: '',
-          rating:0,
-          bough:0,
-          BrandID:'',
-          CategoryID:'',
-          PromotionPrice:0
+          rating: 0,
+          bough: 0,
+          BrandID: '',
+          CategoryID: '',
+          PromotionPrice: 0
         }
         var rs = childSnapshot.val().Name.toLowerCase();
         var des = childSnapshot.val().MetaDescription.toLowerCase();
-        bodau(rs);bodau(des);
-        if (rs.indexOf(st) != -1 || des.indexOf(st) != -1){        
+        bodau(rs); bodau(des);
+        if (rs.indexOf(st) != -1 || des.indexOf(st) != -1) {
           product.title = childSnapshot.val().Name;
-          product.price=childSnapshot.val().Price;
-          product.metades=childSnapshot.val().MetaDescription;
-          product.image=childSnapshot.val().Image;
-          product.id=childSnapshot.val().ProductID;
-          product.rating=childSnapshot.val().Rating;
-          product.bough=childSnapshot.val().bough;
-          product.BrandID=childSnapshot.val().BrandID;
-          product.CategoryID=childSnapshot.val().CategoryID;
+          product.price = childSnapshot.val().Price;
+          product.metades = childSnapshot.val().MetaDescription;
+          product.image = childSnapshot.val().Image;
+          product.id = childSnapshot.val().ProductID;
+          product.rating = childSnapshot.val().Rating;
+          product.bough = childSnapshot.val().bough;
+          product.BrandID = childSnapshot.val().BrandID;
+          product.CategoryID = childSnapshot.val().CategoryID;
           product.PromotionPrice = childSnapshot.val().PromotionPrice;
-          items.push(product);     
-        }              
-    });
- 
-    this.setState({
-      listcate:items,
+          items.push(product);
+        }
+      });
+
+      this.setState({
+        listcate: items,
+      })
     })
-  })
   }
   componentWillUnmount() {
-    clearInterval(this.timer); 
+    clearInterval(this.timer);
   }
-  getnumcart=()=> {
-    if(fbApp.auth().currentUser){ 
-      this.itemRef.ref('Cart/'+fbApp.auth().currentUser.uid).once('value').then((snapshot) => {
+  getnumcart = () => {
+    if (fbApp.auth().currentUser) {
+      this.itemRef.ref('Cart/' + fbApp.auth().currentUser.uid).once('value').then((snapshot) => {
         var dem = 0;
-        snapshot.forEach(function(childSnapshot){
-        dem += childSnapshot.val().Quantity;
+        snapshot.forEach(function (childSnapshot) {
+          dem += childSnapshot.val().Quantity;
         });
         this.setState({
-        numcart:dem,
-        });  
-      });  
+          numcart: dem,
+        });
+      });
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.timer = setInterval(() => {
       this.getnumcart();
     }, 1500);
   }
-  renderNofiCart = () =>{
-    if(this.state.numcart == 0){
+  renderNofiCart = () => {
+    if (this.state.numcart == 0) {
       return null;
     }
-    else{
-      return(
-        <View style={{position:"absolute", borderRadius:25,backgroundColor:"red",alignItems:"center",marginLeft:width/13,width:width/20,marginTop:5 }}>
-              <Text style={{alignSelf:'center', fontSize:10,margin:1,fontWeight:'bold',color:"white" }} numberOfLines={1}>{this.state.numcart}</Text>
+    else {
+      return (
+        <View style={{ position: "absolute", borderRadius: 25, backgroundColor: "red", alignItems: "center", marginLeft: width / 13, width: width / 20, marginTop: 5 }}>
+          <Text style={{ alignSelf: 'center', fontSize: 10, margin: 1, fontWeight: 'bold', color: "white" }} numberOfLines={1}>{this.state.numcart}</Text>
         </View>
       )
     }
   };
-  renderTextnull= ()=>{
-    if(this.state.searchText != null && this.state.listcate == null){
-      return(
+  renderTextnull = () => {
+    if (this.state.searchText != null && this.state.listcate == null) {
+      return (
         <View>
           <Text>Không tìm thấy sản phẩm</Text>
         </View>
@@ -170,52 +170,52 @@ export default class Setting extends React.Component {
     const { navigation } = this.props;
 
     return (
-    <View style={styles.screenContainer}>
-    <StatusBar barStyle="light-content" />
-    <View style={styles.headerContainer}>   
-      <View style={styles.inputContainer}>
-        <FontAwesome name="search" size={24} color="#969696" />
-        <TextInput style={styles.inputText} placeholder="Bạn tìm gì hôm nay?" 
-        autoFocus={true}
-        onChangeText={(text) => this.setState({searchText:text})}
-        onSubmitEditing={() => this.searchDictionary()}
-        />
+      <View style={styles.screenContainer}>
+        <StatusBar barStyle="light-content" />
+        <View style={styles.headerContainer}>
+          <View style={styles.inputContainer}>
+            <FontAwesome name="search" size={24} color="#969696" />
+            <TextInput style={styles.inputText} placeholder="Bạn tìm gì hôm nay?"
+              autoFocus={true}
+              onChangeText={(text) => this.setState({ searchText: text })}
+              onSubmitEditing={() => this.searchDictionary()}
+            />
+          </View>
+          <TouchableOpacity style={styles.cartContainer} onPress={() => navigation.navigate("Cart")}>
+            <FontAwesome name="shopping-cart" size={24} color="#fff" />
+            {this.renderNofiCart()}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.bodyContainer}>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Kết quả tìm kiếm</Text>
+            <SafeAreaView>
+              <ScrollView>
+                <View style={styles.listItemContainer}>
+                  {this.renderTextnull()}
+                  <FlatList
+                    horizontal={false}
+                    numColumns={2}
+                    showsHorizontalScrollIndicator={false}
+                    data={this.state.listcate}
+                    renderItem={({ item }) =>
+                      <TouchableOpacity onPress={() => navigation.navigate('Items', { id: item.id, CategoryID: item.CategoryID, BrandID: item.BrandID })}>
+                        <ProductItem
+                          name={item.title}
+                          image={item.image}
+                          price={item.price}
+                          PromotionPrice={item.PromotionPrice}
+                        />
+                      </TouchableOpacity>
+                    }
+                  ></FlatList>
+                </View>
+                <View style={{ height: height / 7 }}></View>
+              </ScrollView>
+            </SafeAreaView>
+          </View>
+        </View>
       </View>
-        <TouchableOpacity style={styles.cartContainer} onPress={() => navigation.navigate("Cart")}>
-           <FontAwesome name="shopping-cart" size={24} color="#fff" /> 
-           {this.renderNofiCart()}
-        </TouchableOpacity> 
-    </View>
-    <View style={styles.bodyContainer}>     
-    <View style={styles.sectionContainer}>    
-    <Text style={styles.sectionTitle}>Kết quả tìm kiếm</Text>
-      <SafeAreaView>
-      <ScrollView>
-      <View style={styles.listItemContainer}>
-        {this.renderTextnull()}
-      <FlatList 
-        horizontal={false}
-        numColumns={2}
-        showsHorizontalScrollIndicator={false}
-        data={this.state.listcate}
-        renderItem={({item})=>
-        <TouchableOpacity onPress={() => navigation.navigate('Items', {id: item.id, CategoryID: item.CategoryID, BrandID: item.BrandID})}>
-             <ProductItem
-            name={item.title}
-            image={item.image}
-            price={item.price}
-            PromotionPrice={item.PromotionPrice}
-      />
-        </TouchableOpacity>    
-        }
-        ></FlatList>           
-      </View>  
-      <View style={{height:height/7}}></View>  
-      </ScrollView>
-      </SafeAreaView>
-      </View>
-    </View>
-    </View>
     );
   }
 }
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
   },
-  
+
   headerContainer: {
     flexDirection: 'row',
     paddingTop: 10,
@@ -240,31 +240,31 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 2,
-    height:height/16,
+    height: height / 16,
   },
   inputText: {
     color: '#969696',
     fontSize: 14,
     marginLeft: 8,
     fontWeight: '500',
-    height:height/16,
-    width:width*0.7,
-    padding:height/125,
+    height: height / 16,
+    width: width * 0.7,
+    padding: height / 125,
   },
   cartContainer: {
     paddingHorizontal: 20,
-    borderRadius:15,
-    width:70,
-    paddingTop:10,
+    borderRadius: 15,
+    width: 70,
+    paddingTop: 10,
   },
   bodyContainer: {
     flex: 1,
     backgroundColor: '#fff',
   },
-  scrollCate:{
-    height: height/10,
+  scrollCate: {
+    height: height / 10,
     flexDirection: 'row',
-    },
+  },
   itemContainer: {
     width: 100,
     marginRight: 12,
@@ -274,26 +274,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   itemImage: {
-    width: width/2.5,
-    height: height/4,
-    resizeMode:'contain',
-    alignSelf:'center'
+    width: width / 2.5,
+    height: height / 4,
+    resizeMode: 'contain',
+    alignSelf: 'center'
   },
   itemName: {
     fontSize: 14,
     color: 'black',
-    marginHorizontal:10,
+    marginHorizontal: 10,
   },
   itemPrice: {
     fontSize: 16,
     fontWeight: 'bold',
     color: 'black',
-    marginHorizontal:10
+    marginHorizontal: 10
   },
-  reviewimg:{
-    width:width/4,
-    height:height/50,
-    marginLeft:width/60
+  reviewimg: {
+    width: width / 4,
+    height: height / 50,
+    marginLeft: width / 60
   },
   sectionContainer: {
     backgroundColor: '#fff',
@@ -310,14 +310,14 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 4,
   },
-  itemContainer1:{
-    width: width/2.2,
-    height:height/2.8,
-    borderColor:'silver',
-    borderWidth:1,
-    borderRadius:25,
-    marginRight:5,
-    marginEnd:2
+  itemContainer1: {
+    width: width / 2.2,
+    height: height / 2.8,
+    borderColor: 'silver',
+    borderWidth: 1,
+    borderRadius: 25,
+    marginRight: 5,
+    marginEnd: 2
   },
   //
   filterContainer: {
@@ -346,12 +346,11 @@ const styles = StyleSheet.create({
   filterInactiveText: {
     color: '#5a5a5a',
   },
-  cateImage:{
-    marginTop:5,
-    width:100,
-    height:height/11,
-    resizeMode:"center",
+  cateImage: {
+    marginTop: 5,
+    width: 100,
+    height: height / 11,
+    resizeMode: "center",
   }
 });
 
- 

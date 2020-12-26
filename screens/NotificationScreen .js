@@ -1,43 +1,67 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, StatusBar, FlatList, Text,TouchableOpacity} from 'react-native';
+import { StyleSheet, View, StatusBar, FlatList, Text, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { fbApp } from "../firebaseconfig";
 import Header from '../components/HeaderComponent';
 
-export default class NotificationScreen extends Component{
-  constructor(props) {
+const { width, height } = Dimensions.get('screen');
+const thumbMeasure = (width - 48 - 32) / 3;
+export default class NotificationScreen extends Component {
+  constructor (props) {
     super(props);
-    this.state = { 
-     listpro:[],
-    }; 
-  } 
-  NotificationItem = ({item}) => (
+    this.itemRef = fbApp.database();
+    this.state = {
+      listThongBao: [],
+      loading: true
+    };
+  }
+  componentDidMount() {
+    this.getThongBao();
+  }
+  getThongBao = () => {
+    this.itemRef.ref('Announces').once('value').then((snapshot) => {
+      var items = [];
+      snapshot.forEach((child) => {
+        if (child.val().Status == true)
+          items.push({
+            Id: child.val().Id,
+            Details: child.val().Details,
+            Title: child.val().Title,
+            CreatedDate: child.val().CreatedDate,
+            Type: child.val().Type,
+          })
+      });
+      this.setState({ listThongBao: items });
+    })
+  }
+  NotificationItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <View style={styles.itemTopContainer}>
         <View
           style={[
             styles.itemTypeContainer,
             {
-              backgroundColor: item.type === 1 ? '#a2459a' : '#dc3988',
+              backgroundColor: item.Type === 1 ? '#a2459a' : '#dc3988',
             },
           ]}>
           <MaterialCommunityIcons
-            name={item.type === 1 ? 'sale' : 'backup-restore'}
+            name={item.Type === 1 ? 'sale' : 'backup-restore'}
             color="#fff"
             size={22}
           />
         </View>
         <View style={styles.itemTopTextContainer}>
-          <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemDate}>{item.date}</Text>
+          <Text style={styles.itemName}>{item.Title}</Text>
+          <Text style={styles.itemDate}>{item.CreatedDate}</Text>
         </View>
       </View>
       <View>
-        <Text style={styles.itemDetail}>{item.detail}</Text>
+        <Text style={styles.itemDetail}>{item.Details}</Text>
       </View>
     </View>
   );
-  render(){
+  render() {
+    const { listThongBao, loading } = this.state;
     return (
       <View style={styles.screenContainer}>
         <StatusBar barStyle="light-content" />
@@ -54,6 +78,15 @@ export default class NotificationScreen extends Component{
               />
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonInactiveContainer}>
+              {/* <View style={styles.activeMark} /> */}
+              <MaterialCommunityIcons
+                name="clipboard-text-outline"
+                color="#949494"
+                size={22}
+              // style={styles.activeIcon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonInactiveContainer}>
               <MaterialCommunityIcons
                 name="backup-restore"
                 color="#949494"
@@ -64,66 +97,23 @@ export default class NotificationScreen extends Component{
               <MaterialCommunityIcons name="sale" color="#949494" size={22} />
             </TouchableOpacity>
           </View>
-          <View style={styles.listContainer}>
-            <FlatList
-              data={[
-                {
-                  id: 1,
-                  type: 1,
-                  name: 'Anker Giảm Khủng 40% Duy Nhất Hôm Nay 13/11',
-                  date: '13/11/2018',
-                  detail:
-                    'Anker Giảm Khủng 40% Duy Nhất Hôm Nay 13/11 - Số Lượng Có Hạn',
-                },
-                {
-                  id: 2,
-                  type: 2,
-                  name: 'GỢI Ý QUÀ TẶNG 20.10',
-                  date: '02/11/2018',
-                  detail:
-                    'NHẬP MÃ UUDAIT11 GIẢM 50K CHO ĐƠN HÀNG 700K. Áp dụng cho sản phẩm ngành Điện Gia Dụng. XEM NGAY!',
-                },
-                {
-                  id: 3,
-                  type: 1,
-                  name: 'Anker Giảm Khủng 40% Duy Nhất Hôm Nay 13/11',
-                  date: '13/11/2018',
-                  detail:
-                    'Anker Giảm Khủng 40% Duy Nhất Hôm Nay 13/11 - Số Lượng Có Hạn',
-                },
-                {
-                  id: 4,
-                  type: 2,
-                  name: 'GỢI Ý QUÀ TẶNG 20.10',
-                  date: '02/11/2018',
-                  detail:
-                    'NHẬP MÃ UUDAIT11 GIẢM 50K CHO ĐƠN HÀNG 700K. Áp dụng cho sản phẩm ngành Điện Gia Dụng. XEM NGAY!',
-                },
-                {
-                  id: 5,
-                  type: 1,
-                  name: 'Anker Giảm Khủng 40% Duy Nhất Hôm Nay 13/11',
-                  date: '13/11/2018',
-                  detail:
-                    'Anker Giảm Khủng 40% Duy Nhất Hôm Nay 13/11 - Số Lượng Có Hạn',
-                },
-                {
-                  id: 6,
-                  type: 2,
-                  name: 'GỢI Ý QUÀ TẶNG 20.10',
-                  date: '02/11/2018',
-                  detail:
-                    'NHẬP MÃ UUDAIT11 GIẢM 50K CHO ĐƠN HÀNG 700K. Áp dụng cho sản phẩm ngành Điện Gia Dụng. XEM NGAY!',
-                },
-              ]}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({item}) => <this.NotificationItem item={item} />}
-            />
-          </View>
+          {loading ?
+            <View style={styles.listContainer}>
+              <ActivityIndicator size='large' color="'#a2459a" style={{ position: 'absolute', alignSelf: 'center' }} />
+            </View>
+            :
+            <View style={styles.listContainer}>
+              <FlatList
+                data={listThongBao}
+                keyExtractor={(item) => item.Id}
+                renderItem={({ item }) => <this.NotificationItem item={item} />}
+              />
+            </View>
+          }
         </View>
       </View>
     );
-  } 
+  }
 };
 
 const styles = StyleSheet.create({
@@ -152,10 +142,8 @@ const styles = StyleSheet.create({
   },
   activeIcon: {
     padding: 12,
-    // trick
     marginLeft: -4,
   },
-  //
   listContainer: {
     flex: 1,
     borderLeftWidth: 1,

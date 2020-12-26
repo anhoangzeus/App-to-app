@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { 
-    View, 
-    Text, 
-    TouchableOpacity, 
+import {
+    View,
+    Text,
+    TouchableOpacity,
     TextInput,
     Platform,
-    StyleSheet ,
+    StyleSheet,
     StatusBar,
     Alert,
     Image,
@@ -21,28 +21,28 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
 import { AuthContext } from '../components/context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {fbApp} from "../firebaseconfig";
+import { fbApp } from "../firebaseconfig";
 import "firebase/auth";
 
-const {height,width}=Dimensions.get("screen");
-const Login1 = ({navigation}) => {
+const { height, width } = Dimensions.get("screen");
+const Login1 = ({ navigation }) => {
     const [data, setData] = React.useState({
         username: '',
         password: '',
-        email:'',
+        email: '',
         check_textInputChange: false,
         secureTextEntry: true,
         isValidUser: true,
         isValidPassword: true,
-        modalVisibleWarning:false,
-        textAlert:''
+        modalVisibleWarning: false,
+        textAlert: ''
     });
 
     const { colors } = useTheme();
     const { signIn } = React.useContext(AuthContext);
 
     const textInputChange = (val) => {
-        if( val.trim().length >= 6 ) {
+        if (val.trim().length >= 6) {
             setData({
                 ...data,
                 username: val,
@@ -60,8 +60,8 @@ const Login1 = ({navigation}) => {
     }
 
     const handlePasswordChange = (val) => {
-        if( val.trim().length >= 6
-         ) {
+        if (val.trim().length >= 6
+        ) {
             setData({
                 ...data,
                 password: val,
@@ -84,7 +84,7 @@ const Login1 = ({navigation}) => {
     }
 
     const handleValidUser = (val) => {
-        if( val.trim().length >= 6 ) {
+        if (val.trim().length >= 6) {
             setData({
                 ...data,
                 isValidUser: true
@@ -96,192 +96,197 @@ const Login1 = ({navigation}) => {
             });
         }
     }
-    const setModalVisibleWarning = (visible,text) => {
-        setData({ ...data,
-          modalVisibleWarning: visible,
-          textAlert:text },setTimeout(handleClose,2000));
+    const setModalVisibleWarning = (visible, text) => {
+        setData({
+            ...data,
+            modalVisibleWarning: visible,
+            textAlert: text
+        }, setTimeout(handleClose, 2000));
     };
-      const handleClose = () => {
-        setData({  ...data,
-          modalVisibleWarning:false
+    const handleClose = () => {
+        setData({
+            ...data,
+            modalVisibleWarning: false
         });
-      };
+    };
 
     const loginHandle = (userName, password) => {
-        if ( data.username.length < 6 || data.password.length <6 ) {
-            setModalVisibleWarning(true,"Quý khách chưa nhập đầy đủ thông tin");
+        if (data.username.length < 6 || data.password.length < 6) {
+            setModalVisibleWarning(true, "Quý khách chưa nhập đầy đủ thông tin");
             return;
         }
-        fbApp.database().ref('Users').on('value',snapshot=>{
+        fbApp.database().ref('Users').on('value', snapshot => {
             var temp = false;
-            snapshot.forEach((child)=>{
-                if(child.val().UserName==userName) {
-                    temp= true;
-                    if(child.val().Passwords==password){
-                        fbApp.auth().signInWithEmailAndPassword(child.val().Email,password)
-                        .then(()=> signIn())
-                        .catch(function(error) {
-                            setModalVisibleWarning(true,"Quý khách vui lòng kiểm tra lại Internet");         
-                            return;
-                        });      
-                    }else{
-                        setModalVisibleWarning(true,"Mật khẩu không chính xác");
-                    }    
+            snapshot.forEach((child) => {
+                if (child.val().UserName == userName) {
+                    temp = true;
+                    if (child.val().Passwords == password) {
+                        fbApp.auth().signInWithEmailAndPassword(child.val().Email, password)
+                            .then(() => signIn())
+                            .catch(function (error) {
+                                setModalVisibleWarning(true, "Quý khách vui lòng kiểm tra lại Internet");
+                                return;
+                            });
+                    } else {
+                        setModalVisibleWarning(true, "Mật khẩu không chính xác");
+                    }
                 }
             })
-            if(temp==false){
-                setModalVisibleWarning(true,"Tài khoản không tồn tại");
+            if (temp == false) {
+                setModalVisibleWarning(true, "Tài khoản không tồn tại");
             }
-        });                              
+        });
     }
-    const loginFacebook=()=>{
+    const loginFacebook = () => {
     }
-    
+
     return (
         <View style={styles.container}>
-        <StatusBar backgroundColor='#1ba8ff' barStyle="light-content"/>
-      <Animatable.View 
-          animation="fadeInUpBig"
-          style={[styles.footer, {
-              backgroundColor: colors.background
-          }]}
-      >
-          <Text style={[styles.text_footer, {
-              color: colors.text
-          }]}>Tài khoản</Text>
-          <View style={styles.action}>
-              <FontAwesome 
-                  name="user-o"
-                  color={colors.text}
-                  size={20}
-              />
-              <TextInput 
-                  placeholder="Tài khoản"
-                  placeholderTextColor="#666666"
-                  style={[styles.textInput, {
-                      color: colors.text
-                  }]}
-                  autoCapitalize="none"
-                  onChangeText={(val) => textInputChange(val)}
-                  onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
-              />
-              {data.check_textInputChange ? 
-              <Animatable.View
-                  animation="bounceIn"
-              >
-                  <Feather 
-                      name="check-circle"
-                      color="green"
-                      size={20}
-                  />
-              </Animatable.View>
-              : null}
-          </View>
-          { data.isValidUser ? null : 
-          <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={styles.errorMsg}>Tài khoản ít nhất 6 kí tự</Text>
-          </Animatable.View>
-          }
-          
+            <StatusBar backgroundColor='#1ba8ff' barStyle="light-content" />
+            <Animatable.View
+                animation="fadeInUpBig"
+                style={[styles.footer, {
+                    backgroundColor: colors.background
+                }]}
+            >
+                <Text style={[styles.text_footer, {
+                    color: colors.text
+                }]}>Tài khoản</Text>
+                <View style={styles.action}>
+                    <FontAwesome
+                        name="user-o"
+                        color={colors.text}
+                        size={20}
+                    />
+                    <TextInput
+                        placeholder="Tài khoản"
+                        placeholderTextColor="#666666"
+                        style={[styles.textInput, {
+                            color: colors.text
+                        }]}
+                        autoCapitalize="none"
+                        onChangeText={(val) => textInputChange(val)}
+                        onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
+                    />
+                    {data.check_textInputChange ?
+                        <Animatable.View
+                            animation="bounceIn"
+                        >
+                            <Feather
+                                name="check-circle"
+                                color="green"
+                                size={20}
+                            />
+                        </Animatable.View>
+                        : null}
+                </View>
+                {data.isValidUser ? null :
+                    <Animatable.View animation="fadeInLeft" duration={500}>
+                        <Text style={styles.errorMsg}>Tài khoản ít nhất 6 kí tự</Text>
+                    </Animatable.View>
+                }
 
-          <Text style={[styles.text_footer, {
-              color: colors.text,
-              marginTop: 35
-          }]}>Mật khẩu</Text>
-          <View style={styles.action}>
-              <Feather 
-                  name="lock"
-                  color={colors.text}
-                  size={20}
-              />
-              <TextInput 
-                  placeholder="Mật khẩu"
-                  placeholderTextColor="#666666"
-                  secureTextEntry={data.secureTextEntry ? true : false}
-                  style={[styles.textInput, {
-                      color: colors.text
-                  }]}
-                  autoCapitalize="none"
-                  onChangeText={(val) => handlePasswordChange(val)}
-              />
-              <TouchableOpacity
-                  onPress={updateSecureTextEntry}
-              >
-                  {data.secureTextEntry ? 
-                  <Feather 
-                      name="eye-off"
-                      color="grey"
-                      size={20}
-                  />
-                  :
-                  <Feather 
-                      name="eye"
-                      color="grey"
-                      size={20}
-                  />
-                  }
-              </TouchableOpacity>
-          </View>
-          { data.isValidPassword ? null : 
-          <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={styles.errorMsg}>Mật khẩu ít nhất 6 kí tự</Text>
-          </Animatable.View>
-          }
-          <TouchableOpacity
-                onPress={()=> fbApp.auth().sendPasswordResetEmail}                   
-          >
-              <Text style={{color: '#009387', marginTop:15}}>Quên mật khẩu?</Text>
-          </TouchableOpacity>
-          <View style={styles.button}>
-              <TouchableOpacity
-                  style={styles.signIn}
-                  onPress={() => {loginHandle( data.username, data.password )}}
-              >
-              <LinearGradient
-                    colors={['red', 'red']}
-                  style={styles.signIn}
-              >
-                  <Text style={[styles.textSign, {
-                      color:'#fff'
-                  }]}>Đăng nhập</Text>
-              </LinearGradient>
-              </TouchableOpacity>
-          </View>         
-          <View style={{marginTop:10,flexDirection:'row'}}>
-              <TouchableOpacity
-                  style={{...styles.signIn1,backgroundColor:'#3b5998',flexDirection:'row'}}
-                  onPress={() => {loginFacebook()}}
-              >
-                  <Ionicons name="logo-facebook" size={30} color="#fff"/>
-                  <Text style={[styles.textSign, {color:'#fff',marginLeft:5}]}>Facebook</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                  style={{...styles.signIn1,backgroundColor:'#fff',marginLeft:height/100,flexDirection:'row',
-                borderColor:'#000', borderWidth:2}}
-                  onPress={() => {}}
-              >
-                <Image source={require('../assets/google.jpg')} style={{height:width/10,width:width/10,resizeMode:'contain'}}/>
-                  <Text style={[styles.textSign, {color:'#000',marginLeft:5}]}>Google</Text>
-              </TouchableOpacity>
-          </View>         
-      </Animatable.View>
-      <Modal
-                  animationType="fade"
-                  transparent={true}
-                  visible={data.modalVisibleWarning}
-                
-                  onRequestClose={() => {
+
+                <Text style={[styles.text_footer, {
+                    color: colors.text,
+                    marginTop: 35
+                }]}>Mật khẩu</Text>
+                <View style={styles.action}>
+                    <Feather
+                        name="lock"
+                        color={colors.text}
+                        size={20}
+                    />
+                    <TextInput
+                        placeholder="Mật khẩu"
+                        placeholderTextColor="#666666"
+                        secureTextEntry={data.secureTextEntry ? true : false}
+                        style={[styles.textInput, {
+                            color: colors.text
+                        }]}
+                        autoCapitalize="none"
+                        onChangeText={(val) => handlePasswordChange(val)}
+                    />
+                    <TouchableOpacity
+                        onPress={updateSecureTextEntry}
+                    >
+                        {data.secureTextEntry ?
+                            <Feather
+                                name="eye-off"
+                                color="grey"
+                                size={20}
+                            />
+                            :
+                            <Feather
+                                name="eye"
+                                color="grey"
+                                size={20}
+                            />
+                        }
+                    </TouchableOpacity>
+                </View>
+                {data.isValidPassword ? null :
+                    <Animatable.View animation="fadeInLeft" duration={500}>
+                        <Text style={styles.errorMsg}>Mật khẩu ít nhất 6 kí tự</Text>
+                    </Animatable.View>
+                }
+                <TouchableOpacity
+                    onPress={() => fbApp.auth().sendPasswordResetEmail}
+                >
+                    <Text style={{ color: '#009387', marginTop: 15 }}>Quên mật khẩu?</Text>
+                </TouchableOpacity>
+                <View style={styles.button}>
+                    <TouchableOpacity
+                        style={styles.signIn}
+                        onPress={() => { loginHandle(data.username, data.password) }}
+                    >
+                        <LinearGradient
+                            colors={['red', 'red']}
+                            style={styles.signIn}
+                        >
+                            <Text style={[styles.textSign, {
+                                color: '#fff'
+                            }]}>Đăng nhập</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ marginTop: 10, flexDirection: 'row' }}>
+                    <TouchableOpacity
+                        style={{ ...styles.signIn1, backgroundColor: '#3b5998', flexDirection: 'row' }}
+                        onPress={() => { loginFacebook() }}
+                    >
+                        <Ionicons name="logo-facebook" size={30} color="#fff" />
+                        <Text style={[styles.textSign, { color: '#fff', marginLeft: 5 }]}>Facebook</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            ...styles.signIn1, backgroundColor: '#fff', marginLeft: height / 100, flexDirection: 'row',
+                            borderColor: '#000', borderWidth: 2
+                        }}
+                        onPress={() => { }}
+                    >
+                        <Image source={require('../assets/google.jpg')} style={{ height: width / 10, width: width / 10, resizeMode: 'contain' }} />
+                        <Text style={[styles.textSign, { color: '#000', marginLeft: 5 }]}>Google</Text>
+                    </TouchableOpacity>
+                </View>
+            </Animatable.View>
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={data.modalVisibleWarning}
+
+                onRequestClose={() => {
                     Alert.alert("Modal has been closed.");
-                  }}
-               >
-                  <View style={styles.centeredView}>
+                }}
+            >
+                <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                      <FontAwesome5 name="grin-beam-sweat" size={40} color="red"/>
-                      <Text style={styles.modalText1}>{data.textAlert}</Text>
+                        <FontAwesome5 name="grin-beam-sweat" size={40} color="red" />
+                        <Text style={styles.modalText1}>{data.textAlert}</Text>
                     </View>
-                  </View>
-             </Modal>  
-    </View>
+                </View>
+            </Modal>
+        </View>
     );
 };
 
@@ -289,8 +294,8 @@ export default Login1;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1, 
-      backgroundColor: '#1ba8ff'
+        flex: 1,
+        backgroundColor: '#1ba8ff'
     },
     header: {
         flex: 1,
@@ -342,7 +347,7 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'center',
-        marginTop: width/15
+        marginTop: width / 15
     },
     signIn: {
         width: '100%',
@@ -351,7 +356,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10
     },
-    signIn1:{
+    signIn1: {
         width: '49%',
         height: 50,
         justifyContent: 'center',
@@ -370,29 +375,29 @@ const styles = StyleSheet.create({
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
-          width: 0,
-          height: 2
+            width: 0,
+            height: 2
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        justifyContent:'center'
-      },
-      modalText: {
+        justifyContent: 'center'
+    },
+    modalText: {
         marginBottom: 15,
         textAlign: "center",
-        fontSize:20,
-        color:'#a2459a'
-      },
-      modalText1: {
+        fontSize: 20,
+        color: '#a2459a'
+    },
+    modalText1: {
         marginBottom: 15,
         textAlign: "center",
-        fontSize:20,
-        color:'red'
-      },
-      centeredView: {
+        fontSize: 20,
+        color: 'red'
+    },
+    centeredView: {
         justifyContent: "center",
         alignItems: "center",
-        flex:1
-      },
-  });
+        flex: 1
+    },
+});

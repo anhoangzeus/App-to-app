@@ -16,7 +16,7 @@ export default class Onboarding extends React.Component {
         <StatusBar barStyle="light-content" />
         <Block flex center>
           <ImageBackground
-            source={{  uri: Images.Onboarding }}
+            source={{ uri: Images.Onboarding }}
             style={{ height: height, width: width, marginTop: '-55%', zIndex: 1 }}
           />
         </Block>
