@@ -81,6 +81,14 @@ export default class Payscreen extends React.PureComponent {
         Total: this.props.amount + 50000,
         CustomerID: fbApp.auth().currentUser.uid,
         ShipLocation: location,
+        TimeLine:{
+          ChoLayHang:"",
+          ChoXacNhan:"",
+          DaGiaoHang:"",
+          DaHuy:"",
+          DangVanChuyen:"",
+          TraHang:"",
+        },
       });
       await (this.itemRef.ref("Cart/" + fbApp.auth().currentUser.uid).once("value").then((snapshot) => {
         snapshot.forEach(function (childSnapshot) {

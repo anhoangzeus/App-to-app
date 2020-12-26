@@ -10,42 +10,50 @@ const renderTrangThai = (Status) => {
   if (Status == 1) {
     return (
       <View>
-        <Text style={{ color: "#000" }}>Đơn hàng đang chờ xác nhận</Text>
+        <Text style={{ color: "green" }}>Đơn hàng đang chờ xác nhận</Text>
       </View>
     )
   } else if (Status == 2) {
     return (
       <View>
-        <Text style={{ color: "#000" }}>Đơn hàng đang chờ lấy hàng</Text>
+        <Text style={{ color: "green" }}>Đơn hàng đang chờ lấy hàng</Text>
       </View>
     )
   } else if (Status == 3) {
     return (
       <View>
-        <Text style={{ color: "#000" }}>Đơn hàng đang giao hàng</Text>
+        <Text style={{ color: "green" }}>Đơn hàng đang giao hàng</Text>
       </View>
     )
   } else if (Status == 4) {
     return (
       <View>
-        <Text style={{ color: "#000" }}>Đơn hàng đã giao thành công.
-        Bạn hãy đánh giá để giúp người dùng khác hiểu hơn về sản phẩm</Text>
+        <Text style={{ color: "green" }}>Đơn hàng đã giao thành công.
+        <Text style={{ color: '#000' }}> Bạn hãy đánh giá để giúp người dùng khác hiểu hơn về sản phẩm.</Text>
+        </Text>
       </View>
     )
   } else if (Status == 5) {
     return (
       <View>
-        <Text style={{ color: "#000" }}>Đơn hàng đã bị huỷ</Text>
+        <Text style={{ color: "green" }}>Đơn hàng đã bị huỷ</Text>
       </View>
     )
   } else {
     return (
       <View>
-        <Text style={{ color: "#000" }}>Đơn hàng bị trả</Text>
+        <Text style={{ color: "green" }}>Đơn hàng bị trả</Text>
       </View>
     )
   }
 
+}
+const renderTimeLine = (item) => {
+  return (
+    <View>
+      <Text>Ngày {item}</Text>
+    </View>
+  );
 }
 export default class NotificationScreen extends Component {
   constructor (props) {
@@ -56,7 +64,7 @@ export default class NotificationScreen extends Component {
       listOrder: [],
       loading: true,
       ischoose: 1,
-      isdropdown: "",
+      isdropdownid: "",
       refreshing: false,
     };
   }
@@ -105,7 +113,7 @@ export default class NotificationScreen extends Component {
           items.push(order);
         }
       });
-      this.setState({ listOrder: items,refreshing:false });
+      this.setState({ listOrder: items, refreshing: false });
     });
   }
   getThongBao = () => {
@@ -143,27 +151,98 @@ export default class NotificationScreen extends Component {
             })
           }
       });
-      this.setState({ listThongBao: items, loading: false ,refreshing:false});
+      this.setState({ listThongBao: items, loading: false, refreshing: false });
     })
   }
-  renderOrder = ({ item }) => (
-    <View style={{ ...styles.itemContainer, flexDirection: 'row', justifyContent: 'space-between', }}>
-      <TouchableOpacity onPress={() => { item.Status == 4 ? this.props.navigation.navigate("TopTabScreen") : null }}
-        style={{ width: width / 1.5 }}>
-        <Text style={{ color: "green" }}>Mã đơn hàng {item.orderId}</Text>
-        <Text style={{ color: "#000" }}>{item.payment == "01" ? "Thanh toán COD" : "Đã thanh toán trực tuyến"}</Text>
-        {renderTrangThai(item.Status)}
-        <Text><MaterialCommunityIcons name="clock" size={13} />  {item.createdated}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={{ justifyContent: 'center', alignSelf: 'center', height: width / 15, width: width / 15 }}>
-        <MaterialCommunityIcons name="chevron-down" size={20} color="#000" />
-      </TouchableOpacity>
-      <View>
+  renderOrder = ({ item }) => {
+    const { isdropdownid } = this.state;
+    return (
+      <View style={{ justifyContent: 'space-between' }}>
+        <View style={{ ...styles.itemContainer, flexDirection: 'row' }}>
+          <TouchableOpacity onPress={() => {
+            item.Status == 4 ? this.props.navigation.navigate("TopTabScreen") :
+              this.props.navigation.navigate('View_OrderDetail', { id: item.orderId })
+          }}
+            style={{ width: width / 1.5 }}>
+            <Text style={{ color: "#1ba8ff" }}>Mã đơn hàng {item.orderId}</Text>
+            <Text style={{ color: "#000" }}>{item.payment == "01" ? "Thanh toán khi nhận hàng" : "Đã thanh toán trực tuyến"}</Text>
+            {renderTrangThai(item.Status)}
+            <Text style={{ color: '#000' }}><MaterialCommunityIcons name="clock" size={13} />  {item.createdated}</Text>
+          </TouchableOpacity>
+          {isdropdownid == item.orderId ?
+            <TouchableOpacity onPress={() => this.setState({ isdropdownid: "" })}
+              style={{ justifyContent: 'center', alignSelf: 'center', height: width / 12, width: width / 12 }}>
+              <MaterialCommunityIcons name="apple-keyboard-control" size={25} color="#000" />
+            </TouchableOpacity>
+            :
+            <TouchableOpacity onPress={() => this.setState({ isdropdownid: item.orderId })}
+              style={{ justifyContent: 'center', alignSelf: 'center', height: width / 12, width: width / 12 }}>
+              <MaterialCommunityIcons name="chevron-down" size={25} color="#000" />
+            </TouchableOpacity>
+          }
+        </View>
+        {isdropdownid == item.orderId ?
+          <View style={{ backgroundColor: '#dddddd', paddingHorizontal: 10 }}>
+            {item.TimeLine.ChoXacNhan == "" ? null :
+              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
+                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
+                <View style={{ marginLeft: 10 }}>
+                  <Text>Xác nhận đã nhận đơn hàng</Text>
+                  {renderTimeLine(item.TimeLine.ChoXacNhan)}
+                </View>
+              </View>
+            }
+            {item.TimeLine.ChoLayHang == "" ? null :
+              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
+                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
+                <View style={{ marginLeft: 10 }}>
+                  <Text>Nhận kiện hàng thành công</Text>
+                  {renderTimeLine(item.TimeLine.ChoLayHang)}
+                </View>
+              </View>
+            }
+            {item.TimeLine.DangVanChuyen == "" ? null :
+              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
+                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
+                <View style={{ marginLeft: 10 }}>
+                  <Text>Đang vận chuyển</Text>
+                  {renderTimeLine(item.TimeLine.DangVanChuyen)}
+                </View>
 
+              </View>
+            }
+            {item.TimeLine.DaGiaoHang == "" ? null :
+              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
+                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
+                <View style={{ marginLeft: 10 }}>
+                  <Text>Đã giao hàng thành công</Text>
+                  {renderTimeLine(item.TimeLine.DaGiaoHang)}
+                </View>
+              </View>
+            }
+            {item.TimeLine.DaHuy == "" ? null :
+              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
+                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
+                <View style={{ marginLeft: 10 }}>
+                  <Text>Xác nhận huỷ đơn hàng</Text>
+                  {renderTimeLine(item.TimeLine.DaHuy)}
+                </View>
+              </View>
+            }
+            {item.TimeLine.TraHang == "" ? null :
+              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
+                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
+                <View style={{ marginLeft: 10 }}>
+                  <Text>Xác nhận trả hàng</Text>
+                  {renderTimeLine(item.TimeLine.TraHang)}
+                </View>
+              </View>
+            }
+          </View>
+          : null}
       </View>
-    </View>
-    // apple-keyboard-control
-  )
+    );
+  }
   NotificationItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <View style={styles.itemTopContainer}>
@@ -300,7 +379,6 @@ const styles = StyleSheet.create({
   },
   bodyContainer: {
     flex: 1,
-    backgroundColor: '#ededed',
     flexDirection: 'row',
     backgroundColor: '#fff'
   },
@@ -328,9 +406,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     borderLeftColor: '#e5e5e5',
   },
-  //
   itemContainer: {
-    backgroundColor: '#fff',
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderBottomColor: '#ededed',

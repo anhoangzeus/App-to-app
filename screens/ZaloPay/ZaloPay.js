@@ -126,6 +126,14 @@ export default function App({ route, navigation }) {
       Total: route.params.amount,
       CustomerID: fbApp.auth().currentUser.uid,
       ShipLocation: address.Location,
+      TimeLine:{
+        ChoLayHang:"",
+        ChoXacNhan:"",
+        DaGiaoHang:"",
+        DaHuy:"",
+        DangVanChuyen:"",
+        TraHang:"",
+      },
     });
     fbApp.database().ref("Cart/" + fbApp.auth().currentUser.uid).once("value").then((snapshot) => {
       snapshot.forEach(function (childSnapshot) {
