@@ -5,7 +5,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import NumberFormat from 'react-number-format';
-import RNPoll, { IChoice } from "react-native-poll";
+import { Rating, AirbnbRating } from 'react-native-ratings';
+
 
 const { width, height } = Dimensions.get('screen');
 function ReactNativeNumberFormat({ value }) {
@@ -29,12 +30,10 @@ const ProductItem = ({ item }) => (
         <Text style={styles.itemName} numberOfLines={2}>{item.Name}</Text>
         <Text style={styles.itemPrice}><ReactNativeNumberFormat value={item.Price} /></Text>
       </View>
-
     </View>
-
   </View>
 );
-export default class Rating extends Component {
+export default class RatingProduct extends Component {
   constructor (props) {
     super(props);
     this.itemRef = fbApp.database();
@@ -44,15 +43,9 @@ export default class Rating extends Component {
       idvoted: "",
       orderid: "",
       orderdetailid: "",
-      iscomment: false,
-      opencmt: false,
-      textCmt: "",
+      textCmt: "Chưa có bình luận...",
       refreshing: false,
-      points1: 0,
-      points2: 0,
-      points3: 0,
-      points4: 0,
-      points5: 0,
+      points: 3,
       loading: true,
       modalVisibleSuccess: false,
     };
@@ -71,14 +64,18 @@ export default class Rating extends Component {
     this.setState({ modalVisible: visible });
   };
   handleClose = () => {
-    this.getListOrder();
     this.setState({
       modalVisible: false,
-      modalVisibleSuccess: false
     });
   };
+  handleCloseSuccess= () =>{
+    this.setState({
+      modalVisibleSuccess: false
+    });
+    this.getListOrder();
+  }
   setModalVisibleSuccess = (visible) => {
-    this.setState({ modalVisibleSuccess: visible }, () => { setTimeout(this.handleClose, 3000) });
+    this.setState({ modalVisibleSuccess: visible }, () => { setTimeout(this.handleCloseSuccess, 3000) });
   };
   componentDidMount() {
     this.getListOrder();
@@ -88,32 +85,23 @@ export default class Rating extends Component {
     this.getListOrder();
   };
   getRatingPoint = (ProductID, OrderId, OrderDetailsId) => {
-    this.itemRef.ref("Products/" + ProductID).child("Rating").once('value').then((snapshot) => {
-      var points1 = 0;
-      var points2 = 0;
-      var points3 = 0;
-      var points4 = 0;
-      var points5 = 0;
-      snapshot.forEach((child) => {
-        if (child.val().Point == "1")
-          points1++;
-        else if (child.val().Point == "2")
-          points2++;
-        else if (child.val().Point == "3")
-          points3++;
-        else if (child.val().Point == "4")
-          points4++;
-        else if (child.val().Point == "5")
-          points5++;
-      });
-      this.setState({
-        points1: points1, points2: points2, points3: points3, points4: points4,
-        points5: points5, idvoted: ProductID, orderid: OrderId, orderdetailid: OrderDetailsId,
-      })
-    });
+    // this.itemRef.ref("Products/" + ProductID).child("Rating").once('value').then((snapshot) => {
+    //   snapshot.forEach((child) => {
+    //     if (child.val().Point == "1")
+    //       points1++;
+    //     else if (child.val().Point == "2")
+    //       points2++;
+    //     else if (child.val().Point == "3")
+    //       points3++;
+    //     else if (child.val().Point == "4")
+    //       points4++;
+    //     else if (child.val().Point == "5")
+    //       points5++;
+    //   });
+    this.setState({idvoted: ProductID, orderid: OrderId, orderdetailid: OrderDetailsId});
   }
-  votedProduct = async (point) => {
-    const { idvoted, orderid, orderdetailid } = this.state;
+  votedProduct = async() => {
+    const { idvoted, orderid, orderdetailid ,textCmt,points} = this.state;
     var date = this.GetCurrentDate();
     var uid = fbApp.auth().currentUser.uid;
     var username = "";
@@ -124,41 +112,15 @@ export default class Rating extends Component {
     }));
     this.itemRef.ref("Products/" + idvoted).child("/Rating/" + orderdetailid).set({
       Date: date,
-      Point: point,
+      Point: points,
       UserId: uid,
-      Comment: "",
+      Comment: textCmt,
       UserName: username,
       Avatar: Avatar,
     });
     this.itemRef.ref("Orders/" + orderid + "/OrderDetails/" + orderdetailid).update({
       Status: true
-    });
-    this.setPoint(point);
-    this.openComment();
-  }
-  setPoint = (point) => {
-    if (point == 1)
-      this.setState({ points1: this.state.points1 + 1 });
-    else if (point == 2)
-      this.setState({ points2: this.state.points2 + 1 });
-    else if (point == 3)
-      this.setState({ points3: this.state.points3 + 1 });
-    else if (point == 4)
-      this.setState({ points4: this.state.points4 + 1 });
-    else if (point == 5)
-      this.setState({ points5: this.state.points5 + 1 });
-  }
-  openComment = () => {
-    this.setState({ opencmt: true });
-  }
-  openComment1 = () => {
-    this.setState({ iscomment: true, opencmt: false })
-  }
-  sendComment = () => {
-    const { idvoted, textCmt, orderdetailid } = this.state;
-    this.itemRef.ref("Products/" + idvoted).child("/Rating/" + orderdetailid).update({
-      Comment: textCmt,
-    });
+    }).then(this.handleClose());
     this.setModalVisibleSuccess(true);
   }
   handleChange = (val) => {
@@ -191,16 +153,11 @@ export default class Rating extends Component {
       this.setState({ ListProduct: items, refreshing: false, loading: false })
     });
   }
+  ratingCompleted=(rating)=> {
+    this.setState({points : rating});
+  }
   render() {
-    const { iscomment, opencmt, modalVisible, points1, points2, points3, points4, points5, ListProduct, modalVisibleSuccess } = this.state;
-    var total = points1 + points2 + points3 + points4 + points5;
-    var choices: Array<IChoice> = [
-      { id: 1, choice: "1 Sao", votes: points1 },
-      { id: 2, choice: "2 Sao", votes: points2 },
-      { id: 3, choice: "3 Sao", votes: points3 },
-      { id: 4, choice: "4 Sao", votes: points4 },
-      { id: 5, choice: "5 Sao", votes: points5 },
-    ];
+    const { modalVisible,ListProduct, modalVisibleSuccess } = this.state;
     if (this.state.loading) {
       return (
         <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
@@ -234,7 +191,7 @@ export default class Rating extends Component {
           renderItem={({ item }) =>
             <TouchableOpacity
               onPress={() => {
-                this.setModalVisible(true),
+                this.setModalVisible(true), 
                 this.getRatingPoint(item.ProductId, item.OrderID, item.id)
               }}>
               <ProductItem item={item} />
@@ -253,46 +210,38 @@ export default class Rating extends Component {
             <View style={styles.modalView}>
               <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                 <FontAwesome name="times-circle" size={25} color="#fff" />
-                <Text style={styles.modalText}>{iscomment ? "Để lại bình luận của bạn" : "Đánh giá sản phẩm"}</Text>
-                <TouchableOpacity style={{ width: width / 10, marginLeft: 20 }} onPress={() => { this.handleClose() }}>
+                <Text style={styles.modalText}>Đánh Giá Sản Phẩm</Text>
+                <TouchableOpacity style={{ width: width / 15, marginLeft: 20 }} onPress={() => { this.handleClose() }}>
                   <FontAwesome name="times-circle" size={30} color="red" />
                 </TouchableOpacity>
               </View>
-              {iscomment ? null :
-                <RNPoll
-                  totalVotes={total}
-                  choices={choices}
-                  choiceTextStyle={{ color: 'gold', fontWeight: 'bold', fontSize: 18 }}
-                  fillBackgroundColor="#a2459a"
-                  borderColor="#a2459a"
-                  onChoicePress={(selectedChoice: IChoice) =>
-                    this.votedProduct(selectedChoice.id)}
-                />}
-              {iscomment ?
-                <View>
-                  <TextInput
-                    textAlignVertical='top'
-                    multiline={true}
-                    placeholder="..."
-                    placeholderTextColor="#a2459a"
-                    autoCapitalize="none"
-                    onChangeText={(val) => this.handleChange(val)}
-                    style={{
-                      borderColor: "#a2459a",
-                      borderWidth: 1,
-                      height: height / 2,
-                      fontSize: 18,
-                      borderRadius: 10,
-                    }}
-                  />
-                  <TouchableOpacity style={styles.btncomment} onPress={() => { this.sendComment() }}>
-                    <Text style={{ color: '#fff', fontSize: 20, textAlign: 'center', fontWeight: 'bold' }}>Gửi bình luận</Text>
-                  </TouchableOpacity>
-                </View> : null}
-              {opencmt ? <TouchableOpacity style={styles.btncomment} onPress={() => this.openComment1()}>
-                <Text style={{ color: '#fff', fontSize: 20, textAlign: 'center', fontWeight: 'bold' }}>Bình Luận</Text>
-              </TouchableOpacity> : null}
-
+              <View>
+                <Rating
+                  ratingCount={5}
+                  imageSize={40}
+                  showRating
+                  onFinishRating={this.ratingCompleted}
+                  style={{marginBottom: 5}}
+                />
+                <TextInput
+                  textAlignVertical='top'
+                  multiline={true}
+                  placeholder="Bình luận sản phẩm..."
+                  placeholderTextColor="#a2459a"
+                  autoCapitalize="none"
+                  onChangeText={(val) => this.handleChange(val)}
+                  style={{
+                    borderColor: "#a2459a",
+                    borderWidth: 1,
+                    height: height / 2.6,
+                    fontSize: 18,
+                    borderRadius: 10,
+                  }}
+                />
+                <TouchableOpacity style={styles.btncomment} onPress={() => {this.votedProduct()}}>
+                  <Text style={{ color: '#fff', fontSize: 20, textAlign: 'center', fontWeight: 'bold' }}>Gửi đánh giá</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </Modal>
@@ -306,8 +255,8 @@ export default class Rating extends Component {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView1}>
-              <Text style={styles.modalText}>Đánh giá thành công!</Text>
-              <Text style={styles.modalText}>Cảm ơn quý khách! </Text>
+              <Text style={styles.modalText}>Gửi thành công</Text>
+              <Text style={styles.modalText}>Cảm ơn quý khách đã cho chúng tôi biết cảm nhận về sản phẩm! </Text>
             </View>
           </View>
         </Modal>
@@ -366,7 +315,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "#fff",
     borderRadius: 20,
-    padding: 15,
+    padding: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -375,7 +324,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    height: height / 1.5
+    height: height / 1.5,
+    width: width / 1.2
   },
   modalText: {
     textAlign: "center",
