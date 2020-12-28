@@ -36,6 +36,7 @@ import { Images, materialTheme } from "../constants/";
 import Profile_User from '../screens/Profile_User';
 import ProfileScreen from '../screens/Profile';
 import NotificationScreen from '../screens/NotificationScreen ';
+import Contents from '../screens/Contents/Contents';
 
 const { width } = Dimensions.get("screen");
 
@@ -233,6 +234,7 @@ export default function ProjectStack(props) {
       <Stack.Screen name="DetailAddressScreen" component={Route_AddressDetail} />
       <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
       <Stack.Screen name="ZaloPayScreen" component={ZaloPay} />
+      <Stack.Screen name="Contents" component={Contents}/>
     </Stack.Navigator>
   );
 }

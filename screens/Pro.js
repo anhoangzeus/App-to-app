@@ -210,6 +210,7 @@ export default class Pro extends React.PureComponent {
           Detail: childSnapshot.val().Detail,
           Image: childSnapshot.val().Image,
           Name: childSnapshot.val().Name,
+          Url : childSnapshot.val().Url,
         });
       });
       this.setState({
@@ -394,7 +395,7 @@ export default class Pro extends React.PureComponent {
               {this.state.listcontents.map((item) =>
                 <TouchableOpacity
                   key={item.id}
-                  onPress={() => { }}>
+                  onPress={() => this.props.navigation.navigate("Contents", { id: item.Url })}>
                   <View style={styles.sectionContainer}>
                     <Image source={{ uri: item.Image }} style={styles.sectionImage} />
                   </View>

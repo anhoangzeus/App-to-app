@@ -48,11 +48,16 @@ const renderTrangThai = (Status) => {
   }
 
 }
-const renderTimeLine = (item) => {
+const renderTimeLine = (name, item) => {
   return (
-    <View>
-      <Text>Ngày {item}</Text>
+    <View style={{ flexDirection: 'row', marginVertical: 8 }}>
+      <View style={{ width: 2, backgroundColor: '#a2459a' }} />
+      <View style={{ marginLeft: 10 }}>
+        <Text>{name}</Text>
+        <Text>Ngày {item}</Text>
+      </View>
     </View>
+
   );
 }
 export default class NotificationScreen extends Component {
@@ -129,6 +134,7 @@ export default class NotificationScreen extends Component {
                 Title: child.val().Title,
                 CreatedDate: child.val().CreatedDate,
                 Type: child.val().Type,
+                Url: child.val().Url,
               })
             }
           } else if (this.state.ischoose == 3) {
@@ -139,6 +145,7 @@ export default class NotificationScreen extends Component {
                 Title: child.val().Title,
                 CreatedDate: child.val().CreatedDate,
                 Type: child.val().Type,
+                Url: child.val().Url,
               })
             }
           } else if (this.state.ischoose == 1) {
@@ -148,6 +155,7 @@ export default class NotificationScreen extends Component {
               Title: child.val().Title,
               CreatedDate: child.val().CreatedDate,
               Type: child.val().Type,
+              Url: child.val().Url,
             })
           }
       });
@@ -184,59 +192,22 @@ export default class NotificationScreen extends Component {
         {isdropdownid == item.orderId ?
           <View style={{ backgroundColor: '#dddddd', paddingHorizontal: 10 }}>
             {item.TimeLine.ChoXacNhan == "" ? null :
-              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
-                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
-                <View style={{ marginLeft: 10 }}>
-                  <Text>Xác nhận đã nhận đơn hàng</Text>
-                  {renderTimeLine(item.TimeLine.ChoXacNhan)}
-                </View>
-              </View>
+              renderTimeLine("Xác nhận đã nhận đơn hàng", item.TimeLine.ChoXacNhan)
             }
             {item.TimeLine.ChoLayHang == "" ? null :
-              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
-                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
-                <View style={{ marginLeft: 10 }}>
-                  <Text>Nhận kiện hàng thành công</Text>
-                  {renderTimeLine(item.TimeLine.ChoLayHang)}
-                </View>
-              </View>
+              renderTimeLine("Nhận kiện hàng thành công", item.TimeLine.ChoLayHang)
             }
             {item.TimeLine.DangVanChuyen == "" ? null :
-              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
-                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
-                <View style={{ marginLeft: 10 }}>
-                  <Text>Đang vận chuyển</Text>
-                  {renderTimeLine(item.TimeLine.DangVanChuyen)}
-                </View>
-
-              </View>
+              renderTimeLine("Đang vận chuyển", item.TimeLine.DangVanChuyen)
             }
             {item.TimeLine.DaGiaoHang == "" ? null :
-              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
-                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
-                <View style={{ marginLeft: 10 }}>
-                  <Text>Đã giao hàng thành công</Text>
-                  {renderTimeLine(item.TimeLine.DaGiaoHang)}
-                </View>
-              </View>
+              renderTimeLine("Đã giao hàng thành công", item.TimeLine.DaGiaoHang)
             }
             {item.TimeLine.DaHuy == "" ? null :
-              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
-                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
-                <View style={{ marginLeft: 10 }}>
-                  <Text>Xác nhận huỷ đơn hàng</Text>
-                  {renderTimeLine(item.TimeLine.DaHuy)}
-                </View>
-              </View>
+              renderTimeLine("Xác nhận huỷ đơn hàng", item.TimeLine.DaHuy)
             }
             {item.TimeLine.TraHang == "" ? null :
-              <View style={{ flexDirection: 'row', marginVertical: 8 }}>
-                <View style={{ width: 2, backgroundColor: '#a2459a' }} />
-                <View style={{ marginLeft: 10 }}>
-                  <Text>Xác nhận trả hàng</Text>
-                  {renderTimeLine(item.TimeLine.TraHang)}
-                </View>
-              </View>
+              renderTimeLine("Xác nhận trả hàng", item.TimeLine.TraHang)
             }
           </View>
           : null}
@@ -244,7 +215,7 @@ export default class NotificationScreen extends Component {
     );
   }
   NotificationItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate("Contents", { id: item.Url })} >
       <View style={styles.itemTopContainer}>
         <View
           style={[
@@ -267,7 +238,7 @@ export default class NotificationScreen extends Component {
       <View>
         <Text style={styles.itemDetail}>{item.Details}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
   render() {
     const { listThongBao, loading, ischoose, listOrder } = this.state;
