@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, Image, StyleSheet, ScrollView, StatusBar, Dimensions, TextInput, View, LogBox } from 'react-native';
+import { ImageBackground, Image, StyleSheet, ScrollView, StatusBar, Dimensions, TextInput, View, RefreshControl, ActivityIndicator } from 'react-native';
 import { Block, Button, Text, theme } from 'galio-framework';
 import NumberFormat from 'react-number-format';
 
@@ -10,7 +10,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { fbApp } from "../firebaseconfig";
 import "firebase/auth";
 import { SafeAreaView } from 'react-navigation';
-console.disableYellowBox = true;
+
 function ReactNativeNumberFormat({ value }) {
   return (
     <NumberFormat
@@ -50,8 +50,58 @@ export function bodau(str) {
   str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
   return str;
 }
-
-const ProductItem = ({ image, name, price, PromotionPrice }) => (
+const RatingUI = (rating) => {
+  var point = parseInt(rating);
+  switch (point) {
+    case 1: return (
+      <View style={{ flexDirection: "row" }}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+      </View>
+    );
+    case 2: return (
+      <View style={{ flexDirection: "row" }}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+      </View>
+    );
+    case 3: return (
+      <View style={{ flexDirection: "row" }}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+      </View>
+    );
+    case 4: return (
+      <View style={{ flexDirection: "row" }}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color={null} style={{ marginLeft: 5 }} />
+      </View>
+    );
+    case 5: return (
+      <View style={{ flexDirection: "row" }}>
+        <FontAwesome name="star" size={17} color="#ffd700" style={styles.reviewimg} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+        <FontAwesome name="star" size={17} color="#ffd700" style={{ marginLeft: 5 }} />
+      </View>
+    );
+    default: return null;
+  }
+}
+const ProductItem = ({ image, name, price, rating, bough, PromotionPrice  }) => (
   <View style={styles.itemContainer1}>
     <Image source={{ uri: image }} style={styles.itemImage} />
     <Text style={styles.itemName} numberOfLines={2}>
@@ -63,8 +113,8 @@ const ProductItem = ({ image, name, price, PromotionPrice }) => (
       }
     </Text>
     <View style={{ flexDirection: 'row' }}>
-      <Image source={require("../assets/images/star.jpg")} style={styles.reviewimg} />
-      <Text style={{ color: 'green', }}>(500)</Text>
+      {RatingUI(rating)}
+      {bough != 0 ? <Text style={{ color: 'green', }}>({bough})</Text> : null}
     </View>
   </View>
 );
@@ -77,6 +127,8 @@ export default class Setting extends React.Component {
       listcate: [],
       searchText: "",
       numcart: 0,
+      refreshing: false,
+      loading: false
     };
     this.timer;
   }
@@ -87,41 +139,39 @@ export default class Setting extends React.Component {
     this.itemRef.ref('/Products').once('value').then((snapshot) => {
       var items = [];
       snapshot.forEach(function (childSnapshot) {
-        var product = {
-          title: '',
-          price: '',
-          metades: '',
-          image: '',
-          id: '',
-          rating: 0,
-          bough: 0,
-          BrandID: '',
-          CategoryID: '',
-          PromotionPrice: 0
-        }
         var rs = childSnapshot.val().Name.toLowerCase();
         var des = childSnapshot.val().MetaDescription.toLowerCase();
         bodau(rs); bodau(des);
         if (rs.indexOf(st) != -1 || des.indexOf(st) != -1) {
-          product.title = childSnapshot.val().Name;
-          product.price = childSnapshot.val().Price;
-          product.metades = childSnapshot.val().MetaDescription;
-          product.image = childSnapshot.val().Image;
-          product.id = childSnapshot.val().ProductID;
-          product.rating = childSnapshot.val().Rating;
-          product.bough = childSnapshot.val().bough;
-          product.BrandID = childSnapshot.val().BrandID;
-          product.CategoryID = childSnapshot.val().CategoryID;
-          product.PromotionPrice = childSnapshot.val().PromotionPrice;
-          items.push(product);
+          var point = 0;
+          var count = 0;
+          childSnapshot.child("Rating").forEach((child) => {
+            point += child.val().Point;
+            count++;
+          })
+          items.push({
+            title: childSnapshot.val().Name,
+            price: childSnapshot.val().Price,
+            image: childSnapshot.val().Image,
+            metades: childSnapshot.val().MetaDescription,
+            id: childSnapshot.val().ProductID,
+            rating: point / count,
+            bough: count,
+            BrandID: childSnapshot.val().BrandID,
+            CategoryID: childSnapshot.val().CategoryID,
+            PromotionPrice: childSnapshot.val().PromotionPrice
+          });
         }
       });
-
       this.setState({
-        listcate: items,
+        listcate: items, refreshing: false, loading: false
       })
     })
   }
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.searchDictionary();
+  };
   componentWillUnmount() {
     clearInterval(this.timer);
   }
@@ -143,6 +193,12 @@ export default class Setting extends React.Component {
       this.getnumcart();
     }, 1500);
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.searchText != prevState.searchText) {
+      this.searchDictionary();
+    }
+  };
+
   renderNofiCart = () => {
     if (this.state.numcart == 0) {
       return null;
@@ -155,20 +211,8 @@ export default class Setting extends React.Component {
       )
     }
   };
-  renderTextnull = () => {
-    if (this.state.searchText != null && this.state.listcate == null) {
-      return (
-        <View>
-          <Text>Không tìm thấy sản phẩm</Text>
-        </View>
-      )
-    }
-    else
-      return null
-  }
   render() {
     const { navigation } = this.props;
-
     return (
       <View style={styles.screenContainer}>
         <StatusBar barStyle="light-content" />
@@ -177,7 +221,7 @@ export default class Setting extends React.Component {
             <FontAwesome name="search" size={24} color="#969696" />
             <TextInput style={styles.inputText} placeholder="Bạn tìm gì hôm nay?"
               autoFocus={true}
-              onChangeText={(text) => this.setState({ searchText: text })}
+              onChangeText={(text) => this.setState({ searchText: text, loading: true })}
               onSubmitEditing={() => this.searchDictionary()}
             />
           </View>
@@ -190,10 +234,22 @@ export default class Setting extends React.Component {
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Kết quả tìm kiếm</Text>
             <SafeAreaView>
-              <ScrollView>
-                <View style={styles.listItemContainer}>
-                  {this.renderTextnull()}
+              <View style={styles.listItemContainer}>
+                {this.state.listcate[0] == null ?
+                  <View><Text style={{ color: '#000' }}>Không tìm thấy sản phẩm !</Text></View>
+                  : null}
+                {this.state.loading ?
+                  <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size='large' color="'#a2459a" />
+                  </View>
+                  :
                   <FlatList
+                    refreshControl={
+                      <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}
+                      />
+                    }
                     horizontal={false}
                     numColumns={2}
                     showsHorizontalScrollIndicator={false}
@@ -204,14 +260,17 @@ export default class Setting extends React.Component {
                           name={item.title}
                           image={item.image}
                           price={item.price}
+                          rating={item.rating}
+                          bough={item.bough}
                           PromotionPrice={item.PromotionPrice}
                         />
                       </TouchableOpacity>
                     }
-                  ></FlatList>
-                </View>
-                <View style={{ height: height / 7 }}></View>
-              </ScrollView>
+                  />
+                }
+
+              </View>
+              <View style={{ height: height / 7 }}></View>
             </SafeAreaView>
           </View>
         </View>
@@ -224,7 +283,6 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
   },
-
   headerContainer: {
     flexDirection: 'row',
     paddingTop: 10,
@@ -291,7 +349,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10
   },
   reviewimg: {
-    width: width / 4,
     height: height / 50,
     marginLeft: width / 60
   },
@@ -317,7 +374,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 25,
     marginRight: 5,
-    marginEnd: 2
+    marginBottom:5
   },
   //
   filterContainer: {
